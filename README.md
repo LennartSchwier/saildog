@@ -1,4 +1,4 @@
-# Code Zero
+# Saildog
 
 Web application for automated sail trimming calculations through regular weather data update from external api
 
