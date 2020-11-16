@@ -35,8 +35,8 @@ class TrimControllerTest {
     @Test
     public void getJibTrimReturnsHttpStatusOk() {
         // GIVEN
-        String url = "http://localhost:" + port + "/api/trim/jib";
-        EnvironmentDto environment = new EnvironmentDto(WindState.LIGHT_WIND, WaveState.WAVES, BoatCourse.CLOSED_HAULED);
+        String requestParam = "?wind=light_wind";
+        String url = "http://localhost:" + port + "/api/trim/jib" + requestParam;
 
         // WHEN
         ResponseEntity<TrimDto> response = restTemplate.getForEntity(url, TrimDto.class);
