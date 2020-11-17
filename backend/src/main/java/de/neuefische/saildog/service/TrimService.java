@@ -19,7 +19,6 @@ public class TrimService {
 
     public Jib getJibTrim(double wind, double wave, String course) {
         BoatCourse boatCourse = enumUtils.getEnum(BoatCourse.class, course);
-        jibTrimUtils.calculateJibTrim(wind, wave, boatCourse);
-        return null;
+        return jibTrimUtils.calculateJibTrim(wind, wave, boatCourse);
     }
 }

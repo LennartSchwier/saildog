@@ -27,8 +27,6 @@ class JibTrimUtilsTest {
         Jib result = jibTrimUtils.calculateJibTrim(windSpeed, waveHeight, course);
 
         // THEN
-        assertThat(result.getJibSheet(), is(SheetState.LOOSE));
-        assertThat(result.getFairLead(), is(FairLeadState.FORWARD));
-        assertThat(result.getJibLuff(), is(LuffFootState.SLIGHTLY_CRINKLED));
+        assertThat(result, is(new Jib(SheetState.LOOSE, FairLeadState.FORWARD, LuffFootState.SLIGHTLY_CRINKLED)));
     }
 }
