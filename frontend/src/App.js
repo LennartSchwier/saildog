@@ -1,9 +1,10 @@
 import React from 'react';
+import HeadSail from "./components/HeadSail";
 
 function App() {
   return (
     <div>
-      <p>saildog</p>
+      <HeadSail></HeadSail>
     </div>
   );
 }
