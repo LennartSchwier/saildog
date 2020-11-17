@@ -1,17 +1,14 @@
 package de.neuefische.saildog.service;
 
-import de.neuefische.saildog.dto.EnvironmentDto;
-import de.neuefische.saildog.dto.TrimDto;
+import de.neuefische.saildog.model.Jib;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TrimService {
 
-    public TrimDto getJibTrim(EnvironmentDto environment) {
-        return null;
-    }
-
-    public TrimDto getMainSailTrim(EnvironmentDto environment) {
+    public Jib getJibTrim(int wind, int wave, String course) {
+        Jib jibToTrim = Jib.builder()
+                .build();
         return null;
     }
 }
