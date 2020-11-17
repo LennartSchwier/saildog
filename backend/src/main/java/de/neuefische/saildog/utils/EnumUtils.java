@@ -10,7 +10,7 @@ public class EnumUtils {
             return T.valueOf( enumType, input.toUpperCase());
         }
         catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Enum does not exist");
+            throw new IllegalArgumentException("Enum does not exist.");
         }
     }
 }
