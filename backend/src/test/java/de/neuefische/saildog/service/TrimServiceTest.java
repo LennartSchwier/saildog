@@ -3,29 +3,28 @@ package de.neuefische.saildog.service;
 import de.neuefische.saildog.enums.FairLeadState;
 import de.neuefische.saildog.enums.LuffFootState;
 import de.neuefische.saildog.enums.SheetState;
-import de.neuefische.saildog.model.Jib;
+import de.neuefische.saildog.model.HeadSail;
 import de.neuefische.saildog.utils.EnumUtils;
-import de.neuefische.saildog.utils.JibTrimUtils;
+import de.neuefische.saildog.utils.HeadSailTrimUtils;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 
 class TrimServiceTest {
 
     @Test
-    public void testGetJibTrimReturnsCorrectJib() {
+    public void testGetHeadSailTrimReturnsCorrectHeadSail() {
         // GIVEN
-        JibTrimUtils jibTrimUtils = new JibTrimUtils();
+        HeadSailTrimUtils headSailTrimUtils = new HeadSailTrimUtils();
         EnumUtils enumUtils = new EnumUtils();
-        TrimService trimService = new TrimService(jibTrimUtils, enumUtils);
+        TrimService trimService = new TrimService(headSailTrimUtils, enumUtils);
 
         // WHEN
-        Jib result = trimService.getJibTrim(25, 3.2, "BEAM_REACH");
+        HeadSail result = trimService.getHeadTrim(25, 3.2, "BEAM_REACH");
 
         // THEN
-        assertThat(result, is(new Jib(SheetState.SLIGHTLY_LOOSE, FairLeadState.NORMAL, LuffFootState.MEDIUM_CLOSED)));
+        assertThat(result, is(new HeadSail(SheetState.SLIGHTLY_LOOSE, FairLeadState.NORMAL, LuffFootState.MEDIUM_CLOSED)));
     }
 
 }

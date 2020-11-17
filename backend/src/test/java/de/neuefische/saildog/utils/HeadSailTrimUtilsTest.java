@@ -4,29 +4,26 @@ import de.neuefische.saildog.enums.BoatCourse;
 import de.neuefische.saildog.enums.FairLeadState;
 import de.neuefische.saildog.enums.LuffFootState;
 import de.neuefische.saildog.enums.SheetState;
-import de.neuefische.saildog.model.Jib;
-import de.neuefische.saildog.model.Weather;
+import de.neuefische.saildog.model.HeadSail;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-class JibTrimUtilsTest {
+class HeadSailTrimUtilsTest {
 
     @Test
-    public void testCalculateJibTrimsReturnsCorrectTrim() {
+    public void testCalculateHeadSailTrimsReturnsCorrectTrim() {
         // GIVEN
-        JibTrimUtils jibTrimUtils = new JibTrimUtils();
+        HeadSailTrimUtils headSailTrimUtils = new HeadSailTrimUtils();
         double windSpeed = 12;
         double waveHeight = 1.8;
         BoatCourse course = BoatCourse.WIND_ASTERN;
 
         // WHEN
-        Jib result = jibTrimUtils.calculateJibTrim(windSpeed, waveHeight, course);
+        HeadSail result = headSailTrimUtils.calculateHeadSailTrim(windSpeed, waveHeight, course);
 
         // THEN
-        assertThat(result, is(new Jib(SheetState.LOOSE, FairLeadState.FORWARD, LuffFootState.SLIGHTLY_CRINKLED)));
+        assertThat(result, is(new HeadSail(SheetState.LOOSE, FairLeadState.FORWARD, LuffFootState.SLIGHTLY_CRINKLED)));
     }
 }

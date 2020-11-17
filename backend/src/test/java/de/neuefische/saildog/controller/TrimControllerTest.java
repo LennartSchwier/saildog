@@ -3,7 +3,7 @@ package de.neuefische.saildog.controller;
 import de.neuefische.saildog.enums.FairLeadState;
 import de.neuefische.saildog.enums.LuffFootState;
 import de.neuefische.saildog.enums.SheetState;
-import de.neuefische.saildog.model.Jib;
+import de.neuefische.saildog.model.HeadSail;
 import de.neuefische.saildog.service.TrimService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,19 +31,19 @@ class TrimControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void getJibTrimReturnsHttpStatusOk() {
+    public void getHeadSailTrimReturnsHttpStatusOk() {
         // GIVEN
         String requestParam = "?wind=3.0&&wave=2.8&course=closed_hauled";
-        String url = "http://localhost:" + port + "/api/trim/jib" + requestParam;
-        Jib expectedResult = new Jib(SheetState.LOOSE, FairLeadState.SLIGHTLY_FORWARD, LuffFootState.SLIGHTLY_CRINKLED);
+        String url = "http://localhost:" + port + "/api/trim/headsail" + requestParam;
+        HeadSail expectedResult = new HeadSail(SheetState.LOOSE, FairLeadState.SLIGHTLY_FORWARD, LuffFootState.SLIGHTLY_CRINKLED);
 
         // WHEN
-        when(mockedTrimService.getJibTrim(3.0, 2.8, "closed_hauled")).thenReturn(expectedResult);
-        ResponseEntity<Jib> response = restTemplate.getForEntity(url, Jib.class);
+        when(mockedTrimService.getHeadTrim(3.0, 2.8, "closed_hauled")).thenReturn(expectedResult);
+        ResponseEntity<HeadSail> response = restTemplate.getForEntity(url, HeadSail.class);
 
         // THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody(), is(new Jib(SheetState.LOOSE, FairLeadState.SLIGHTLY_FORWARD, LuffFootState.SLIGHTLY_CRINKLED)));
+        assertThat(response.getBody(), is(new HeadSail(SheetState.LOOSE, FairLeadState.SLIGHTLY_FORWARD, LuffFootState.SLIGHTLY_CRINKLED)));
     }
 
 }

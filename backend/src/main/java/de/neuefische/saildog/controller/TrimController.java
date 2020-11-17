@@ -1,8 +1,7 @@
 package de.neuefische.saildog.controller;
 
-import de.neuefische.saildog.model.Jib;
+import de.neuefische.saildog.model.HeadSail;
 import de.neuefische.saildog.service.TrimService;
-import de.neuefische.saildog.utils.EnumUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +19,9 @@ public class TrimController {
         this.trimService = trimService;
     }
 
-    @GetMapping(path = "/jib")
-    public Jib getJibTrim (@RequestParam double wind, @RequestParam double wave, @RequestParam String course) {
-        return trimService.getJibTrim(wind, wave, course);
+    @GetMapping(path = "/headsail")
+    public HeadSail getHeadSailTrim (@RequestParam double wind, @RequestParam double wave, @RequestParam String course) {
+        return trimService.getHeadTrim(wind, wave, course);
     }
 
 }
