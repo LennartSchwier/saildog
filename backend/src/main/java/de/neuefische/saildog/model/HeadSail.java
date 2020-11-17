@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Jib {
+public class HeadSail {
 
-    private SheetState jibSheet;
-    private FairLeadState fairLead;
-    private LuffFootState jibLuff;
+    private SheetState headSailSheet;
+    private FairLeadState headSailLead;
+    private LuffFootState headSailLuff;
 }
