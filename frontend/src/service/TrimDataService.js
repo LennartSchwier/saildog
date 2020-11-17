@@ -6,5 +6,5 @@ const course = "beam_reach";
 const url = `/api/trim/headsail?wind=${windSpeed}&wave=${waveHeight}&course=${course}`
 
 export const getHeadSailTrim = () => {
-    axios.get(url).then(result => console.log(result.data));
+    axios.get(url).then(result => (result.data));
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {getHeadSailTrim} from "../service/TrimData";
+import {getHeadSailTrim} from "../service/TrimDataService";
 
 export default function HeadSail() {
     return (
