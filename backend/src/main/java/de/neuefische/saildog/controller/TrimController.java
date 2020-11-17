@@ -16,12 +16,12 @@ public class TrimController {
     private final TrimService trimService;
 
     @Autowired
-    public TrimController(TrimService trimService, EnumUtils enumUtils) {
+    public TrimController(TrimService trimService) {
         this.trimService = trimService;
     }
 
     @GetMapping(path = "/jib")
-    public Jib getJibTrim (@RequestParam int wind, @RequestParam int wave, @RequestParam String course) {
+    public Jib getJibTrim (@RequestParam double wind, @RequestParam double wave, @RequestParam String course) {
         return trimService.getJibTrim(wind, wave, course);
     }
 

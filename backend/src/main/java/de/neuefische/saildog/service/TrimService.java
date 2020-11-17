@@ -1,14 +1,25 @@
 package de.neuefische.saildog.service;
 
+import de.neuefische.saildog.enums.BoatCourse;
 import de.neuefische.saildog.model.Jib;
+import de.neuefische.saildog.utils.EnumUtils;
+import de.neuefische.saildog.utils.JibTrimUtils;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TrimService {
 
-    public Jib getJibTrim(int wind, int wave, String course) {
-        Jib jibToTrim = Jib.builder()
-                .build();
+    private final JibTrimUtils jibTrimUtils;
+    private final EnumUtils enumUtils;
+
+    public TrimService(JibTrimUtils jibTrimUtils, EnumUtils enumUtils) {
+        this.jibTrimUtils = jibTrimUtils;
+        this.enumUtils = enumUtils;
+    }
+
+    public Jib getJibTrim(double wind, double wave, String course) {
+        BoatCourse boatCourse = enumUtils.getEnum(BoatCourse.class, course);
+        jibTrimUtils.calculateJibTrim(wind, wave, boatCourse);
         return null;
     }
 }

@@ -20,8 +20,8 @@ class TrimUtilsTest {
     })
     public void testSetWeatherReturnsCorrectWeatherModel(double wind, double wave, String expectedWind, String expectedWave){
         // WHEN
-        TrimUtils trimUtils = new TrimUtils();
-        Weather resultWeather = trimUtils.setWeather(wind, wave);
+        JibTrimUtils jibTrimUtils = new JibTrimUtils();
+        Weather resultWeather = jibTrimUtils.setWeather(wind, wave);
 
         // THEN
         assertThat(resultWeather.getWindState().toString(), is(expectedWind));
