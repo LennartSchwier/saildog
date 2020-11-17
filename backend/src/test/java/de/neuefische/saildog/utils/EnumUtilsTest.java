@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class EnumUtilsTest {
 
@@ -20,7 +21,6 @@ class EnumUtilsTest {
         // THEN
         assertThat(windState, is(WindState.LIGHT_WIND));
     }
-/*
     @Test
     public void testGetEnumReturnsExceptionWithIncorrectInput() {
         // GIVEN
@@ -29,11 +29,13 @@ class EnumUtilsTest {
         IllegalArgumentException exception = new IllegalArgumentException();
 
         // WHEN
-        WindState windState = enumUtils.getEnum(WindState.class, input);
-
+        try {
+            WindState windState = enumUtils.getEnum(WindState.class, input);
+            fail();
         // THEN
-        assertThat(windState, is(exception));
-
-    }*/
+        } catch (IllegalArgumentException e){
+            // noop
+        }
+    }
 
 }
