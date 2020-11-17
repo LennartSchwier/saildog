@@ -143,6 +143,6 @@ public class JibTrimUtils {
                 );
             }
         }
-        return null;
+        return new Jib();
     }
 }

@@ -4,6 +4,7 @@ import de.neuefische.saildog.enums.BoatCourse;
 import de.neuefische.saildog.model.Jib;
 import de.neuefische.saildog.utils.EnumUtils;
 import de.neuefische.saildog.utils.JibTrimUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,7 @@ public class TrimService {
     private final JibTrimUtils jibTrimUtils;
     private final EnumUtils enumUtils;
 
+    @Autowired
     public TrimService(JibTrimUtils jibTrimUtils, EnumUtils enumUtils) {
         this.jibTrimUtils = jibTrimUtils;
         this.enumUtils = enumUtils;

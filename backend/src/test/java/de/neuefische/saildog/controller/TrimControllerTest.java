@@ -1,5 +1,9 @@
 package de.neuefische.saildog.controller;
 
+import de.neuefische.saildog.enums.FairLeadState;
+import de.neuefische.saildog.enums.LuffFootState;
+import de.neuefische.saildog.enums.SheetState;
+import de.neuefische.saildog.model.Jib;
 import de.neuefische.saildog.service.TrimService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class TrimControllerTest {
@@ -28,14 +33,17 @@ class TrimControllerTest {
     @Test
     public void getJibTrimReturnsHttpStatusOk() {
         // GIVEN
-        String requestParam = "?wind=light_wind";
+        String requestParam = "?wind=3.0&&wave=2.8&course=closed_hauled";
         String url = "http://localhost:" + port + "/api/trim/jib" + requestParam;
+        Jib expectedResult = new Jib(SheetState.LOOSE, FairLeadState.SLIGHTLY_FORWARD, LuffFootState.SLIGHTLY_CRINKLED);
 
         // WHEN
-        //ResponseEntity<TrimDto> response = restTemplate.getForEntity(url, TrimDto.class);
+        when(mockedTrimService.getJibTrim(3.0, 2.8, "closed_hauled")).thenReturn(expectedResult);
+        ResponseEntity<Jib> response = restTemplate.getForEntity(url, Jib.class);
 
         // THEN
-        //assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(response.getBody(), is(new Jib(SheetState.LOOSE, FairLeadState.SLIGHTLY_FORWARD, LuffFootState.SLIGHTLY_CRINKLED)));
     }
 
 }
