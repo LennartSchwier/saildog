@@ -4,6 +4,7 @@ import {Switch, Route, Redirect} from "react-router-dom";
 import Input from "./components/Input";
 import useEnvironmentData from "./hooks/useEnvironmentData";
 import MainSail from "./components/MainSail";
+import Dashboard from "./components/Dashboard";
 
 
 export default function App() {
@@ -12,6 +13,9 @@ export default function App() {
 
   return (
       <Switch>
+          <Route path={"/dashboard"}>
+              <Dashboard/>
+          </Route>
           <Route path={"/input"}>
               <Input course={course} setCourse={setCourse}
                          windSpeed={windSpeed} setWindSpeed={setWindSpeed}
