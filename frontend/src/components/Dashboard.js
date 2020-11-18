@@ -16,13 +16,13 @@ export default function Dashboard() {
     }
 
     const geoError = (error) => {
-        setErrorMessage("Error Code = " + error.code + " - " + error.message);
+        setErrorMessage("Error: Code " + error.code + " - " + error.message);
     }
 
     const geoOptions = {
         enableHighAccuracy: true,
         maximumAge: 30000,
-        //timeout: 27000
+        timeout: 35000
     }
 
     useEffect(() => {
