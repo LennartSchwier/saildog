@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import Header from "../commons/Header";
 import styled from "styled-components/macro";
 import Buttons from "../commons/Buttons";
