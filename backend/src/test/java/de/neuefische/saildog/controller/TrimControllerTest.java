@@ -1,9 +1,8 @@
 package de.neuefische.saildog.controller;
 
-import de.neuefische.saildog.enums.FairLeadState;
-import de.neuefische.saildog.enums.LuffFootState;
-import de.neuefische.saildog.enums.SheetState;
+import de.neuefische.saildog.enums.*;
 import de.neuefische.saildog.model.HeadSail;
+import de.neuefische.saildog.model.MainSail;
 import de.neuefische.saildog.service.TrimService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +29,11 @@ class TrimControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    String requestParam = "?course=closed_hauled&wind=3.0&wave=2.8";
+
     @Test
-    public void getHeadSailTrimReturnsHttpStatusOk() {
+    public void getHeadSailTrimReturnsCorrectResponse() {
         // GIVEN
-        String requestParam = "?wind=3.0&&wave=2.8&course=closed_hauled";
         String url = "http://localhost:" + port + "/api/trim/headsail" + requestParam;
         HeadSail expectedResult = new HeadSail(SheetState.LOOSE, FairLeadState.SLIGHTLY_FORWARD, LuffFootState.SLIGHTLY_CRINKLED);
 
@@ -44,6 +44,34 @@ class TrimControllerTest {
         // THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody(), is(new HeadSail(SheetState.LOOSE, FairLeadState.SLIGHTLY_FORWARD, LuffFootState.SLIGHTLY_CRINKLED)));
+    }
+
+    @Test
+    public void getMainSailTrimReturnsCorrectResponse() {
+        // GIVEN
+        String url = "http://localhost:" + port + "/api/trim/mainsail" + requestParam;
+        MainSail expectedResult = MainSail.builder()
+                .mainSailSheet(SheetState.LOOSE)
+                .traveller(TravellerState.SLIGHTLY_LUV)
+                .boomVang(BoomVangState.LOOSE)
+                .mainSailLuff(LuffFootState.SLIGHTLY_CRINKLED)
+                .mainSailFoot(LuffFootState.SMOOTH)
+                .build();
+
+        // WHEN
+        when(mockedTrimService.getMainSailTrim("closed_hauled", 3.0, 2.8 )).thenReturn(expectedResult);
+        ResponseEntity<MainSail> response = restTemplate.getForEntity(url, MainSail.class);
+
+        // THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(response.getBody(), is(MainSail.builder()
+                .mainSailSheet(SheetState.LOOSE)
+                .traveller(TravellerState.SLIGHTLY_LUV)
+                .boomVang(BoomVangState.LOOSE)
+                .mainSailLuff(LuffFootState.SLIGHTLY_CRINKLED)
+                .mainSailFoot(LuffFootState.SMOOTH)
+                .build()
+        ));
     }
 
 }

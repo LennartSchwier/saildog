@@ -12,61 +12,61 @@ public class MainSailTrimUtils {
             if (wind < 7 && wave < 0.5) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.LOOSE)
+                        .mainSailSheet(SheetState.LOOSE)
                         .traveller(TravellerState.SLIGHTLY_LUV)
                         .boomVang(BoomVangState.LOOSE)
-                        .mainLuff(LuffFootState.SMOOTH)
-                        .mainFoot(LuffFootState.SLIGHTLY_CLOSED)
+                        .mainSailLuff(LuffFootState.SMOOTH)
+                        .mainSailFoot(LuffFootState.SLIGHTLY_CLOSED)
                         .build();
             }
             if (wind < 7 && wave >= 0.5) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.LOOSE)
+                        .mainSailSheet(SheetState.LOOSE)
                         .traveller(TravellerState.SLIGHTLY_LUV)
                         .boomVang(BoomVangState.LOOSE)
-                        .mainLuff(LuffFootState.SLIGHTLY_CRINKLED)
-                        .mainFoot(LuffFootState.SMOOTH)
+                        .mainSailLuff(LuffFootState.SLIGHTLY_CRINKLED)
+                        .mainSailFoot(LuffFootState.SMOOTH)
                         .build();
             }
             if (wind < 18 && wave < 1.0) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.TIGHT)
+                        .mainSailSheet(SheetState.TIGHT)
                         .traveller(TravellerState.SLIGHTLY_LUV)
                         .boomVang(BoomVangState.LOOSE)
-                        .mainLuff(LuffFootState.SLIGHTLY_CLOSED)
-                        .mainFoot(LuffFootState.CLOSED)
+                        .mainSailLuff(LuffFootState.SLIGHTLY_CLOSED)
+                        .mainSailFoot(LuffFootState.CLOSED)
                         .build();
             }
             if (wind < 18 && wave >= 1.0) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.MEDIUM_TIGHT)
+                        .mainSailSheet(SheetState.MEDIUM_TIGHT)
                         .traveller(TravellerState.MID)
                         .boomVang(BoomVangState.LOOSE)
-                        .mainLuff(LuffFootState.SLIGHTLY_CLOSED)
-                        .mainFoot(LuffFootState.SLIGHTLY_CLOSED)
+                        .mainSailLuff(LuffFootState.SLIGHTLY_CLOSED)
+                        .mainSailFoot(LuffFootState.SLIGHTLY_CLOSED)
                         .build();
             }
             if (wind >= 18 && wave < 1.5) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.MAX_TIGHT)
+                        .mainSailSheet(SheetState.MAX_TIGHT)
                         .traveller(TravellerState.SLIGHTLY_LUV)
                         .boomVang(BoomVangState.LOOSE)
-                        .mainLuff(LuffFootState.FULL_CLOSED)
-                        .mainFoot(LuffFootState.FULL_CLOSED)
+                        .mainSailLuff(LuffFootState.FULL_CLOSED)
+                        .mainSailFoot(LuffFootState.FULL_CLOSED)
                         .build();
             }
             if (wind >= 18 && wave >= 1.5) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.TIGHT)
+                        .mainSailSheet(SheetState.TIGHT)
                         .traveller(TravellerState.LEE)
                         .boomVang(BoomVangState.LOOSE)
-                        .mainLuff(LuffFootState.FULL_CLOSED)
-                        .mainFoot(LuffFootState.FULL_CLOSED)
+                        .mainSailLuff(LuffFootState.FULL_CLOSED)
+                        .mainSailFoot(LuffFootState.FULL_CLOSED)
                         .build();
             }
         }
@@ -74,61 +74,61 @@ public class MainSailTrimUtils {
             if (wind < 7 && wave < 0.5) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.LOOSE)
+                        .mainSailSheet(SheetState.LOOSE)
                         .traveller(TravellerState.SLIGHTLY_LEE)
                         .boomVang(BoomVangState.LOOSE)
-                        .mainLuff(LuffFootState.SMOOTH)
-                        .mainFoot(LuffFootState.SMOOTH)
+                        .mainSailLuff(LuffFootState.SMOOTH)
+                        .mainSailFoot(LuffFootState.SMOOTH)
                         .build();
             }
             if (wind < 7 && wave >= 0.5) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.LOOSE)
+                        .mainSailSheet(SheetState.LOOSE)
                         .traveller(TravellerState.SLIGHTLY_LEE)
                         .boomVang(BoomVangState.LOOSE)
-                        .mainLuff(LuffFootState.SLIGHTLY_CRINKLED)
-                        .mainFoot(LuffFootState.SMOOTH)
+                        .mainSailLuff(LuffFootState.SLIGHTLY_CRINKLED)
+                        .mainSailFoot(LuffFootState.SMOOTH)
                         .build();
             }
             if (wind < 18 && wave < 1.0) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.SLIGHTLY_TIGHT)
+                        .mainSailSheet(SheetState.SLIGHTLY_TIGHT)
                         .traveller(TravellerState.MID)
                         .boomVang(BoomVangState.MEDIUM_TIGHT)
-                        .mainLuff(LuffFootState.SLIGHTLY_CRINKLED)
-                        .mainFoot(LuffFootState.SMOOTH)
+                        .mainSailLuff(LuffFootState.SLIGHTLY_CRINKLED)
+                        .mainSailFoot(LuffFootState.SMOOTH)
                         .build();
             }
             if (wind < 18 && wave >= 1.0) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.MEDIUM_TIGHT)
+                        .mainSailSheet(SheetState.MEDIUM_TIGHT)
                         .traveller(TravellerState.SLIGHTLY_LEE)
                         .boomVang(BoomVangState.MEDIUM_TIGHT)
-                        .mainLuff(LuffFootState.SMOOTH)
-                        .mainFoot(LuffFootState.SMOOTH)
+                        .mainSailLuff(LuffFootState.SMOOTH)
+                        .mainSailFoot(LuffFootState.SMOOTH)
                         .build();
             }
             if (wind >= 18 && wave < 1.5) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.MEDIUM_LOOSE)
+                        .mainSailSheet(SheetState.MEDIUM_LOOSE)
                         .traveller(TravellerState.SLIGHTLY_LEE)
                         .boomVang(BoomVangState.TIGHT)
-                        .mainLuff(LuffFootState.SLIGHTLY_CLOSED)
-                        .mainFoot(LuffFootState.CLOSED)
+                        .mainSailLuff(LuffFootState.SLIGHTLY_CLOSED)
+                        .mainSailFoot(LuffFootState.CLOSED)
                         .build();
             }
             if (wind >= 18 && wave >= 1.5) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.SLIGHTLY_LOOSE)
+                        .mainSailSheet(SheetState.SLIGHTLY_LOOSE)
                         .traveller(TravellerState.LEE)
                         .boomVang(BoomVangState.MEDIUM_TIGHT)
-                        .mainLuff(LuffFootState.SLIGHTLY_CLOSED)
-                        .mainFoot(LuffFootState.FULL_CLOSED)
+                        .mainSailLuff(LuffFootState.SLIGHTLY_CLOSED)
+                        .mainSailFoot(LuffFootState.FULL_CLOSED)
                         .build();
             }
         }
@@ -136,61 +136,61 @@ public class MainSailTrimUtils {
             if (wind < 7 && wave < 0.5) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.LOOSE)
+                        .mainSailSheet(SheetState.LOOSE)
                         .traveller(TravellerState.LEE)
                         .boomVang(BoomVangState.LOOSE)
-                        .mainLuff(LuffFootState.SMOOTH)
-                        .mainFoot(LuffFootState.LOOSE)
+                        .mainSailLuff(LuffFootState.SMOOTH)
+                        .mainSailFoot(LuffFootState.LOOSE)
                         .build();
             }
             if (wind < 7 && wave >= 0.5) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.LOOSE)
+                        .mainSailSheet(SheetState.LOOSE)
                         .traveller(TravellerState.LEE)
                         .boomVang(BoomVangState.SLIGHTLY_TIGHT)
-                        .mainLuff(LuffFootState.SLIGHTLY_CRINKLED)
-                        .mainFoot(LuffFootState.LOOSE)
+                        .mainSailLuff(LuffFootState.SLIGHTLY_CRINKLED)
+                        .mainSailFoot(LuffFootState.LOOSE)
                         .build();
             }
             if (wind < 18 && wave < 1.0) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.LOOSE)
+                        .mainSailSheet(SheetState.LOOSE)
                         .traveller(TravellerState.LEE)
                         .boomVang(BoomVangState.TIGHT)
-                        .mainLuff(LuffFootState.SLIGHTLY_CRINKLED)
-                        .mainFoot(LuffFootState.LOOSE)
+                        .mainSailLuff(LuffFootState.SLIGHTLY_CRINKLED)
+                        .mainSailFoot(LuffFootState.LOOSE)
                         .build();
             }
             if (wind < 18 && wave >= 1.0) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.LOOSE)
+                        .mainSailSheet(SheetState.LOOSE)
                         .traveller(TravellerState.LEE)
                         .boomVang(BoomVangState.TIGHT)
-                        .mainLuff(LuffFootState.SMOOTH)
-                        .mainFoot(LuffFootState.LOOSE)
+                        .mainSailLuff(LuffFootState.SMOOTH)
+                        .mainSailFoot(LuffFootState.LOOSE)
                         .build();
             }
             if (wind >= 18 && wave < 1.5) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.LOOSE)
+                        .mainSailSheet(SheetState.LOOSE)
                         .traveller(TravellerState.LEE)
                         .boomVang(BoomVangState.MAX_TIGHT)
-                        .mainLuff(LuffFootState.SMOOTH)
-                        .mainFoot(LuffFootState.SLIGHTLY_CLOSED)
+                        .mainSailLuff(LuffFootState.SMOOTH)
+                        .mainSailFoot(LuffFootState.SLIGHTLY_CLOSED)
                         .build();
             }
             if (wind >= 18 && wave >= 1.5) {
                 return MainSail
                         .builder()
-                        .mainSheet(SheetState.LOOSE)
+                        .mainSailSheet(SheetState.LOOSE)
                         .traveller(TravellerState.LEE)
                         .boomVang(BoomVangState.MAX_TIGHT)
-                        .mainLuff(LuffFootState.SMOOTH)
-                        .mainFoot(LuffFootState.SLIGHTLY_CLOSED)
+                        .mainSailLuff(LuffFootState.SMOOTH)
+                        .mainSailFoot(LuffFootState.SLIGHTLY_CLOSED)
                         .build();
             }
         }

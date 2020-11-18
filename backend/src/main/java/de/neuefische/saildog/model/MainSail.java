@@ -15,11 +15,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MainSail {
 
-
-    private SheetState mainSheet;
+    private SheetState mainSailSheet;
     private TravellerState traveller;
     private BoomVangState boomVang;
-    private LuffFootState mainLuff;
-    private LuffFootState mainFoot;
+    private LuffFootState mainSailLuff;
+    private LuffFootState mainSailFoot;
 
 }
