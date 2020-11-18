@@ -51,6 +51,7 @@ export default function Dashboard({course, setCourse, windSpeed, setWindSpeed, w
             </FormStyled>
             <Buttons disableButtonOne={disableHandler()} disableButtonTwo={!windSpeed && !waveHeight && !course} disableButtonThree={disableHandler()}
                      labelButtonOne={"Main Sail"} labelButtonTwo={"Reset"} labelButtonThree={"Head Sail"}
+                     clickHandlerOne={clickHandlerMainSail}
                      clickHandlerTwo={clickHandlerReset}
                      clickHandlerThree={clickHandlerHeadSail}
             />
@@ -65,6 +66,10 @@ export default function Dashboard({course, setCourse, windSpeed, setWindSpeed, w
         return !(course && windSpeed && waveHeight && windSpeed !== 0 && waveHeight !== 0);
     }
 
+    function clickHandlerMainSail() {
+        history.push("/mainsail");
+    }
+
     function clickHandlerReset() {
         setCourse(null);
         setWindSpeed(0);
@@ -72,7 +77,7 @@ export default function Dashboard({course, setCourse, windSpeed, setWindSpeed, w
     }
 
     function clickHandlerHeadSail() {
-        history.push("/headsail")
+        history.push("/headsail");
     }
 }
 

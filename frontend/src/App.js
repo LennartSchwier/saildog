@@ -3,6 +3,7 @@ import HeadSail from "./components/HeadSail";
 import {Switch, Route} from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import useEnvironmentData from "./hooks/useEnvironmentData";
+import MainSail from "./components/MainSail";
 
 
 export default function App() {
@@ -19,6 +20,11 @@ export default function App() {
           </Route>
           <Route path={"/headsail"}>
               <HeadSail
+                  course={course} windSpeed={windSpeed} waveHeight={waveHeight}
+              />
+          </Route>
+          <Route path={"/mainsail"}>
+              <MainSail
                   course={course} windSpeed={windSpeed} waveHeight={waveHeight}
               />
           </Route>
