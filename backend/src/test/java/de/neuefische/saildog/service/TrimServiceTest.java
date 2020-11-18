@@ -18,10 +18,10 @@ class TrimServiceTest {
         // GIVEN
         HeadSailTrimUtils headSailTrimUtils = new HeadSailTrimUtils();
         EnumUtils enumUtils = new EnumUtils();
-        TrimService trimService = new TrimService(headSailTrimUtils, enumUtils);
+        TrimService trimService = new TrimService(headSailTrimUtils, null, enumUtils);                  //TODO
 
         // WHEN
-        HeadSail result = trimService.getHeadTrim("BEAM_REACH", 25, 3.2);
+        HeadSail result = trimService.getHeadSailTrim("BEAM_REACH", 25, 3.2);
 
         // THEN
         assertThat(result, is(new HeadSail(SheetState.SLIGHTLY_LOOSE, FairLeadState.NORMAL, LuffFootState.MEDIUM_CLOSED)));

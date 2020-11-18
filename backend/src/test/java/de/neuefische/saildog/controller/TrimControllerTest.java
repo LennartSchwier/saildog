@@ -38,7 +38,7 @@ class TrimControllerTest {
         HeadSail expectedResult = new HeadSail(SheetState.LOOSE, FairLeadState.SLIGHTLY_FORWARD, LuffFootState.SLIGHTLY_CRINKLED);
 
         // WHEN
-        when(mockedTrimService.getHeadTrim("closed_hauled", 3.0, 2.8 )).thenReturn(expectedResult);
+        when(mockedTrimService.getHeadSailTrim("closed_hauled", 3.0, 2.8 )).thenReturn(expectedResult);
         ResponseEntity<HeadSail> response = restTemplate.getForEntity(url, HeadSail.class);
 
         // THEN
