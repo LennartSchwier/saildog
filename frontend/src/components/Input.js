@@ -4,13 +4,13 @@ import styled from "styled-components/macro";
 import Buttons from "../commons/Buttons";
 import { useHistory } from 'react-router-dom';
 
-export default function Dashboard({course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight}) {
+export default function Input({course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight}) {
 
     const history = useHistory();
 
     return (
         <PageLayout>
-            <Header headerText={'Dashboard'}/>
+            <Header headerText={'Input'}/>
             <FormStyled>
                 <InputStyled>
                     <div>Course :</div>

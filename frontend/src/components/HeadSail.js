@@ -52,7 +52,7 @@ export default function HeadSail({course, windSpeed, waveHeight}) {
     );
 
     function clickHandlerBack() {
-        history.push("/dashboard");
+        history.push("/input");
     }
 }
 
