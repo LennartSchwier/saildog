@@ -10,7 +10,7 @@ export default function HeadSail({course, windSpeed, waveHeight}) {
     const history = useHistory();
     const headSailTrimData = useTrimData(course, windSpeed, waveHeight).headSailTrimData;
 
-    const getTextualOutput = (input) => input.replace("_", " ").toLowerCase()
+    const getTextualOutput = (input) => input?.replace("_", " ").toLowerCase()
 
     return (
         <PageLayout>
