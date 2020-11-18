@@ -60,7 +60,7 @@ export default function MainSail({course, windSpeed, waveHeight}) {
     );
 
     function clickHandlerBack() {
-        history.push("/dashboard");
+        history.push("/input");
     }
 }
 
