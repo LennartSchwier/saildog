@@ -1,19 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {getHeadSailTrim} from "../service/TrimDataService";
+import React from 'react';
 import Header from "../commons/Header";
 import Buttons from "../commons/Buttons";
 import styled from "styled-components/macro";
 import {useHistory} from "react-router-dom";
+import useTrimData from "../hooks/useTrimData";
 
 export default function HeadSail({course, windSpeed, waveHeight}) {
 
     const history = useHistory();
-    const [headSailTrimData, setHeadSailTrimData] = useState();
-
-    useEffect(() => {
-        getHeadSailTrim(course, windSpeed, waveHeight)
-            .then(data => setHeadSailTrimData(data))
-    }, [course, waveHeight, windSpeed])
+    const headSailTrimData = useTrimData(course, windSpeed, waveHeight).headSailTrimData;
 
     const getTextualOutput = (input) => input.replace("_", " ").toLowerCase()
 
