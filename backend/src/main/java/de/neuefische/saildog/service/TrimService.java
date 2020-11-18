@@ -19,8 +19,8 @@ public class TrimService {
         this.enumUtils = enumUtils;
     }
 
-    public HeadSail getHeadTrim(double wind, double wave, String course) {
+    public HeadSail getHeadTrim( String course, double wind, double wave) {
         BoatCourse boatCourse = enumUtils.getEnum(BoatCourse.class, course);
-        return headSailTrimUtils.calculateHeadSailTrim(wind, wave, boatCourse);
+        return headSailTrimUtils.calculateHeadSailTrim(boatCourse, wind, wave);
     }
 }

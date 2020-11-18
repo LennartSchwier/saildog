@@ -33,7 +33,7 @@ class HeadSailTrimUtilsTest {
         BoatCourse boatCourse = enumUtils.getEnum(BoatCourse.class, course);
 
         // WHEN
-        HeadSail result = headSailTrimUtils.calculateHeadSailTrim(windSpeed, waveHeight, boatCourse);
+        HeadSail result = headSailTrimUtils.calculateHeadSailTrim(boatCourse, windSpeed, waveHeight);
 
         // THEN
         assertThat(result.getHeadSailSheet(), is(sheetState));

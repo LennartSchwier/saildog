@@ -11,11 +11,11 @@ export default function HeadSail({course, windSpeed, waveHeight}) {
     const [headSailTrimData, setHeadSailTrimData] = useState();
 
     useEffect(() => {
-        getHeadSailTrim(windSpeed, waveHeight, course)
+        getHeadSailTrim(course, windSpeed, waveHeight)
             .then(data => setHeadSailTrimData(data))
     }, [course, waveHeight, windSpeed])
 
-    const getTextualOutput = (input) => input.replace("_", " ")
+    const getTextualOutput = (input) => input.replace("_", " ").toLowerCase()
 
     return (
         <PageLayout>

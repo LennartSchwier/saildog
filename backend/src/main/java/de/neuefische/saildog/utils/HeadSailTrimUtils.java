@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class HeadSailTrimUtils {
 
-    public HeadSail calculateHeadSailTrim(double wind, double wave, BoatCourse boatCourse) {
+    public HeadSail calculateHeadSailTrim(BoatCourse boatCourse, double wind, double wave) {
         if (boatCourse == BoatCourse.CLOSED_HAULED) {
             if (wind < 7 && wave < 0.5) {
                 return new HeadSail(
