@@ -1,12 +1,14 @@
 import React from 'react';
 import HeadSail from "./components/HeadSail";
+import {Switch, Route} from "react-router-dom";
 
-function App() {
+export default function App() {
   return (
-    <div>
-      <HeadSail></HeadSail>
-    </div>
+      <Switch>
+          <Route path={"/headsail"}>
+              <HeadSail/>
+          </Route>
+      </Switch>
   );
 }
 
-export default App;
