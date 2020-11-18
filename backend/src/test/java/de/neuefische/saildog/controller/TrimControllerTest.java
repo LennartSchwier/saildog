@@ -29,12 +29,16 @@ class TrimControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    String requestParam = "?course=closed_hauled&wind=3.0&wave=2.8";
+    public String getTrimUrl(String sail) {
+        String requestParam = "?course=closed_hauled&wind=3.0&wave=2.8";
+        return "http://localhost:" + port + "/api/trim/"+ sail + requestParam;
+    }
+
 
     @Test
     public void getHeadSailTrimReturnsCorrectResponse() {
         // GIVEN
-        String url = "http://localhost:" + port + "/api/trim/headsail" + requestParam;
+        String url = getTrimUrl("headsail");
         HeadSail expectedResult = new HeadSail(SheetState.LOOSE, FairLeadState.SLIGHTLY_FORWARD, LuffFootState.SLIGHTLY_CRINKLED);
 
         // WHEN
@@ -49,7 +53,7 @@ class TrimControllerTest {
     @Test
     public void getMainSailTrimReturnsCorrectResponse() {
         // GIVEN
-        String url = "http://localhost:" + port + "/api/trim/mainsail" + requestParam;
+        String url = getTrimUrl("mainsail");
         MainSail expectedResult = MainSail.builder()
                 .mainSailSheet(SheetState.LOOSE)
                 .traveller(TravellerState.SLIGHTLY_LUV)
