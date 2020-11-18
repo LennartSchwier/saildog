@@ -20,8 +20,7 @@ public class TrimController {
     }
 
     @GetMapping(path = "/headsail")
-    public HeadSail getHeadSailTrim (@RequestParam double wind, @RequestParam double wave, @RequestParam String course) {
-        return trimService.getHeadTrim(wind, wave, course);
+    public HeadSail getHeadSailTrim (@RequestParam String course, @RequestParam double wind, @RequestParam double wave) {
+        return trimService.getHeadTrim(course, wind, wave);
     }
-
 }
