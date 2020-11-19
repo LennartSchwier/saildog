@@ -1,55 +1,22 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import styled from "styled-components/macro";
 import Header from "../commons/Header";
 import Buttons from "../commons/Buttons";
 import {useHistory} from "react-router-dom";
+import usePositioning from "../hooks/usePositioning";
 
 export default function Dashboard() {
 
     const history = useHistory();
 
-    const [geoAvailable, setGeoAvailable] = useState();
-    const [latitude, setLatitude] = useState();
-    const [longitude, setLongitude] = useState();
-    const [errorMessage, setErrorMessage] = useState();
-
-    const geoSuccess = (position) => {
-        setGeoAvailable(true);
-        setLatitude(position.coords.latitude);
-        setLongitude(position.coords.longitude);
-    }
-
-    const geoError = (error) => {
-        setErrorMessage("Error: Code " + error.code + " - " + error.message);
-    }
-
-    const geoRequest = () => {
-        const watchId = navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
-    }
-
-    const geoOptions = {
-        enableHighAccuracy: true,
-        maximumAge: 30000,
-        timeout: 35000
-    }
-
-    useEffect(() => {
-        console.log("checking availability...")
-        if (!"geolocation" in navigator) {
-            setGeoAvailable(false)
-        }
-        else {
-            console.log("requesting position...");
-            geoRequest();
-        }
-    }, []);
+    const [positionAvailable, latitude, longitude, errorMessage] = usePositioning();
 
     return (
         <PageLayout>
             <Header headerText={"Ahoi 'username'"}/>
             <PositionBlock>
-                <div>Current location: {geoAvailable ? <b>Available</b> : <b>Not Available</b>}</div>
-                {geoAvailable ?
+                <div>Current location: {positionAvailable ? <b>Available</b> : <b>Not Available</b>}</div>
+                {positionAvailable ?
                     <div>
                         <div>Latitude: <b>{latitude}</b></div>
                         <div>Longitude: <b>{longitude}</b></div>
