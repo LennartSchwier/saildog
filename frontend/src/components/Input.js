@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../commons/Header";
 import styled from "styled-components/macro";
-import Buttons from "../commons/Buttons";
+import FootButton from "../commons/FootButton";
 import { useHistory } from 'react-router-dom';
 
 export default function Input({course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight}) {
@@ -49,12 +49,12 @@ export default function Input({course, setCourse, windSpeed, setWindSpeed, waveH
                     <label htmlFor={"waveHeight"}>{waveHeight} meter</label>
                 </InputStyled>
             </FormStyled>
-            <Buttons disableButtonOne={disableHandler()} disableButtonTwo={!windSpeed && !waveHeight && !course} disableButtonThree={disableHandler()}
-                     labelButtonOne={"Main Sail"} labelButtonTwo={"Reset"} labelButtonThree={"Head Sail"}
-                     clickHandlerOne={clickHandlerMainSail}
-                     clickHandlerTwo={clickHandlerReset}
-                     clickHandlerThree={clickHandlerHeadSail}
-            />
+            <div>
+                <FootButton labelButton={"Dashboard"} handleClick={redirectToDashboard}/>
+                <FootButton labelButton={"Reset"} handleClick={resetAllInputData} disableButton={!windSpeed && !waveHeight && !course}/>
+                <FootButton labelButton={"Main Sail"} handleClick={redirectToMainSail} disableButton={disableHandler()}/>
+                <FootButton labelButton={"Head Sail"} handleClick={redirectToHeadSail} disableButton={disableHandler()}/>
+            </div>
         </PageLayout>
     );
 
@@ -62,21 +62,25 @@ export default function Input({course, setCourse, windSpeed, setWindSpeed, waveH
         setCourse(event.target.value)
     }
 
+    function redirectToDashboard() {
+        history.push("/dashboard");
+    }
+
     function disableHandler() {
         return !(course && windSpeed && waveHeight && windSpeed !== 0 && waveHeight !== 0);
     }
 
-    function clickHandlerMainSail() {
+    function redirectToMainSail() {
         history.push("/mainsail");
     }
 
-    function clickHandlerReset() {
+    function resetAllInputData() {
         setCourse(null);
         setWindSpeed(0);
         setWaveHeight(0);
     }
 
-    function clickHandlerHeadSail() {
+    function redirectToHeadSail() {
         history.push("/headsail");
     }
 }
@@ -94,4 +98,8 @@ const InputStyled = styled.div`
 display: grid;
 row-gap: var(--size-s);
 margin: var(--size-m);
+
+  & label{
+  font-weight: bold;
+  }
 `
