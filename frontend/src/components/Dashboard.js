@@ -9,14 +9,14 @@ export default function Dashboard() {
 
     const history = useHistory();
 
-    const [positionAvailable, latitude, longitude, errorMessage] = usePositioning();
+    const [latitude, longitude, errorMessage] = usePositioning();
 
     return (
         <PageLayout>
             <Header headerText={"Ahoi 'username'"}/>
             <PositionBlock>
-                <section>Current location: {positionAvailable ? <Bold>Available</Bold> : <Bold>Not Available</Bold>}</section>
-                {positionAvailable ?
+                <section>Current location: {latitude && longitude ? <Bold>Available</Bold> : <Bold>Not Available</Bold>}</section>
+                {latitude && longitude ?
                     <div>
                         <div>Latitude: <Bold>{latitude}</Bold></div>
                         <div>Longitude: <Bold>{longitude}</Bold></div>
