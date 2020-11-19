@@ -49,17 +49,23 @@ export default function Input({course, setCourse, windSpeed, setWindSpeed, waveH
                     <label htmlFor={"waveHeight"}>{waveHeight} meter</label>
                 </InputStyled>
             </FormStyled>
-            <Buttons disableButtonOne={disableHandler()} disableButtonTwo={!windSpeed && !waveHeight && !course} disableButtonThree={disableHandler()}
-                     labelButtonOne={"Main Sail"} labelButtonTwo={"Reset"} labelButtonThree={"Head Sail"}
-                     clickHandlerOne={clickHandlerMainSail}
+            <Buttons disableButtonOne={false} disableButtonTwo={!windSpeed && !waveHeight && !course}
+                     disableButtonThree={disableHandler()} disableButtonFour={disableHandler()}
+                     labelButtonOne={"Dashboard"} labelButtonTwo={"Reset"} labelButtonThree={"Main Sail"} lableButtonFour={"Head Sail"}
+                     clickHandlerOne={clickHandlerDashboard}
                      clickHandlerTwo={clickHandlerReset}
-                     clickHandlerThree={clickHandlerHeadSail}
+                     clickHandlerThree={clickHandlerMainSail}
+                     clickHandlerFour={clickHandlerHeadSail}
             />
         </PageLayout>
     );
 
     function handleRadioButton(event) {
         setCourse(event.target.value)
+    }
+
+    function clickHandlerDashboard() {
+        history.push("/dashboard");
     }
 
     function disableHandler() {
