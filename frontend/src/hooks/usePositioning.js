@@ -22,7 +22,7 @@ export default function usePositioning() {
         const geoOptions = {
             enableHighAccuracy: true,
             maximumAge: 30000,
-            timeout: 35000
+            //timeout: 35000
         }
         console.log("checking availability...")
         if (!navigator.geolocation) {
