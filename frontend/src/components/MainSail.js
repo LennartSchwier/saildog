@@ -1,20 +1,20 @@
-import React from 'react';
+import {useHistory} from "react-router-dom";
+import useTrimData from "../hooks/useTrimData";
 import Header from "../commons/Header";
 import Buttons from "../commons/Buttons";
 import styled from "styled-components/macro";
-import {useHistory} from "react-router-dom";
-import useTrimData from "../hooks/useTrimData";
+import React from "react";
 
-export default function HeadSail({course, windSpeed, waveHeight}) {
+export default function MainSail({course, windSpeed, waveHeight}) {
 
     const history = useHistory();
-    const headSailTrimData = useTrimData(course, windSpeed, waveHeight).headSailTrimData;
+    const mainSailTrimData = useTrimData(course, windSpeed, waveHeight).mainSailTrimData;
 
     const getTextualOutput = (input) => input?.replace("_", " ").toLowerCase()
 
     return (
         <PageLayout>
-            <Header headerText={'Head Sail'}/>
+            <Header headerText={'Main Sail'}/>
             <InputField>
                 <div>
                     <div>Course:</div>
@@ -32,15 +32,23 @@ export default function HeadSail({course, windSpeed, waveHeight}) {
             <OutputField>
                 <div>
                     <div>Sheet:</div>
-                    <span>{headSailTrimData && getTextualOutput(headSailTrimData.headSailSheet)}</span>
+                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailSheet)}</span>
                 </div>
                 <div>
-                    <div>Fair Lead:</div>
-                    <span>{headSailTrimData && getTextualOutput(headSailTrimData.headSailLead)}</span>
+                    <div>Traveller:</div>
+                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.traveller)}</span>
+                </div>
+                <div>
+                    <div>Boom Vang:</div>
+                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.boomVang)}</span>
                 </div>
                 <div>
                     <div>Luff:</div>
-                    <span>{headSailTrimData && getTextualOutput(headSailTrimData.headSailLuff)}</span>
+                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailLuff)}</span>
+                </div>
+                <div>
+                    <div>Foot:</div>
+                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailFoot)}</span>
                 </div>
             </OutputField>
             <Buttons

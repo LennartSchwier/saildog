@@ -1,8 +1,9 @@
 import React from 'react';
 import HeadSail from "./components/HeadSail";
-import {Switch, Route} from "react-router-dom";
-import Dashboard from "./components/Dashboard";
+import {Switch, Route, Redirect} from "react-router-dom";
+import Input from "./components/Input";
 import useEnvironmentData from "./hooks/useEnvironmentData";
+import MainSail from "./components/MainSail";
 
 
 export default function App() {
@@ -11,8 +12,8 @@ export default function App() {
 
   return (
       <Switch>
-          <Route path={"/dashboard"}>
-              <Dashboard course={course} setCourse={setCourse}
+          <Route path={"/input"}>
+              <Input course={course} setCourse={setCourse}
                          windSpeed={windSpeed} setWindSpeed={setWindSpeed}
                          waveHeight={waveHeight} setWaveHeight={setWaveHeight}
               />
@@ -21,6 +22,14 @@ export default function App() {
               <HeadSail
                   course={course} windSpeed={windSpeed} waveHeight={waveHeight}
               />
+          </Route>
+          <Route path={"/mainsail"}>
+              <MainSail
+                  course={course} windSpeed={windSpeed} waveHeight={waveHeight}
+              />
+          </Route>
+          <Route path={"/"}>
+              <Redirect to={"/dashboard"}/>
           </Route>
       </Switch>
   );
