@@ -78,7 +78,7 @@ justify-content: space-evenly;
 align-items: center;
 font-size: 0.9em;
 
-  div > div {
+  div > span {
   font-weight: bold;
   }
 `
@@ -93,7 +93,7 @@ font-size: 1.1em;
   margin: var(--size-s);
   }
   
-  div > div {
+  div > span {
   font-weight: bold;
   }
 `

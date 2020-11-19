@@ -42,7 +42,7 @@ export default function Dashboard() {
 
     return (
         <PageLayout>
-            <Header headerText={"Welcome 'username'"}/>
+            <Header headerText={"Ahoi 'username'"}/>
             <PositionBlock>
                 <div>Current location: {geoAvailable ? <b>Available</b> : <b>Not Available</b>}</div>
                 {geoAvailable ?

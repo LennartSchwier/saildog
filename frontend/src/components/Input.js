@@ -100,4 +100,8 @@ const InputStyled = styled.div`
 display: grid;
 row-gap: var(--size-s);
 margin: var(--size-m);
+
+  & label{
+  font-weight: bold;
+  }
 `
