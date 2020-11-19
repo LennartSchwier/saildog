@@ -18,24 +18,21 @@ export default function usePositioning() {
         setErrorMessage("Error: Code " + error.code + " - " + error.message);
     }
 
-    const geoRequest = () => navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
-
-    const geoOptions = {
-        enableHighAccuracy: true,
-        maximumAge: 30000,
-        timeout: 35000
-    }
-
     useEffect(() => {
+        const geoOptions = {
+            enableHighAccuracy: true,
+            maximumAge: 30000,
+            timeout: 35000
+        }
         console.log("checking availability...")
         if (!navigator.geolocation) {
             setGeoAvailable(false)
         }
         else {
             console.log("requesting position...");
-            geoRequest();
+            navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
         }
-    }, [geoRequest]);
+    }, []);
 
     return [geoAvailable, latitude, longitude, errorMessage];
 }
