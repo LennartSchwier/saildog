@@ -8,7 +8,7 @@ import useTrimData from "../hooks/useTrimData";
 export default function HeadSail({course, windSpeed, waveHeight}) {
 
     const history = useHistory();
-    const headSailTrimData = useTrimData(course, windSpeed, waveHeight).headSailTrimData;
+    const { headSailTrimData } = useTrimData(course, windSpeed, waveHeight);
 
     const getTextualOutput = (input) => input?.replace("_", " ").toLowerCase()
 
@@ -32,15 +32,15 @@ export default function HeadSail({course, windSpeed, waveHeight}) {
             <OutputField>
                 <div>
                     <div>Sheet:</div>
-                    <Bold>{headSailTrimData && getTextualOutput(headSailTrimData.headSailSheet)}</Bold>
+                    {headSailTrimData && <Bold>{getTextualOutput(headSailTrimData.headSailSheet)}</Bold>}
                 </div>
                 <div>
                     <div>Fair Lead:</div>
-                    <Bold>{headSailTrimData && getTextualOutput(headSailTrimData.headSailLead)}</Bold>
+                    {headSailTrimData && <Bold>{getTextualOutput(headSailTrimData.headSailLead)}</Bold>}
                 </div>
                 <div>
                     <div>Luff:</div>
-                    <Bold>{headSailTrimData && getTextualOutput(headSailTrimData.headSailLuff)}</Bold>
+                    {headSailTrimData && <Bold>{getTextualOutput(headSailTrimData.headSailLuff)}</Bold>}
                 </div>
             </OutputField>
             <div>

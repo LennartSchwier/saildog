@@ -8,7 +8,7 @@ import React from "react";
 export default function MainSail({course, windSpeed, waveHeight}) {
 
     const history = useHistory();
-    const mainSailTrimData = useTrimData(course, windSpeed, waveHeight).mainSailTrimData;
+    const { mainSailTrimData } = useTrimData(course, windSpeed, waveHeight);
 
     const getTextualOutput = (input) => input?.replace("_", " ").toLowerCase()
 
@@ -32,23 +32,23 @@ export default function MainSail({course, windSpeed, waveHeight}) {
             <OutputField>
                 <div>
                     <div>Sheet:</div>
-                    <Bold>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailSheet)}</Bold>
+                    {mainSailTrimData && <Bold>{getTextualOutput(mainSailTrimData.mainSailSheet)}</Bold>}
                 </div>
                 <div>
                     <div>Traveller:</div>
-                    <Bold>{mainSailTrimData && getTextualOutput(mainSailTrimData.traveller)}</Bold>
+                    {mainSailTrimData && <Bold>{getTextualOutput(mainSailTrimData.traveller)}</Bold>}
                 </div>
                 <div>
                     <div>Boom Vang:</div>
-                    <Bold>{mainSailTrimData && getTextualOutput(mainSailTrimData.boomVang)}</Bold>
+                    {mainSailTrimData && <Bold>{getTextualOutput(mainSailTrimData.boomVang)}</Bold>}
                 </div>
                 <div>
                     <div>Luff:</div>
-                    <Bold>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailLuff)}</Bold>
+                    {mainSailTrimData && <Bold>{getTextualOutput(mainSailTrimData.mainSailLuff)}</Bold>}
                 </div>
                 <div>
                     <div>Foot:</div>
-                    <Bold>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailFoot)}</Bold>
+                    {mainSailTrimData && <Bold>{getTextualOutput(mainSailTrimData.mainSailFoot)}</Bold>}
                 </div>
             </OutputField>
             <div>
