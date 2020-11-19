@@ -18,29 +18,29 @@ export default function HeadSail({course, windSpeed, waveHeight}) {
             <InputField>
                 <div>
                     <div>Course:</div>
-                    <span>{getTextualOutput(course)}</span>
+                    <Bold>{getTextualOutput(course)}</Bold>
                 </div>
                 <div>
                     <div>Wind Speed:</div>
-                    <span>{windSpeed} knots</span>
+                    <Bold>{windSpeed} knots</Bold>
                 </div>
                 <div>
                     <div>Wave Height:</div>
-                    <span>{waveHeight} meter</span>
+                    <Bold>{waveHeight} meter</Bold>
                 </div>
             </InputField>
             <OutputField>
                 <div>
                     <div>Sheet:</div>
-                    <span>{headSailTrimData && getTextualOutput(headSailTrimData.headSailSheet)}</span>
+                    <Bold>{headSailTrimData && getTextualOutput(headSailTrimData.headSailSheet)}</Bold>
                 </div>
                 <div>
                     <div>Fair Lead:</div>
-                    <span>{headSailTrimData && getTextualOutput(headSailTrimData.headSailLead)}</span>
+                    <Bold>{headSailTrimData && getTextualOutput(headSailTrimData.headSailLead)}</Bold>
                 </div>
                 <div>
                     <div>Luff:</div>
-                    <span>{headSailTrimData && getTextualOutput(headSailTrimData.headSailLuff)}</span>
+                    <Bold>{headSailTrimData && getTextualOutput(headSailTrimData.headSailLuff)}</Bold>
                 </div>
             </OutputField>
             <div>
@@ -82,8 +82,8 @@ font-size: 1.1em;
   align-items: center;
   margin: var(--size-s);
   }
-  
-  div > span {
-  font-weight: bold;
-  }
+`
+
+const Bold = styled.span`
+font-weight: bold;
 `

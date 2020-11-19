@@ -23,12 +23,10 @@ export default function usePositioning() {
             enableHighAccuracy: true,
             maximumAge: 30000
         }
-        console.log("checking availability...")
         if (!navigator.geolocation) {
             setGeoAvailable(false)
         }
         else {
-            console.log("requesting position...");
             navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
         }
     }, []);

@@ -18,37 +18,37 @@ export default function MainSail({course, windSpeed, waveHeight}) {
             <InputField>
                 <div>
                     <div>Course:</div>
-                    <span>{getTextualOutput(course)}</span>
+                    <Bold>{getTextualOutput(course)}</Bold>
                 </div>
                 <div>
                     <div>Wind Speed:</div>
-                    <span>{windSpeed} knots</span>
+                    <Bold>{windSpeed} knots</Bold>
                 </div>
                 <div>
                     <div>Wave Height:</div>
-                    <span>{waveHeight} meter</span>
+                    <Bold>{waveHeight} meter</Bold>
                 </div>
             </InputField>
             <OutputField>
                 <div>
                     <div>Sheet:</div>
-                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailSheet)}</span>
+                    <Bold>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailSheet)}</Bold>
                 </div>
                 <div>
                     <div>Traveller:</div>
-                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.traveller)}</span>
+                    <Bold>{mainSailTrimData && getTextualOutput(mainSailTrimData.traveller)}</Bold>
                 </div>
                 <div>
                     <div>Boom Vang:</div>
-                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.boomVang)}</span>
+                    <Bold>{mainSailTrimData && getTextualOutput(mainSailTrimData.boomVang)}</Bold>
                 </div>
                 <div>
                     <div>Luff:</div>
-                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailLuff)}</span>
+                    <Bold>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailLuff)}</Bold>
                 </div>
                 <div>
                     <div>Foot:</div>
-                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailFoot)}</span>
+                    <Bold>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailFoot)}</Bold>
                 </div>
             </OutputField>
             <div>
@@ -90,8 +90,8 @@ font-size: 1.1em;
   align-items: center;
   margin: var(--size-s);
   }
-  
-  div > span {
-  font-weight: bold;
-  }
+`
+
+const Bold = styled.span`
+font-weight: bold;
 `
