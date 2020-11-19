@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 import Header from "../commons/Header";
-import Buttons from "../commons/Buttons";
+import FootButton from "../commons/FootButton";
 import {useHistory} from "react-router-dom";
 import usePositioning from "../hooks/usePositioning";
 
@@ -26,17 +26,14 @@ export default function Dashboard() {
                 }
             </PositionBlock>
             <div>some content</div>
-            <Buttons
-                disableButtonOne={false}
-                labelButtonOne={"Log Out"}
-                disableButtonThree={false}
-                labelButtonThree={"Input"}
-                clickHandlerThree={clickHandlerInput}
-            />
+            <div>
+                <FootButton labelButton={"Log Out"} />
+                <FootButton labelButton={"Input"} handleClick={redirectToInput}/>
+            </div>
         </PageLayout>
     );
 
-    function clickHandlerInput() {
+    function redirectToInput() {
         history.push("/input");
     }
 }

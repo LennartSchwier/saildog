@@ -1,7 +1,7 @@
 import {useHistory} from "react-router-dom";
 import useTrimData from "../hooks/useTrimData";
 import Header from "../commons/Header";
-import Buttons from "../commons/Buttons";
+import FootButton from "../commons/FootButton";
 import styled from "styled-components/macro";
 import React from "react";
 
@@ -51,15 +51,13 @@ export default function MainSail({course, windSpeed, waveHeight}) {
                     <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailFoot)}</span>
                 </div>
             </OutputField>
-            <Buttons
-                disableButtonTwo={false}
-                labelButtonTwo={"Back"}
-                clickHandlerTwo={clickHandlerBack}
-            />
+            <div>
+                <FootButton labelButton={"Back"} handleClick={redirectToInput}/>
+            </div>
         </PageLayout>
     );
 
-    function clickHandlerBack() {
+    function redirectToInput() {
         history.push("/input");
     }
 }
