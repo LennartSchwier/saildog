@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from "../commons/Header";
-import Buttons from "../commons/Buttons";
+import FootButton from "../commons/FootButton";
 import styled from "styled-components/macro";
 import {useHistory} from "react-router-dom";
 import useTrimData from "../hooks/useTrimData";
@@ -8,7 +8,7 @@ import useTrimData from "../hooks/useTrimData";
 export default function HeadSail({course, windSpeed, waveHeight}) {
 
     const history = useHistory();
-    const headSailTrimData = useTrimData(course, windSpeed, waveHeight).headSailTrimData;
+    const { headSailTrimData } = useTrimData(course, windSpeed, waveHeight);
 
     const getTextualOutput = (input) => input?.replace("_", " ").toLowerCase()
 
@@ -18,40 +18,38 @@ export default function HeadSail({course, windSpeed, waveHeight}) {
             <InputField>
                 <div>
                     <div>Course:</div>
-                    <span>{getTextualOutput(course)}</span>
+                    <Bold>{getTextualOutput(course)}</Bold>
                 </div>
                 <div>
                     <div>Wind Speed:</div>
-                    <span>{windSpeed} knots</span>
+                    <Bold>{windSpeed} knots</Bold>
                 </div>
                 <div>
                     <div>Wave Height:</div>
-                    <span>{waveHeight} meter</span>
+                    <Bold>{waveHeight} meter</Bold>
                 </div>
             </InputField>
             <OutputField>
                 <div>
                     <div>Sheet:</div>
-                    <span>{headSailTrimData && getTextualOutput(headSailTrimData.headSailSheet)}</span>
+                    {headSailTrimData && <Bold>{getTextualOutput(headSailTrimData.headSailSheet)}</Bold>}
                 </div>
                 <div>
                     <div>Fair Lead:</div>
-                    <span>{headSailTrimData && getTextualOutput(headSailTrimData.headSailLead)}</span>
+                    {headSailTrimData && <Bold>{getTextualOutput(headSailTrimData.headSailLead)}</Bold>}
                 </div>
                 <div>
                     <div>Luff:</div>
-                    <span>{headSailTrimData && getTextualOutput(headSailTrimData.headSailLuff)}</span>
+                    {headSailTrimData && <Bold>{getTextualOutput(headSailTrimData.headSailLuff)}</Bold>}
                 </div>
             </OutputField>
-            <Buttons
-                disableButtonTwo={false}
-                labelButtonTwo={"Back"}
-                clickHandlerTwo={clickHandlerBack}
-            />
+            <div>
+                <FootButton labelButton={"Back"} handleClick={redirectToInput}/>
+            </div>
         </PageLayout>
     );
 
-    function clickHandlerBack() {
+    function redirectToInput() {
         history.push("/input");
     }
 }
@@ -84,8 +82,8 @@ font-size: 1.1em;
   align-items: center;
   margin: var(--size-s);
   }
-  
-  div > span {
-  font-weight: bold;
-  }
+`
+
+const Bold = styled.span`
+font-weight: bold;
 `

@@ -1,14 +1,14 @@
 import {useHistory} from "react-router-dom";
 import useTrimData from "../hooks/useTrimData";
 import Header from "../commons/Header";
-import Buttons from "../commons/Buttons";
+import FootButton from "../commons/FootButton";
 import styled from "styled-components/macro";
 import React from "react";
 
 export default function MainSail({course, windSpeed, waveHeight}) {
 
     const history = useHistory();
-    const mainSailTrimData = useTrimData(course, windSpeed, waveHeight).mainSailTrimData;
+    const { mainSailTrimData } = useTrimData(course, windSpeed, waveHeight);
 
     const getTextualOutput = (input) => input?.replace("_", " ").toLowerCase()
 
@@ -18,48 +18,46 @@ export default function MainSail({course, windSpeed, waveHeight}) {
             <InputField>
                 <div>
                     <div>Course:</div>
-                    <span>{getTextualOutput(course)}</span>
+                    <Bold>{getTextualOutput(course)}</Bold>
                 </div>
                 <div>
                     <div>Wind Speed:</div>
-                    <span>{windSpeed} knots</span>
+                    <Bold>{windSpeed} knots</Bold>
                 </div>
                 <div>
                     <div>Wave Height:</div>
-                    <span>{waveHeight} meter</span>
+                    <Bold>{waveHeight} meter</Bold>
                 </div>
             </InputField>
             <OutputField>
                 <div>
                     <div>Sheet:</div>
-                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailSheet)}</span>
+                    {mainSailTrimData && <Bold>{getTextualOutput(mainSailTrimData.mainSailSheet)}</Bold>}
                 </div>
                 <div>
                     <div>Traveller:</div>
-                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.traveller)}</span>
+                    {mainSailTrimData && <Bold>{getTextualOutput(mainSailTrimData.traveller)}</Bold>}
                 </div>
                 <div>
                     <div>Boom Vang:</div>
-                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.boomVang)}</span>
+                    {mainSailTrimData && <Bold>{getTextualOutput(mainSailTrimData.boomVang)}</Bold>}
                 </div>
                 <div>
                     <div>Luff:</div>
-                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailLuff)}</span>
+                    {mainSailTrimData && <Bold>{getTextualOutput(mainSailTrimData.mainSailLuff)}</Bold>}
                 </div>
                 <div>
                     <div>Foot:</div>
-                    <span>{mainSailTrimData && getTextualOutput(mainSailTrimData.mainSailFoot)}</span>
+                    {mainSailTrimData && <Bold>{getTextualOutput(mainSailTrimData.mainSailFoot)}</Bold>}
                 </div>
             </OutputField>
-            <Buttons
-                disableButtonTwo={false}
-                labelButtonTwo={"Back"}
-                clickHandlerTwo={clickHandlerBack}
-            />
+            <div>
+                <FootButton labelButton={"Back"} handleClick={redirectToInput}/>
+            </div>
         </PageLayout>
     );
 
-    function clickHandlerBack() {
+    function redirectToInput() {
         history.push("/input");
     }
 }
@@ -92,8 +90,8 @@ font-size: 1.1em;
   align-items: center;
   margin: var(--size-s);
   }
-  
-  div > span {
-  font-weight: bold;
-  }
+`
+
+const Bold = styled.span`
+font-weight: bold;
 `

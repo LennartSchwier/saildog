@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 import Header from "../commons/Header";
-import Buttons from "../commons/Buttons";
+import FootButton from "../commons/FootButton";
 import {useHistory} from "react-router-dom";
 import usePositioning from "../hooks/usePositioning";
 
@@ -9,34 +9,31 @@ export default function Dashboard() {
 
     const history = useHistory();
 
-    const [positionAvailable, latitude, longitude, errorMessage] = usePositioning();
+    const [latitude, longitude, errorMessage] = usePositioning();
 
     return (
         <PageLayout>
             <Header headerText={"Ahoi 'username'"}/>
             <PositionBlock>
-                <div>Current location: {positionAvailable ? <b>Available</b> : <b>Not Available</b>}</div>
-                {positionAvailable ?
+                <section>Current location: {latitude && longitude ? <Bold>Available</Bold> : <Bold>Not Available</Bold>}</section>
+                {latitude && longitude ?
                     <div>
-                        <div>Latitude: <b>{latitude}</b></div>
-                        <div>Longitude: <b>{longitude}</b></div>
+                        <div>Latitude: <Bold>{latitude}</Bold></div>
+                        <div>Longitude: <Bold>{longitude}</Bold></div>
                     </div>
                     :
-                    <div id={"error"}>{errorMessage}</div>
+                    <div className={"error"}>{errorMessage}</div>
                 }
             </PositionBlock>
             <div>some content</div>
-            <Buttons
-                disableButtonOne={false}
-                labelButtonOne={"Log Out"}
-                disableButtonThree={false}
-                labelButtonThree={"Input"}
-                clickHandlerThree={clickHandlerInput}
-            />
+            <div>
+                <FootButton labelButton={"Log Out"} />
+                <FootButton labelButton={"Input"} handleClick={redirectToInput}/>
+            </div>
         </PageLayout>
     );
 
-    function clickHandlerInput() {
+    function redirectToInput() {
         history.push("/input");
     }
 }
@@ -55,8 +52,12 @@ margin: 0 var(--size-l);
   margin: var(--size-s);
   }
   
-  #error {
+  .error {
   margin: var(--size-s);
   color: red;
   }
+`
+
+const Bold = styled.span`
+font-weight: bold;
 `
