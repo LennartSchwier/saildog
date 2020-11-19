@@ -23,6 +23,10 @@ export default function Dashboard() {
         setErrorMessage("Error: Code " + error.code + " - " + error.message);
     }
 
+    const geoRequest = () => {
+        const watchId = navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
+    }
+
     const geoOptions = {
         enableHighAccuracy: true,
         maximumAge: 30000,
@@ -35,8 +39,8 @@ export default function Dashboard() {
             setGeoAvailable(false)
         }
         else {
-            console.log("requesting position...")
-            navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
+            console.log("requesting position...");
+            geoRequest();
         }
     }, []);
 

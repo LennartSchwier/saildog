@@ -18,7 +18,7 @@ class MainSailTrimUtilsTest {
             "8, 0.9, beam_reach, SLIGHTLY_TIGHT",
             "12, 2.0, closed_Hauled, MEDIUM_TIGHT",
             "22, 1.3, closed_Hauled, MAX_TIGHT",
-            "200, 200, beam_reach, SLIGHTLY_LOOSE"
+            "200, 200, wind_astern, LOOSE"
     })
     public void testCalculateMainSailTrimsReturnsCorrectSheetTrim(
             double windSpeed,
