@@ -15,14 +15,14 @@ export default function Dashboard() {
         <PageLayout>
             <Header headerText={"Ahoi 'username'"}/>
             <PositionBlock>
-                <div>Current location: {positionAvailable ? <b>Available</b> : <b>Not Available</b>}</div>
+                <section>Current location: {positionAvailable ? <Bold>Available</Bold> : <Bold>Not Available</Bold>}</section>
                 {positionAvailable ?
                     <div>
-                        <div>Latitude: <b>{latitude}</b></div>
-                        <div>Longitude: <b>{longitude}</b></div>
+                        <div>Latitude: <Bold>{latitude}</Bold></div>
+                        <div>Longitude: <Bold>{longitude}</Bold></div>
                     </div>
                     :
-                    <div id={"error"}>{errorMessage}</div>
+                    <div className={"error"}>{errorMessage}</div>
                 }
             </PositionBlock>
             <div>some content</div>
@@ -55,8 +55,12 @@ margin: 0 var(--size-l);
   margin: var(--size-s);
   }
   
-  #error {
+  .error {
   margin: var(--size-s);
   color: red;
   }
+`
+
+const Bold = styled.span`
+font-weight: bold;
 `

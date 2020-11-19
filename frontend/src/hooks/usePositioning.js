@@ -21,8 +21,7 @@ export default function usePositioning() {
     useEffect(() => {
         const geoOptions = {
             enableHighAccuracy: true,
-            maximumAge: 30000,
-            //timeout: 35000
+            maximumAge: 30000
         }
         console.log("checking availability...")
         if (!navigator.geolocation) {

@@ -184,24 +184,16 @@ public class MainSailTrimUtils {
                         .build();
             }
             if (wind >= 18 && wave >= 1.5) {
-                return mainSailBuilder(
-                        SheetState.LOOSE, TravellerState.LEE,
-                        BoomVangState.MAX_TIGHT, LuffFootState.SMOOTH,
-                        LuffFootState.SLIGHTLY_CLOSED);
+                return MainSail
+                        .builder()
+                        .mainSailSheet(SheetState.LOOSE)
+                        .traveller(TravellerState.LEE)
+                        .boomVang(BoomVangState.MAX_TIGHT)
+                        .mainSailLuff(LuffFootState.SMOOTH)
+                        .mainSailFoot(LuffFootState.SLIGHTLY_CLOSED)
+                        .build();
             }
         }
         return new MainSail();
-    }
-
-    private MainSail mainSailBuilder(SheetState sheetState, TravellerState travellerState,
-                                     BoomVangState boomVangState, LuffFootState luffState, LuffFootState footState) {
-        return MainSail
-                .builder()
-                .mainSailSheet(sheetState)
-                .traveller(travellerState)
-                .boomVang(boomVangState)
-                .mainSailLuff(luffState)
-                .mainSailFoot(footState)
-                .build();
     }
 }
