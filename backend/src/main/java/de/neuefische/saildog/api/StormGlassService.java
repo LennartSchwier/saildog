@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.neuefische.saildog.api.stormGlassModels.StormGlassResponse;
 import de.neuefische.saildog.dto.WeatherDto;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -18,9 +19,12 @@ import java.time.Instant;
 @Service
 public class StormGlassService {
 
+    @Value("${storm.glass.key}")
+    private String stormGlassKey;
+
     public WeatherDto getSgWeather(String latitude, String longitude) {
         HttpHeaders header = new HttpHeaders();
-        header.set("Authorization", "c532036c-2a04-11eb-a53d-0242ac130002-c5320466-2a04-11eb-a53d-0242ac130002");
+        header.set("Authorization", stormGlassKey);
 
         HttpEntity<Void> entity = new HttpEntity<>(null, header);
         String url = generateSgUrl(latitude, longitude);
@@ -34,7 +38,6 @@ public class StormGlassService {
             throw new RuntimeException("Json deserialization failed.");
         }
     }
-
 
     public WeatherDto refactorSgResponse(String sgResponse) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();

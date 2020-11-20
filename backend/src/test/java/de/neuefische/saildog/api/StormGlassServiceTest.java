@@ -3,6 +3,7 @@ package de.neuefische.saildog.api;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import de.neuefische.saildog.dto.WeatherDto;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -15,6 +16,9 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class StormGlassServiceTest {
 
+    @Value("${storm.glass.key}")
+    private String stormGlassKey;
+
     @MockBean
     private StormGlassService mockedStormGlassService;
 
@@ -26,7 +30,7 @@ class StormGlassServiceTest {
         String testUrl = "https://api.stormglass.io/v2/weather/point?lat=39.504082&lng=2.647854&params=windSpeed,waveHeight&start=1605783600&end=1605783600&source=sg";
         TestRestTemplate restTemplate = new TestRestTemplate();
         HttpHeaders header = new HttpHeaders();
-        header.set("Authorization", "c532036c-2a04-11eb-a53d-0242ac130002-c5320466-2a04-11eb-a53d-0242ac130002");
+        header.set("Authorization", stormGlassKey);
         HttpEntity<Void> httpEntity = new HttpEntity<>(null, header);
         ResponseEntity<String> expected = restTemplate.exchange(testUrl, HttpMethod.GET, httpEntity, String.class);
 
