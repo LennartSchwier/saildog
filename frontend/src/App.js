@@ -5,21 +5,25 @@ import Input from "./components/Input";
 import useEnvironmentData from "./hooks/useEnvironmentData";
 import MainSail from "./components/MainSail";
 import Dashboard from "./components/Dashboard";
+import usePositioning from "./hooks/usePositioning";
 
 
 export default function App() {
 
     const [course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight] = useEnvironmentData();
+    const [latitude, longitude, errorMessage] = usePositioning();
 
-  return (
+
+    return (
       <Switch>
           <Route path={"/dashboard"}>
-              <Dashboard/>
+              <Dashboard latitude={latitude} longitude={longitude} errorMessage={errorMessage} />
           </Route>
           <Route path={"/input"}>
               <Input course={course} setCourse={setCourse}
                          windSpeed={windSpeed} setWindSpeed={setWindSpeed}
                          waveHeight={waveHeight} setWaveHeight={setWaveHeight}
+                     latitude={latitude} longitude={longitude}
               />
           </Route>
           <Route path={"/headsail"}>

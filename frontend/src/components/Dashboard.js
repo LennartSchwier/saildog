@@ -3,17 +3,14 @@ import styled from "styled-components/macro";
 import Header from "../commons/Header";
 import FootButton from "../commons/FootButton";
 import {useHistory} from "react-router-dom";
-import usePositioning from "../hooks/usePositioning";
 
-export default function Dashboard() {
+export default function Dashboard({latitude, longitude, errorMessage}) {
 
     const history = useHistory();
 
-    const [latitude, longitude, errorMessage] = usePositioning();
-
     return (
         <PageLayout>
-            <Header headerText={"Ahoi 'username'"}/>
+            <Header headerText={"Ahoi"}/>
             <PositionBlock>
                 <section>Current location: {latitude && longitude ? <Bold>Available</Bold> : <Bold>Not Available</Bold>}</section>
                 {latitude && longitude ?

@@ -3,8 +3,9 @@ import Header from "../commons/Header";
 import styled from "styled-components/macro";
 import FootButton from "../commons/FootButton";
 import { useHistory } from 'react-router-dom';
+import {getStormGlassWeather} from "../service/StormGlassService";
 
-export default function Input({course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight}) {
+export default function Input({course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight, latitude, longitude}) {
 
     const history = useHistory();
 
@@ -47,6 +48,7 @@ export default function Input({course, setCourse, windSpeed, setWindSpeed, waveH
                            onChange={event => setWaveHeight(event.target.value)}
                     />
                     <label htmlFor={"waveHeight"}>{waveHeight} meter</label>
+                    <button type={"button"} disabled={!latitude || !longitude} onClick={loadWeather}>load weather at current location</button>
                 </InputStyled>
             </FormStyled>
             <div>
@@ -60,6 +62,11 @@ export default function Input({course, setCourse, windSpeed, setWindSpeed, waveH
 
     function handleRadioButton(event) {
         setCourse(event.target.value)
+    }
+
+    function loadWeather() {
+        getStormGlassWeather(latitude, longitude).then(data => setWindSpeed(data.windSpeed));
+        getStormGlassWeather(latitude, longitude).then(data => setWaveHeight(data.waveHeight));
     }
 
     function redirectToDashboard() {

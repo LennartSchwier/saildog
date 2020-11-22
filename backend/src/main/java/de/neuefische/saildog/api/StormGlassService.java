@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 
@@ -61,9 +62,9 @@ public class StormGlassService {
                 "&lng=" +
                 longitude +
                 "&params=windSpeed,waveHeight&start=" +
-                Instant.now().getEpochSecond() +
+                Instant.now().plus(60, ChronoUnit.MINUTES).getEpochSecond() +
                 "&end=" +
-                Instant.now().getEpochSecond() +
+                Instant.now().plus(60, ChronoUnit.MINUTES).getEpochSecond() +
                 "&source=sg";
     }
 }
