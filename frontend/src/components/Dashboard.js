@@ -10,8 +10,8 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
 
     return (
         <PageLayout>
-            <Header headerText={"Ahoi"}/>
-            <PositionBlock>
+            <Header headerText={"Ahoi 'test user'"}/>
+            <DashboardBlock>
                 <section>Current location: {latitude && longitude ? <Bold>Available</Bold> : <Bold>Not Available</Bold>}</section>
                 {latitude && longitude ?
                     <div>
@@ -21,10 +21,11 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
                     :
                     <div className={"error"}>{errorMessage}</div>
                 }
-            </PositionBlock>
-            <WeatherBlock>
+            </DashboardBlock>
+            <DashboardBlock>
                 <section>Current weather: </section>
-            </WeatherBlock>
+            </DashboardBlock>
+            <div></div>
             <div>
                 <PrimaryButton labelButton={"Log Out"} />
                 <PrimaryButton labelButton={"Input"} handleClick={redirectToInput}/>
@@ -39,13 +40,17 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
 
 const PageLayout = styled.div`
 display: grid;
-grid-template-rows: 60px 80px 1fr 60px;
-row-gap: var(--size-m);
+grid-template-rows: 60px 120px 120px 1fr 60px;
+row-gap: var(--size-xl);
 height: 100vh;
 `
 
-const PositionBlock = styled.div`
+const DashboardBlock = styled.div`
 margin: 0 var(--size-l);
+background-color: floralwhite;
+box-shadow: var(--size-xs) var(--size-xs) var(--size-s) dimgrey;
+border-radius: var(--size-m);
+padding: var(--size-m);
 
   div {
   margin: var(--size-s);
