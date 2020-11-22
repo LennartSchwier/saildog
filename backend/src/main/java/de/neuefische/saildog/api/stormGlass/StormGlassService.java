@@ -1,10 +1,10 @@
-package de.neuefische.saildog.api;
+package de.neuefische.saildog.api.stormGlass;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.neuefische.saildog.api.stormGlassModels.StormGlassResponse;
-import de.neuefische.saildog.api.stormGlassModels.WaveHeight;
+import de.neuefische.saildog.api.stormGlass.stormGlassModels.StormGlassResponse;
+import de.neuefische.saildog.api.stormGlass.stormGlassModels.WaveHeight;
 import de.neuefische.saildog.dto.WeatherDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;

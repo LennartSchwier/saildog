@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 import Header from "../commons/Header";
-import FootButton from "../commons/FootButton";
+import PrimaryButton from "../commons/PrimaryButton";
 import {useHistory} from "react-router-dom";
 
 export default function Dashboard({latitude, longitude, errorMessage}) {
@@ -22,10 +22,12 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
                     <div className={"error"}>{errorMessage}</div>
                 }
             </PositionBlock>
-            <div>some content</div>
+            <WeatherBlock>
+                <section>Current weather: </section>
+            </WeatherBlock>
             <div>
-                <FootButton labelButton={"Log Out"} />
-                <FootButton labelButton={"Input"} handleClick={redirectToInput}/>
+                <PrimaryButton labelButton={"Log Out"} />
+                <PrimaryButton labelButton={"Input"} handleClick={redirectToInput}/>
             </div>
         </PageLayout>
     );
@@ -52,6 +54,14 @@ margin: 0 var(--size-l);
   .error {
   margin: var(--size-s);
   color: red;
+  }
+`
+
+const WeatherBlock = styled.div`
+margin: 0 var(--size-l);
+  
+  div {
+  margin: var(--size-s);
   }
 `
 

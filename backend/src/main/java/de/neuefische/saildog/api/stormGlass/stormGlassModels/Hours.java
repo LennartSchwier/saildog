@@ -1,4 +1,4 @@
-package de.neuefische.saildog.api.stormGlassModels;
+package de.neuefische.saildog.api.stormGlass.stormGlassModels;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,7 @@
 package de.neuefische.saildog.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import de.neuefische.saildog.api.stormGlass.StormGlassService;
 import de.neuefische.saildog.dto.WeatherDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

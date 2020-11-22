@@ -1,4 +1,4 @@
-package de.neuefische.saildog.api;
+package de.neuefische.saildog.api.stormGlass;
 
 import de.neuefische.saildog.dto.WeatherDto;
 import org.springframework.web.bind.annotation.GetMapping;

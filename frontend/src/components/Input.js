@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../commons/Header";
 import styled from "styled-components/macro";
-import FootButton from "../commons/FootButton";
+import PrimaryButton from "../commons/PrimaryButton";
 import { useHistory } from 'react-router-dom';
 import {getStormGlassWeather} from "../service/StormGlassService";
 
@@ -48,14 +48,18 @@ export default function Input({course, setCourse, windSpeed, setWindSpeed, waveH
                            onChange={event => setWaveHeight(event.target.value)}
                     />
                     <label htmlFor={"waveHeight"}>{waveHeight} meter</label>
-                    <button type={"button"} disabled={!latitude || !longitude} onClick={loadWeather}>load weather at current location</button>
+                    <PrimaryButton labelButton={"Load weather for current location"}
+                                   handleClick={loadWeather} disableButton={!latitude || !longitude}
+                    />
+                    <PrimaryButton labelButton={"Reset"} handleClick={resetAllInputData}
+                                   disableButton={!windSpeed && !waveHeight && !course}
+                    />
                 </InputStyled>
             </FormStyled>
             <div>
-                <FootButton labelButton={"Dashboard"} handleClick={redirectToDashboard}/>
-                <FootButton labelButton={"Reset"} handleClick={resetAllInputData} disableButton={!windSpeed && !waveHeight && !course}/>
-                <FootButton labelButton={"Main Sail"} handleClick={redirectToMainSail} disableButton={disableHandler()}/>
-                <FootButton labelButton={"Head Sail"} handleClick={redirectToHeadSail} disableButton={disableHandler()}/>
+                <PrimaryButton labelButton={"Dashboard"} handleClick={redirectToDashboard}/>
+                <PrimaryButton labelButton={"Main Sail"} handleClick={redirectToMainSail} disableButton={disableHandler()}/>
+                <PrimaryButton labelButton={"Head Sail"} handleClick={redirectToHeadSail} disableButton={disableHandler()}/>
             </div>
         </PageLayout>
     );
