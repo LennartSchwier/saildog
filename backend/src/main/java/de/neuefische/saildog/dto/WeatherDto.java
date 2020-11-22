@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WeatherDto {
 
+    private String time;
     private double windSpeed;
     private double waveHeight;
 
