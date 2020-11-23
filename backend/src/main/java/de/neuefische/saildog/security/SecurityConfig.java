@@ -9,14 +9,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final MongoDbUserDetailsService mongoDbUserDetailsService;
+    private final JwtAuthFilter jwtAuthFilter;
 
-    public SecurityConfig(MongoDbUserDetailsService mongoDbUserDetailsService) {
+    public SecurityConfig(MongoDbUserDetailsService mongoDbUserDetailsService, JwtAuthFilter jwtAuthFilter) {
         this.mongoDbUserDetailsService = mongoDbUserDetailsService;
+        this.jwtAuthFilter = jwtAuthFilter;
     }
 
     @Override
@@ -26,7 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/**").permitAll()
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

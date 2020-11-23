@@ -1,5 +1,6 @@
 package de.neuefische.saildog.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,5 +25,13 @@ public class JwtUtils {
                 .setExpiration(Date.from(Instant.now().plus(60, ChronoUnit.MINUTES)))
                 .signWith(SignatureAlgorithm.HS256, key)
                 .compact();
+    }
+
+    public Claims parseJwtToken(String jwtToken) {
+        return Jwts.parser().setSigningKey(key).parseClaimsJws(jwtToken).getBody();
+    }
+
+    public boolean isExpired(Claims claims) {
+        return claims.getExpiration().before(new Date());
     }
 }
