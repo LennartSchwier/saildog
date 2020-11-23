@@ -25,7 +25,6 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
             <DashboardBlock>
                 <section>Current sea report: </section>
             </DashboardBlock>
-            <div></div>
             <div>
                 <PrimaryButton labelButton={"Log Out"} />
                 <PrimaryButton labelButton={"Input"} handleClick={redirectToInput}/>
@@ -59,14 +58,6 @@ padding: var(--size-m);
   .error {
   margin: var(--size-s);
   color: red;
-  }
-`
-
-const WeatherBlock = styled.div`
-margin: 0 var(--size-l);
-  
-  div {
-  margin: var(--size-s);
   }
 `
 

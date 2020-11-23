@@ -4,10 +4,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import de.neuefische.saildog.api.stormGlass.StormGlassService;
 import de.neuefische.saildog.dto.WeatherDto;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.TestPropertySource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+@TestPropertySource(properties = {
+        "storm.glass.key=somesecretkey"
+})
 class StormGlassServiceTest {
 
     @Test
