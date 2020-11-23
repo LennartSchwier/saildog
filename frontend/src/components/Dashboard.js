@@ -1,20 +1,17 @@
 import React from "react";
 import styled from "styled-components/macro";
 import Header from "../commons/Header";
-import FootButton from "../commons/FootButton";
+import PrimaryButton from "../commons/PrimaryButton";
 import {useHistory} from "react-router-dom";
-import usePositioning from "../hooks/usePositioning";
 
-export default function Dashboard() {
+export default function Dashboard({latitude, longitude, errorMessage}) {
 
     const history = useHistory();
 
-    const [latitude, longitude, errorMessage] = usePositioning();
-
     return (
         <PageLayout>
-            <Header headerText={"Ahoi 'username'"}/>
-            <PositionBlock>
+            <Header headerText={"Ahoi 'test user'"}/>
+            <DashboardBlock>
                 <section>Current location: {latitude && longitude ? <Bold>Available</Bold> : <Bold>Not Available</Bold>}</section>
                 {latitude && longitude ?
                     <div>
@@ -24,11 +21,13 @@ export default function Dashboard() {
                     :
                     <div className={"error"}>{errorMessage}</div>
                 }
-            </PositionBlock>
-            <div>some content</div>
+            </DashboardBlock>
+            <DashboardBlock>
+                <section>Current sea report: </section>
+            </DashboardBlock>
             <div>
-                <FootButton labelButton={"Log Out"} />
-                <FootButton labelButton={"Input"} handleClick={redirectToInput}/>
+                <PrimaryButton labelButton={"Log Out"} />
+                <PrimaryButton labelButton={"Input"} handleClick={redirectToInput}/>
             </div>
         </PageLayout>
     );
@@ -40,13 +39,17 @@ export default function Dashboard() {
 
 const PageLayout = styled.div`
 display: grid;
-grid-template-rows: 60px 80px 1fr 60px;
-row-gap: var(--size-m);
+grid-template-rows: 60px 120px 120px 1fr 60px;
+row-gap: var(--size-xl);
 height: 100vh;
 `
 
-const PositionBlock = styled.div`
+const DashboardBlock = styled.div`
 margin: 0 var(--size-l);
+background-color: floralwhite;
+box-shadow: var(--size-xs) var(--size-xs) var(--size-s) dimgrey;
+border-radius: var(--size-m);
+padding: var(--size-m);
 
   div {
   margin: var(--size-s);

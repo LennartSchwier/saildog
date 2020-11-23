@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from "../commons/Header";
-import FootButton from "../commons/FootButton";
+import PrimaryButton from "../commons/PrimaryButton";
 import styled from "styled-components/macro";
 import {useHistory} from "react-router-dom";
 import useTrimData from "../hooks/useTrimData";
@@ -44,7 +44,7 @@ export default function HeadSail({course, windSpeed, waveHeight}) {
                 </div>
             </OutputField>
             <div>
-                <FootButton labelButton={"Back"} handleClick={redirectToInput}/>
+                <PrimaryButton labelButton={"Back"} handleClick={redirectToInput}/>
             </div>
         </PageLayout>
     );

@@ -12,7 +12,7 @@ describe('component test :: Input', () => {
         );
 
         // WHEN
-        const inputHeader = queryByRole('heading', {name: /input/i});
+        const inputHeader = queryByRole('heading', {name: /sail trim/i});
 
         // THEN
         expect(inputHeader).toBeInTheDocument();

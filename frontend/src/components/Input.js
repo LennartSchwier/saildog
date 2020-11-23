@@ -1,16 +1,17 @@
 import React from "react";
 import Header from "../commons/Header";
 import styled from "styled-components/macro";
-import FootButton from "../commons/FootButton";
+import PrimaryButton from "../commons/PrimaryButton";
 import { useHistory } from 'react-router-dom';
+import {getStormGlassWeather} from "../service/StormGlassService";
 
-export default function Input({course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight}) {
+export default function Input({course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight, latitude, longitude}) {
 
     const history = useHistory();
 
     return (
         <PageLayout>
-            <Header headerText={'Input'}/>
+            <Header headerText={'Sail Trim'}/>
             <FormStyled>
                 <InputStyled>
                     <div>Course :</div>
@@ -47,19 +48,29 @@ export default function Input({course, setCourse, windSpeed, setWindSpeed, waveH
                            onChange={event => setWaveHeight(event.target.value)}
                     />
                     <label htmlFor={"waveHeight"}>{waveHeight} meter</label>
+                    <PrimaryButton labelButton={"Load weather for current location"}
+                                   handleClick={loadWeather} disableButton={!latitude || !longitude}
+                    />
+                    <PrimaryButton labelButton={"Reset"} handleClick={resetAllInputData}
+                                   disableButton={!windSpeed && !waveHeight && !course}
+                    />
                 </InputStyled>
             </FormStyled>
             <div>
-                <FootButton labelButton={"Dashboard"} handleClick={redirectToDashboard}/>
-                <FootButton labelButton={"Reset"} handleClick={resetAllInputData} disableButton={!windSpeed && !waveHeight && !course}/>
-                <FootButton labelButton={"Main Sail"} handleClick={redirectToMainSail} disableButton={disableHandler()}/>
-                <FootButton labelButton={"Head Sail"} handleClick={redirectToHeadSail} disableButton={disableHandler()}/>
+                <PrimaryButton labelButton={"Dashboard"} handleClick={redirectToDashboard}/>
+                <PrimaryButton labelButton={"Main Sail"} handleClick={redirectToMainSail} disableButton={disableHandler()}/>
+                <PrimaryButton labelButton={"Head Sail"} handleClick={redirectToHeadSail} disableButton={disableHandler()}/>
             </div>
         </PageLayout>
     );
 
     function handleRadioButton(event) {
         setCourse(event.target.value)
+    }
+
+    function loadWeather() {
+        getStormGlassWeather(latitude, longitude).then(data => setWindSpeed(data.windSpeed));
+        getStormGlassWeather(latitude, longitude).then(data => setWaveHeight(data.waveHeight));
     }
 
     function redirectToDashboard() {
