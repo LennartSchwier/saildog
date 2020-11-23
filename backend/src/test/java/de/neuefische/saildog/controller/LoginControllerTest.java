@@ -3,6 +3,8 @@ package de.neuefische.saildog.controller;
 import de.neuefische.saildog.dao.UserDao;
 import de.neuefische.saildog.dto.LoginDto;
 import de.neuefische.saildog.model.SailDogUser;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +15,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 
+import java.util.Date;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = {
-        "storm.glass.key=somesecretkey"
+        "storm.glass.key=someSecretKey",
+        "jwt.secret.key=someSecretKey"
 })
 class LoginControllerTest {
 
@@ -51,10 +56,14 @@ class LoginControllerTest {
 
         // WHEN
         ResponseEntity<String> response = restTemplate.postForEntity(createUrl(), loginDto, String.class);
+        String jwtToken = response.getBody();
+        String key = "someSecretKey";
+        Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(jwtToken).getBody();
 
         // THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody(), is("login successful"));
+        assertThat(claims.getSubject(), is("test_user"));
+        assertThat(claims.getExpiration().after(new Date()), is(true));
     }
 
     @Test

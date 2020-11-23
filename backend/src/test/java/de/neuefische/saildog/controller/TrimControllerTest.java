@@ -20,7 +20,8 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = {
-        "storm.glass.key=somesecretkey"
+        "storm.glass.key=someSecretKey",
+        "jwt.secret.key=someSecretKey"
 })
 class TrimControllerTest {
 
