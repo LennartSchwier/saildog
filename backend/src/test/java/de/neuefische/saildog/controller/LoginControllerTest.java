@@ -40,18 +40,32 @@ class LoginControllerTest {
                 "test user"));
     }
 
+    public String createUrl() {
+        return "http://localhost:" + port + "auth/login";
+    }
+
     @Test
     public void testLoginWithCorrectCredentialsReturnsCorrectResponse() {
         // GIVEN
-        String url = "http://localhost:" + port + "/auth/login";
         LoginDto loginDto = new LoginDto("test_user", "test_password");
 
         // WHEN
-        ResponseEntity<String> response = restTemplate.postForEntity(url, loginDto, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(createUrl(), loginDto, String.class);
 
         // THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody(), is("login successful"));
+    }
 
+    @Test
+    public void testloginWithIncorrectCredentialsReturnsForbidden() {
+        // GIVEN
+        LoginDto badLoginDto = new LoginDto("wrong_user", "wrong_password");
+
+        // WHEN
+        ResponseEntity<String> response = restTemplate.postForEntity(createUrl(), badLoginDto, String.class);
+
+        // THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.FORBIDDEN));
     }
 }
