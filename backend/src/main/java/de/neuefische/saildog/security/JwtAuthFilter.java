@@ -45,5 +45,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         } catch (Exception e) {
             System.out.println(e);
         }
+        filterChain.doFilter(request,response);
     }
 }

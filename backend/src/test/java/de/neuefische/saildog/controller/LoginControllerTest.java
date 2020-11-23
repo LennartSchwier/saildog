@@ -45,7 +45,7 @@ class LoginControllerTest {
                 "test user"));
     }
 
-    public String createUrl() {
+    private String createUrl() {
         return "http://localhost:" + port + "auth/login";
     }
 
