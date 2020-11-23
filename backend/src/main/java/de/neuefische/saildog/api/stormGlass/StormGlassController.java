@@ -1,6 +1,7 @@
 package de.neuefische.saildog.api.stormGlass;
 
 import de.neuefische.saildog.dto.WeatherDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ public class StormGlassController {
 
     private final StormGlassService stormGlassService;
 
+    @Autowired
     public StormGlassController(StormGlassService stormGlassService) {
         this.stormGlassService = stormGlassService;
     }
