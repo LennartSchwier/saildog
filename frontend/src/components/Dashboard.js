@@ -23,7 +23,7 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
                 }
             </DashboardBlock>
             <DashboardBlock>
-                <section>Current weather: </section>
+                <section>Current sea report: </section>
             </DashboardBlock>
             <div></div>
             <div>

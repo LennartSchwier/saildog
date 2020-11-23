@@ -11,7 +11,7 @@ export default function Input({course, setCourse, windSpeed, setWindSpeed, waveH
 
     return (
         <PageLayout>
-            <Header headerText={'Input'}/>
+            <Header headerText={'Sail Trim'}/>
             <FormStyled>
                 <InputStyled>
                     <div>Course :</div>
