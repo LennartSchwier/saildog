@@ -1,13 +1,15 @@
 import axios from 'axios';
 
-export const getStormGlassWeather = (latitude, longitude) => {
-    const url = `/api/stormglass?latitude=${latitude}&longitude=${longitude}`;
-    const token = localStorage.getItem("jwtToken");
-    const request = {
+const setHeaders = () => {
+    return {
         headers: {
-            "Authorization": "Bearer " + token
+            "Authorization": "Bearer " + localStorage.getItem("jwtToken")
         }
     }
-    return axios.get(url, request)
+}
+
+export const getStormGlassWeather = (latitude, longitude) => {
+    const url = `/api/stormglass?latitude=${latitude}&longitude=${longitude}`;
+    return axios.get(url, setHeaders())
         .then(response => response.data);
 }
