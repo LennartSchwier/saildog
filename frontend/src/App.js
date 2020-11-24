@@ -14,15 +14,13 @@ export default function App() {
 
     const [course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight] = useEnvironmentData();
     const [latitude, longitude, errorMessage] = usePositioning();
-    const [loginData, setLoginData, jwtToken, setJwtToken] = useLoginData();
+    const [loginData, setLoginData] = useLoginData();
 
 
     return (
       <Switch>
           <Route path={"/login"}>
-              <Login loginData={loginData} setLoginData={setLoginData}
-                     jwtToken={jwtToken} setJwtToken={setJwtToken}
-              />
+              <Login loginData={loginData} setLoginData={setLoginData}/>
           </Route>
           <Route path={"/dashboard"}>
               <Dashboard latitude={latitude} longitude={longitude} errorMessage={errorMessage} />

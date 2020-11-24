@@ -6,7 +6,6 @@ export default function useLoginData() {
         username: "",
         password: ""
     });
-    const [jwtToken, setJwtToken] = useState("");
 
-    return [loginData, setLoginData, jwtToken, setJwtToken];
+    return [loginData, setLoginData];
 }

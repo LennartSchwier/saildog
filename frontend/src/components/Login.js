@@ -4,9 +4,7 @@ import styled from "styled-components/macro";
 import Header from "../commons/Header";
 import PrimaryButton from "../commons/PrimaryButton";
 
-export default function Login({loginData, setLoginData, jwtToken, setJwtToken}) {
-
-    console.log(jwtToken);
+export default function Login({loginData, setLoginData}) {
 
     return(
         <PageLayout>
@@ -30,7 +28,7 @@ export default function Login({loginData, setLoginData, jwtToken, setJwtToken}) 
     }
 
     function login() {
-        getJwtToken(loginData).then(data => setJwtToken(data));
+        getJwtToken(loginData).then(data => localStorage.setItem("jwtToken", data));
     }
 }
 
