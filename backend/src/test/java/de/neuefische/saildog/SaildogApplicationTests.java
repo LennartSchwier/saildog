@@ -6,7 +6,8 @@ import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
 @TestPropertySource(properties = {
-		"storm.glass.key=somesecretkey"
+		"storm.glass.key=someSecretKey",
+		"jwt.secret.key=someSecretKey"
 })
 class SaildogApplicationTests {
 

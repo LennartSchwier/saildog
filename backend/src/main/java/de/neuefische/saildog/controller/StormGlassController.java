@@ -1,5 +1,6 @@
-package de.neuefische.saildog.api.stormGlass;
+package de.neuefische.saildog.controller;
 
+import de.neuefische.saildog.api.stormGlass.StormGlassService;
 import de.neuefische.saildog.dto.WeatherDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
