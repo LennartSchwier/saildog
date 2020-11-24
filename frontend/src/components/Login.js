@@ -36,6 +36,7 @@ export default function Login({loginData, setLoginData}) {
         getJwtToken(loginData)
             .then(data => localStorage.setItem("jwtToken", data))
             .then(() => history.push("/dashboard"))
+            .then(() => setLoginData(""))
             .catch(error => console.log(error))
     }
 }

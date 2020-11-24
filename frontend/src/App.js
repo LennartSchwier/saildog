@@ -26,23 +26,23 @@ export default function App() {
           <ProtectedRoute path={"/dashboard"}>
               <Dashboard latitude={latitude} longitude={longitude} errorMessage={errorMessage} />
           </ProtectedRoute>
-          <Route path={"/input"}>
+          <ProtectedRoute path={"/triminput"}>
               <TrimInput course={course} setCourse={setCourse}
                          windSpeed={windSpeed} setWindSpeed={setWindSpeed}
                          waveHeight={waveHeight} setWaveHeight={setWaveHeight}
                          latitude={latitude} longitude={longitude}
               />
-          </Route>
-          <Route path={"/headsail"}>
+          </ProtectedRoute>
+          <ProtectedRoute path={"/headsail"}>
               <HeadSail
                   course={course} windSpeed={windSpeed} waveHeight={waveHeight}
               />
-          </Route>
-          <Route path={"/mainsail"}>
+          </ProtectedRoute>
+          <ProtectedRoute path={"/mainsail"}>
               <MainSail
                   course={course} windSpeed={windSpeed} waveHeight={waveHeight}
               />
-          </Route>
+          </ProtectedRoute>
           <Route path={"/"}>
               <Redirect to={"/dashboard"}/>
           </Route>
