@@ -3,8 +3,11 @@ import {getJwtToken} from "../service/LoginService";
 import styled from "styled-components/macro";
 import Header from "../commons/Header";
 import PrimaryButton from "../commons/PrimaryButton";
+import { useHistory } from 'react-router-dom';
 
 export default function Login({loginData, setLoginData}) {
+
+    const history = useHistory();
 
     return(
         <PageLayout>
@@ -18,7 +21,9 @@ export default function Login({loginData, setLoginData}) {
                 <input value={loginData.password} name={"password"}
                        onChange={updateLoginData} type={"password"}
                 />
-                <PrimaryButton labelButton={"Log in"} handleClick={login}/>
+                <PrimaryButton labelButton={"Log in"} handleClick={login}
+                               disableButton={!loginData.username || !loginData.password}
+                />
             </FormStyled>
         </PageLayout>
     );
@@ -28,7 +33,10 @@ export default function Login({loginData, setLoginData}) {
     }
 
     function login() {
-        getJwtToken(loginData).then(data => localStorage.setItem("jwtToken", data));
+        getJwtToken(loginData)
+            .then(data => localStorage.setItem("jwtToken", data))
+            .then(() => history.push("/dashboard"))
+            .catch(error => console.log(error))
     }
 }
 

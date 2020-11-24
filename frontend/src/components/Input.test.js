@@ -1,13 +1,13 @@
-import Input from "./Input";
+import TrimInput from "./TrimInput";
 import { render } from '@testing-library/react';
 import {MemoryRouter as Router} from "react-router-dom";
 
-describe('component test :: Input', () => {
-    it('renders the Input page and it\'s content', () => {
+describe('component test :: TrimInput', () => {
+    it('renders the TrimInput page and it\'s content', () => {
         // GIVEN
         const {queryByRole} = render(
             <Router>
-                <Input/>
+                <TrimInput/>
             </Router>
         );
 

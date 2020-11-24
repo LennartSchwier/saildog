@@ -5,20 +5,20 @@ import PrimaryButton from "../commons/PrimaryButton";
 import { useHistory } from 'react-router-dom';
 import {getStormGlassWeather} from "../service/StormGlassService";
 
-export default function Input({course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight, latitude, longitude}) {
+export default function TrimInput({course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight, latitude, longitude}) {
 
     const history = useHistory();
 
     return (
         <PageLayout>
             <Header headerText={'Sail Trim'}/>
-            <FormStyled>
+            <form>
                 <InputStyled>
                     <div>Course :</div>
                     <div>
                         <input type={"radio"} name={"course"} id={"closed_hauled"} value={"closed_hauled"}
                                checked={course === "closed_hauled"}
-                               onClick={handleRadioButton}
+                               onChange={handleRadioButton}
                         />
                         <label htmlFor={"closed_hauled"}>Closed Hauled</label>
                     </div>
@@ -55,7 +55,7 @@ export default function Input({course, setCourse, windSpeed, setWindSpeed, waveH
                                    disableButton={!windSpeed && !waveHeight && !course}
                     />
                 </InputStyled>
-            </FormStyled>
+            </form>
             <div>
                 <PrimaryButton labelButton={"Dashboard"} handleClick={redirectToDashboard}/>
                 <PrimaryButton labelButton={"Main Sail"} handleClick={redirectToMainSail} disableButton={disableHandler()}/>
@@ -65,7 +65,7 @@ export default function Input({course, setCourse, windSpeed, setWindSpeed, waveH
     );
 
     function handleRadioButton(event) {
-        setCourse(event.target.value)
+        setCourse(event.target.value);
     }
 
     function loadWeather() {
@@ -100,9 +100,6 @@ const PageLayout = styled.div`
 display: grid;
 grid-template-rows: 60px 1fr 60px;
 height: 100vh;
-`
-
-const FormStyled = styled.form`
 `
 
 const InputStyled = styled.div`

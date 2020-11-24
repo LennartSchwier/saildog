@@ -1,13 +1,14 @@
 import React from 'react';
 import HeadSail from "./components/HeadSail";
 import {Switch, Route, Redirect} from "react-router-dom";
-import Input from "./components/Input";
+import TrimInput from "./components/TrimInput";
 import useEnvironmentData from "./hooks/useEnvironmentData";
 import MainSail from "./components/MainSail";
 import Dashboard from "./components/Dashboard";
 import usePositioning from "./hooks/usePositioning";
 import Login from "./components/Login";
 import useLoginData from "./hooks/useLoginData";
+import ProtectedRoute from "./routing/ProtectedRoute";
 
 
 export default function App() {
@@ -22,14 +23,14 @@ export default function App() {
           <Route path={"/login"}>
               <Login loginData={loginData} setLoginData={setLoginData}/>
           </Route>
-          <Route path={"/dashboard"}>
+          <ProtectedRoute path={"/dashboard"}>
               <Dashboard latitude={latitude} longitude={longitude} errorMessage={errorMessage} />
-          </Route>
+          </ProtectedRoute>
           <Route path={"/input"}>
-              <Input course={course} setCourse={setCourse}
+              <TrimInput course={course} setCourse={setCourse}
                          windSpeed={windSpeed} setWindSpeed={setWindSpeed}
                          waveHeight={waveHeight} setWaveHeight={setWaveHeight}
-                     latitude={latitude} longitude={longitude}
+                         latitude={latitude} longitude={longitude}
               />
           </Route>
           <Route path={"/headsail"}>
