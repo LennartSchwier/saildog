@@ -50,7 +50,7 @@ export default function HeadSail({course, windSpeed, waveHeight}) {
     );
 
     function redirectToInput() {
-        history.push("/input");
+        history.push("/triminput");
     }
 }
 

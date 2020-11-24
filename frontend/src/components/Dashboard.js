@@ -27,13 +27,13 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
             </DashboardBlock>
             <div>
                 <PrimaryButton labelButton={"Log Out"} />
-                <PrimaryButton labelButton={"Input"} handleClick={redirectToInput}/>
+                <PrimaryButton labelButton={"Trim Input"} handleClick={redirectToTrimInput}/>
             </div>
         </PageLayout>
     );
 
-    function redirectToInput() {
-        history.push("/input");
+    function redirectToTrimInput() {
+        history.push("/triminput");
     }
 }
 
