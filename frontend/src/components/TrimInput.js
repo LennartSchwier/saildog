@@ -12,9 +12,9 @@ export default function TrimInput({course, setCourse, windSpeed, setWindSpeed, w
     return (
         <PageLayout>
             <Header headerText={'Sail Trim'}/>
-            <form>
+            <FormStyled>
                 <InputStyled>
-                    <div>Course :</div>
+                    <section>Course :</section>
                     <div>
                         <input type={"radio"} name={"course"} id={"closed_hauled"} value={"closed_hauled"}
                                checked={course === "closed_hauled"}
@@ -38,16 +38,16 @@ export default function TrimInput({course, setCourse, windSpeed, setWindSpeed, w
                     </div>
                 </InputStyled>
                 <InputStyled>
-                    <div>Wind Speed :</div>
+                    <label htmlFor={"windSpeed"}>Wind Speed :</label>
                     <input type={"range"} max={"40"} value={windSpeed} id={"windSpeed"}
                            onChange={event => setWindSpeed(event.target.value)}
                     />
-                    <label htmlFor={"windSpeed"}>{windSpeed} knots</label>
-                    <div>Wave Height :</div>
+                    <output>{windSpeed} knots</output>
+                    <label htmlFor={"waveHeight"}>Wave Height :</label>
                     <input type={"range"} max={"3"} step={"0.1"} value={waveHeight} id={"waveHeight"}
                            onChange={event => setWaveHeight(event.target.value)}
                     />
-                    <label htmlFor={"waveHeight"}>{waveHeight} meter</label>
+                    <output>{waveHeight} meter</output>
                     <PrimaryButton labelButton={"Load weather for current location"}
                                    handleClick={loadWeather} disableButton={!latitude || !longitude}
                     />
@@ -55,7 +55,7 @@ export default function TrimInput({course, setCourse, windSpeed, setWindSpeed, w
                                    disableButton={!windSpeed && !waveHeight && !course}
                     />
                 </InputStyled>
-            </form>
+            </FormStyled>
             <div>
                 <PrimaryButton labelButton={"Dashboard"} handleClick={redirectToDashboard}/>
                 <PrimaryButton labelButton={"Main Sail"} handleClick={redirectToMainSail} disableButton={disableHandler()}/>
@@ -102,12 +102,18 @@ grid-template-rows: 60px 1fr 60px;
 height: 100vh;
 `
 
+const FormStyled = styled.form`
+display: grid;
+grid-template-rows: 150px 250px;
+row-gap: var(--size-m);
+`
+
 const InputStyled = styled.div`
 display: grid;
 row-gap: var(--size-s);
 margin: var(--size-m);
 
-  & label{
+  & output, div{
   font-weight: bold;
   }
 `
