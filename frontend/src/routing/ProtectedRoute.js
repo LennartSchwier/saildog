@@ -6,7 +6,6 @@ export default function ProtectedRoute(props) {
 
     const token = localStorage.getItem("jwtToken");
     const decode = token && jwtDecode(token);
-    console.log(decode);
 
     const isValid = () => {
         return decode.exp > new Date().getTime() / 1000;
