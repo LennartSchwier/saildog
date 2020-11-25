@@ -5,7 +5,7 @@ import PrimaryButton from "../commons/PrimaryButton";
 import { useHistory } from 'react-router-dom';
 import {getStormGlassWeather} from "../service/StormGlassService";
 
-export default function Input({course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight, latitude, longitude}) {
+export default function TrimInput({course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight, latitude, longitude}) {
 
     const history = useHistory();
 
@@ -14,11 +14,11 @@ export default function Input({course, setCourse, windSpeed, setWindSpeed, waveH
             <Header headerText={'Sail Trim'}/>
             <FormStyled>
                 <InputStyled>
-                    <div>Course :</div>
+                    <section>Course :</section>
                     <div>
                         <input type={"radio"} name={"course"} id={"closed_hauled"} value={"closed_hauled"}
                                checked={course === "closed_hauled"}
-                               onClick={handleRadioButton}
+                               onChange={handleRadioButton}
                         />
                         <label htmlFor={"closed_hauled"}>Closed Hauled</label>
                     </div>
@@ -38,16 +38,16 @@ export default function Input({course, setCourse, windSpeed, setWindSpeed, waveH
                     </div>
                 </InputStyled>
                 <InputStyled>
-                    <div>Wind Speed :</div>
+                    <label htmlFor={"windSpeed"}>Wind Speed :</label>
                     <input type={"range"} max={"40"} value={windSpeed} id={"windSpeed"}
                            onChange={event => setWindSpeed(event.target.value)}
                     />
-                    <label htmlFor={"windSpeed"}>{windSpeed} knots</label>
-                    <div>Wave Height :</div>
+                    <output>{windSpeed} knots</output>
+                    <label htmlFor={"waveHeight"}>Wave Height :</label>
                     <input type={"range"} max={"3"} step={"0.1"} value={waveHeight} id={"waveHeight"}
                            onChange={event => setWaveHeight(event.target.value)}
                     />
-                    <label htmlFor={"waveHeight"}>{waveHeight} meter</label>
+                    <output>{waveHeight} meter</output>
                     <PrimaryButton labelButton={"Load weather for current location"}
                                    handleClick={loadWeather} disableButton={!latitude || !longitude}
                     />
@@ -65,7 +65,7 @@ export default function Input({course, setCourse, windSpeed, setWindSpeed, waveH
     );
 
     function handleRadioButton(event) {
-        setCourse(event.target.value)
+        setCourse(event.target.value);
     }
 
     function loadWeather() {
@@ -103,6 +103,9 @@ height: 100vh;
 `
 
 const FormStyled = styled.form`
+display: grid;
+grid-template-rows: 150px 250px;
+row-gap: var(--size-m);
 `
 
 const InputStyled = styled.div`
@@ -110,7 +113,7 @@ display: grid;
 row-gap: var(--size-s);
 margin: var(--size-m);
 
-  & label{
+  & output, div{
   font-weight: bold;
   }
 `

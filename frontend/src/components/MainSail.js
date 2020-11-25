@@ -58,7 +58,7 @@ export default function MainSail({course, windSpeed, waveHeight}) {
     );
 
     function redirectToInput() {
-        history.push("/input");
+        history.push("/triminput");
     }
 }
 

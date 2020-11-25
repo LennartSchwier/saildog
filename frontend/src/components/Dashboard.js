@@ -27,26 +27,26 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
             </DashboardBlock>
             <div>
                 <PrimaryButton labelButton={"Log Out"} />
-                <PrimaryButton labelButton={"Input"} handleClick={redirectToInput}/>
+                <PrimaryButton labelButton={"Trim Input"} handleClick={redirectToTrimInput}/>
             </div>
         </PageLayout>
     );
 
-    function redirectToInput() {
-        history.push("/input");
+    function redirectToTrimInput() {
+        history.push("/triminput");
     }
 }
 
 const PageLayout = styled.div`
 display: grid;
-grid-template-rows: 60px 120px 120px 1fr 60px;
+grid-template-rows: 60px 120px 1fr 60px;
 row-gap: var(--size-xl);
 height: 100vh;
 `
 
 const DashboardBlock = styled.div`
 margin: 0 var(--size-l);
-background-color: floralwhite;
+background-color: Transparent;
 box-shadow: var(--size-xs) var(--size-xs) var(--size-s) dimgrey;
 border-radius: var(--size-m);
 padding: var(--size-m);
