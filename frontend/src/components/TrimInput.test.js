@@ -5,13 +5,18 @@ import React from "react";
 import userEvent from "@testing-library/user-event";
 
 describe('component test :: TrimInput', () => {
-    it('renders the TrimInput page and it\'s content', () => {
-        // GIVEN
+
+    const renderPage = () => {
         render(
             <Router>
                 <TrimInput/>
             </Router>
         );
+    }
+
+    it('renders the TrimInput page and it\'s content', () => {
+        // GIVEN
+        renderPage();
 
         // WHEN
         const inputHeader = screen.queryByRole('heading', {name: /sail trim/i});
@@ -22,11 +27,7 @@ describe('component test :: TrimInput', () => {
 
     test('button "Dashboard" redirects to correct page', () => {
        // GIVEN
-       render(
-           <Router>
-               <TrimInput/>
-           </Router>
-       );
+       renderPage();
 
        // WHEN
         const dashboardButton = screen.getByRole('button', {name: /dashboard/i});
@@ -38,11 +39,7 @@ describe('component test :: TrimInput', () => {
 
     test('button "Main Sail" redirects to correct page', () => {
         // GIVEN
-        render(
-            <Router>
-                <TrimInput/>
-            </Router>
-        );
+        renderPage();
 
         // WHEN
         const mainSailButton = screen.getByRole('button', {name: /main sail/i});
@@ -54,11 +51,7 @@ describe('component test :: TrimInput', () => {
 
     test('button "Head Sail" redirects to correct page', () => {
         // GIVEN
-        render(
-            <Router>
-                <TrimInput/>
-            </Router>
-        );
+        renderPage();
 
         // WHEN
         const headSailButton = screen.getByRole('button', {name: /head sail/i});
