@@ -33,14 +33,14 @@ class StormGlassServiceTest {
                 .time("2020-11-26T15:00:00+00:00")
                 .airTemperature(8.06)
                 .currentDirection(43.08)
-                .currentSpeed(0.74)
+                .currentSpeed(1.48)
                 .pressure(1019.79)
                 .visibility(24.14)
                 .waterTemperature(12.88)
                 .waveDirection(262.1)
                 .waveHeight(0.44)
                 .windDirection(79.22)
-                .windSpeed(2.87)
+                .windSpeed(5.74)
                 .build()));
     }
 
