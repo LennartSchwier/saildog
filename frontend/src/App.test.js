@@ -1,8 +1,18 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
 
-xtest('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import { render, screen } from '@testing-library/react';
+import React from "react";
+import App from './App';
+import MemoryRouter from "react-router-dom";
+
+describe("header", () => {
+  xtest("'Dashbord' links to the correct page", () => {
+    render(
+        <MemoryRouter>
+          <App/>
+        </MemoryRouter>
+    );
+
+
+    screen.debug();
+  });
 });
