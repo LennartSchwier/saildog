@@ -47,7 +47,8 @@ public class StormGlassService {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         StormGlassResponse stormGlassResponse = objectMapper.readValue(sgResponse, StormGlassResponse.class);
         String time = stormGlassResponse.getHours().get(0).getTime();
-        double windSpeed = stormGlassResponse.getHours().get(0).getWindSpeed().getSg();
+        double windSpeedInMeterPerSecond = stormGlassResponse.getHours().get(0).getWindSpeed().getSg();
+        double windSpeed = (windSpeedInMeterPerSecond * 2);
         Optional<WaveHeight> waveHeight = Optional.ofNullable(stormGlassResponse.getHours().get(0).getWaveHeight());
         if (waveHeight.isEmpty()) {
             return new WeatherDto(time, windSpeed, 0);
