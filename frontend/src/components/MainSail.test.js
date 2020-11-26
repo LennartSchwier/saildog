@@ -1,20 +1,39 @@
 import MainSail from "./MainSail";
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import {MemoryRouter as Router} from "react-router-dom";
+import React from "react";
+import userEvent from "@testing-library/user-event";
 
 describe('component test :: MainSail', () => {
-    it('renders the MainSail page and it\'s content', () => {
-        // GIVEN
-        const {queryByRole} = render(
+
+    const renderPage = () => {
+        render(
             <Router>
                 <MainSail/>
             </Router>
         );
+    };
+
+    it('renders the MainSail page and it\'s content', () => {
+        // GIVEN
+        renderPage();
 
         // WHEN
-        const mainSailHeader = queryByRole('heading', {name: /main sail/i});
+        const mainSailHeader = screen.getByRole('heading', /main sail/i);
 
         // THEN
         expect(mainSailHeader).toBeInTheDocument();
+    });
+
+    test('button "back" redirects to correct page', () => {
+        // GIVEN
+        renderPage();
+
+        // WHEN
+        const backButton = screen.getByRole('button', /back/i);
+        userEvent.click(backButton);
+
+        // THEN
+        expect(screen.getByRole('heading', /sail trim/i)).toBeInTheDocument();
     });
 });
