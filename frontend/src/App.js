@@ -2,7 +2,7 @@ import React from 'react';
 import HeadSail from "./components/HeadSail";
 import {Switch, Route, Redirect} from "react-router-dom";
 import TrimInput from "./components/TrimInput";
-import useEnvironmentData from "./hooks/useEnvironmentData";
+import useWeatherData from "./hooks/useWeatherData";
 import MainSail from "./components/MainSail";
 import Dashboard from "./components/Dashboard";
 import usePositioning from "./hooks/usePositioning";
@@ -13,7 +13,7 @@ import ProtectedRoute from "./routing/ProtectedRoute";
 
 export default function App() {
 
-    const [course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight] = useEnvironmentData();
+    const [course, setCourse, weatherData, setWeatherData] = useWeatherData();
     const [latitude, longitude, errorMessage] = usePositioning();
     const [loginData, setLoginData] = useLoginData();
 
@@ -28,19 +28,18 @@ export default function App() {
           </ProtectedRoute>
           <ProtectedRoute path={"/triminput"}>
               <TrimInput course={course} setCourse={setCourse}
-                         windSpeed={windSpeed} setWindSpeed={setWindSpeed}
-                         waveHeight={waveHeight} setWaveHeight={setWaveHeight}
+                         weatherData={weatherData} setWeatherData={setWeatherData}
                          latitude={latitude} longitude={longitude}
               />
           </ProtectedRoute>
           <ProtectedRoute path={"/headsail"}>
               <HeadSail
-                  course={course} windSpeed={windSpeed} waveHeight={waveHeight}
+                  course={course} weatherData={weatherData}
               />
           </ProtectedRoute>
           <ProtectedRoute path={"/mainsail"}>
               <MainSail
-                  course={course} windSpeed={windSpeed} waveHeight={waveHeight}
+                  course={course} weatherData={weatherData}
               />
           </ProtectedRoute>
           <Route path={"/"}>

@@ -5,10 +5,10 @@ import PrimaryButton from "../commons/PrimaryButton";
 import styled from "styled-components/macro";
 import React from "react";
 
-export default function MainSail({course, windSpeed, waveHeight}) {
+export default function MainSail({course, weatherData}) {
 
     const history = useHistory();
-    const { mainSailTrimData } = useTrimData(course, windSpeed, waveHeight);
+    const { mainSailTrimData } = useTrimData(course, weatherData.windSpeed, weatherData.waveHeight);
 
     const getTextualOutput = (input) => input?.replace("_", " ").toLowerCase()
 
@@ -22,11 +22,11 @@ export default function MainSail({course, windSpeed, waveHeight}) {
                 </div>
                 <div>
                     <div>Wind Speed:</div>
-                    <Bold>{windSpeed} knots</Bold>
+                    <Bold>{weatherData.windSpeed} knots</Bold>
                 </div>
                 <div>
                     <div>Wave Height:</div>
-                    <Bold>{waveHeight} meter</Bold>
+                    <Bold>{weatherData.waveHeight} meter</Bold>
                 </div>
             </InputField>
             <OutputField>

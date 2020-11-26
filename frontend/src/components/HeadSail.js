@@ -5,10 +5,10 @@ import styled from "styled-components/macro";
 import {useHistory} from "react-router-dom";
 import useTrimData from "../hooks/useTrimData";
 
-export default function HeadSail({course, windSpeed, waveHeight}) {
+export default function HeadSail({course, weatherData}) {
 
     const history = useHistory();
-    const { headSailTrimData } = useTrimData(course, windSpeed, waveHeight);
+    const { headSailTrimData } = useTrimData(course, weatherData.windSpeed, weatherData.waveHeight);
 
     const getTextualOutput = (input) => input?.replace("_", " ").toLowerCase()
 
@@ -22,11 +22,11 @@ export default function HeadSail({course, windSpeed, waveHeight}) {
                 </div>
                 <div>
                     <div>Wind Speed:</div>
-                    <Bold>{windSpeed} knots</Bold>
+                    <Bold>{weatherData.windSpeed} knots</Bold>
                 </div>
                 <div>
                     <div>Wave Height:</div>
-                    <Bold>{waveHeight} meter</Bold>
+                    <Bold>{weatherData.waveHeight} meter</Bold>
                 </div>
             </InputField>
             <OutputField>
