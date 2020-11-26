@@ -13,8 +13,8 @@ export default function TrimInput({course, setCourse, windSpeed, setWindSpeed, w
         <PageLayout>
             <Header headerText={'Sail Trim'}/>
             <FormStyled>
-                <InputStyled>
-                    <section>Course :</section>
+                <FieldsetStyled>
+                    <legend>Course</legend>
                     <div>
                         <input type={"radio"} name={"course"} id={"closed_hauled"} value={"closed_hauled"}
                                checked={course === "closed_hauled"}
@@ -36,8 +36,9 @@ export default function TrimInput({course, setCourse, windSpeed, setWindSpeed, w
                         />
                         <label htmlFor={"wind_astern"}>Wind Astern</label>
                     </div>
-                </InputStyled>
-                <InputStyled>
+                </FieldsetStyled>
+                <FieldsetStyled>
+                    <legend>Weather</legend>
                     <label htmlFor={"windSpeed"}>Wind Speed :</label>
                     <input type={"range"} max={"40"} value={windSpeed} id={"windSpeed"}
                            onChange={event => setWindSpeed(event.target.value)}
@@ -48,13 +49,13 @@ export default function TrimInput({course, setCourse, windSpeed, setWindSpeed, w
                            onChange={event => setWaveHeight(event.target.value)}
                     />
                     <output>{waveHeight} meter</output>
-                    <PrimaryButton labelButton={"Load weather for current location"}
-                                   handleClick={loadWeather} disableButton={!latitude || !longitude}
-                    />
-                    <PrimaryButton labelButton={"Reset"} handleClick={resetAllInputData}
-                                   disableButton={!windSpeed && !waveHeight && !course}
-                    />
-                </InputStyled>
+                </FieldsetStyled>
+                <PrimaryButton labelButton={"Load weather for current location"}
+                               handleClick={loadWeather} disableButton={!latitude || !longitude}
+                />
+                <PrimaryButton labelButton={"Reset"} handleClick={resetAllInputData}
+                               disableButton={!windSpeed && !waveHeight && !course}
+                />
             </FormStyled>
             <div>
                 <PrimaryButton labelButton={"Dashboard"} handleClick={redirectToDashboard}/>
@@ -104,16 +105,18 @@ height: 100vh;
 
 const FormStyled = styled.form`
 display: grid;
-grid-template-rows: 150px 250px;
-row-gap: var(--size-m);
+grid-template-rows: min-content min-content min-content min-content;
 `
 
-const InputStyled = styled.div`
+const FieldsetStyled = styled.fieldset`
 display: grid;
+grid-template-rows: 0 1fr 1fr 1fr;
 row-gap: var(--size-s);
 margin: var(--size-m);
+border-radius: var(--size-s);
+border-color: lightgrey;
 
-  & output, div{
+  & output, div, legend{
   font-weight: bold;
   }
 `
