@@ -78,7 +78,7 @@ public class StormGlassService {
                 latitude +
                 "&lng=" +
                 longitude +
-                "&params=windSpeed,waveHeight&start=" +
+                "&params=windSpeed,waveHeight,airTemperature,pressure,currentDirection,currentSpeed,visibility,windDirection,waveDirection,waterTemperature&start=" +
                 Instant.now().plus(60, ChronoUnit.MINUTES).getEpochSecond() +
                 "&end=" +
                 Instant.now().plus(60, ChronoUnit.MINUTES).getEpochSecond() +
