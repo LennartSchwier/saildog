@@ -51,9 +51,9 @@ public class StormGlassService {
         double windSpeed = (windSpeedInMeterPerSecond * 2);
         Optional<WaveHeight> waveHeight = Optional.ofNullable(stormGlassResponse.getHours().get(0).getWaveHeight());
         if (waveHeight.isEmpty()) {
-            return new WeatherDto(time, windSpeed, 0);
+            return WeatherDto.builder().build();
         }
-        return new WeatherDto(time, windSpeed, waveHeight.get().getSg());
+        return WeatherDto.builder().build();
     }
 
     public String generateSgUrl(String latitude, String longitude){
