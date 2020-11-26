@@ -19,7 +19,7 @@ describe('component test :: TrimInput', () => {
         renderPage();
 
         // WHEN
-        const inputHeader = screen.queryByRole('heading', {name: /sail trim/i});
+        const inputHeader = screen.queryByRole('heading', /sail trim/i);
 
         // THEN
         expect(inputHeader).toBeInTheDocument();
