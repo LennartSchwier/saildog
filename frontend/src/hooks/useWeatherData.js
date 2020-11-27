@@ -17,9 +17,5 @@ export default function useWeatherData() {
         waveHeight: 0,
     })
 
-    const [windSpeed, setWindSpeed] = useState(0);
-    const [waveHeight, setWaveHeight] = useState(0);
-
-
-    return [course, setCourse, weatherData, setWeatherData, windSpeed, setWindSpeed, waveHeight, setWaveHeight];
+    return [course, setCourse, weatherData, setWeatherData];
 }
