@@ -1,13 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 import Header from "../commons/Header";
 import styled from "styled-components/macro";
 import PrimaryButton from "../commons/PrimaryButton";
 import { useHistory } from 'react-router-dom';
 import {getStormGlassWeather} from "../service/StormGlassService";
+import WeatherDataContext from "../contexts/WeatherDataContext";
 
-export default function TrimInput({course, setCourse, weatherData, setWeatherData, latitude, longitude}) {
+export default function TrimInput({course, setCourse, latitude, longitude}) {
 
     const history = useHistory();
+    const { weatherData, setWeatherData } = useContext(WeatherDataContext)
 
     return (
         <PageLayout>

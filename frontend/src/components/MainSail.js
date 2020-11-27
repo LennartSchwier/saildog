@@ -3,11 +3,13 @@ import useTrimData from "../hooks/useTrimData";
 import Header from "../commons/Header";
 import PrimaryButton from "../commons/PrimaryButton";
 import styled from "styled-components/macro";
-import React from "react";
+import React, {useContext} from "react";
+import WeatherDataContext from "../contexts/WeatherDataContext";
 
-export default function MainSail({course, weatherData}) {
+export default function MainSail({course}) {
 
     const history = useHistory();
+    const {weatherData} = useContext(WeatherDataContext);
     const { mainSailTrimData } = useTrimData(course, weatherData.windSpeed, weatherData.waveHeight);
 
     const getTextualOutput = (input) => input?.replace("_", " ").toLowerCase()

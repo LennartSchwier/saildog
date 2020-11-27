@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Header from "../commons/Header";
 import PrimaryButton from "../commons/PrimaryButton";
 import styled from "styled-components/macro";
 import {useHistory} from "react-router-dom";
 import useTrimData from "../hooks/useTrimData";
+import WeatherDataContext from "../contexts/WeatherDataContext";
 
-export default function HeadSail({course, weatherData}) {
+export default function HeadSail({course}) {
 
     const history = useHistory();
+    const {weatherData} = useContext(WeatherDataContext);
     const { headSailTrimData } = useTrimData(course, weatherData.windSpeed, weatherData.waveHeight);
 
     const getTextualOutput = (input) => input?.replace("_", " ").toLowerCase()
