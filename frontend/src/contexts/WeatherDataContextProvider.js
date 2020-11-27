@@ -21,9 +21,12 @@ export default function WeatherDataContextProvider({ children }) {
     const [latitude, longitude] = usePositioning();
 
     useEffect(() => {
-        getStormGlassWeather(latitude, longitude)
+        latitude && longitude && getStormGlassWeather(latitude, longitude)
             .then(data => setWeatherData(data))
     }, [latitude, longitude])
+
+
+
 
     return (
         <WeatherDataContext.Provider value={{ weatherData, setWeatherData }}>
