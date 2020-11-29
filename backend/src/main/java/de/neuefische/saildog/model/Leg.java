@@ -1,5 +1,6 @@
 package de.neuefische.saildog.model;
 
+import de.neuefische.saildog.enums.TypeOfWaypoint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,6 @@ public class Leg {
     private String legId;
     private Waypoint startPoint;
     private Waypoint endPoint;
-    private double course;
+    private double bearing;
     private double distance;
 }

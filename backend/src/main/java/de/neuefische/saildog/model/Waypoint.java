@@ -1,5 +1,6 @@
 package de.neuefische.saildog.model;
 
+import de.neuefische.saildog.enums.TypeOfWaypoint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Waypoint {
 
-    private String waypointId;
+    private TypeOfWaypoint typeOfWaypoint;
     private String latitude;
     private String longitude;
 }
