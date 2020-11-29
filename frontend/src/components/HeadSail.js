@@ -9,8 +9,8 @@ import WeatherDataContext from "../contexts/WeatherDataContext";
 export default function HeadSail({course}) {
 
     const history = useHistory();
-    const {weatherData} = useContext(WeatherDataContext);
-    const { headSailTrimData } = useTrimData(course, weatherData.windSpeed, weatherData.waveHeight);
+    const { refactoredWeatherData } = useContext(WeatherDataContext);
+    const { headSailTrimData } = useTrimData(course, refactoredWeatherData.windSpeed, refactoredWeatherData.waveHeight);
 
     const getTextualOutput = (input) => input?.replace("_", " ").toLowerCase()
 
@@ -24,11 +24,11 @@ export default function HeadSail({course}) {
                 </div>
                 <div>
                     <div>Wind Speed:</div>
-                    <Bold>{weatherData.windSpeed} knots</Bold>
+                    <Bold>{refactoredWeatherData.windSpeed} knots</Bold>
                 </div>
                 <div>
                     <div>Wave Height:</div>
-                    <Bold>{weatherData.waveHeight} meter</Bold>
+                    <Bold>{refactoredWeatherData.waveHeight} meter</Bold>
                 </div>
             </InputField>
             <OutputField>

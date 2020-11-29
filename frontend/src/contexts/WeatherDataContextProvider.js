@@ -18,6 +18,12 @@ export default function WeatherDataContextProvider({ children }) {
             waveDirection: 0,
             waveHeight: 0,
     })
+
+    const [refactoredWeatherData, setRefactoredWeatherData] = useState({
+        windSpeed: 0,
+        waveHeight: 0
+    });
+
     const [latitude, longitude] = usePositioning();
 
     useEffect(() => {
@@ -29,7 +35,9 @@ export default function WeatherDataContextProvider({ children }) {
 
 
     return (
-        <WeatherDataContext.Provider value={{ weatherData, setWeatherData }}>
+        <WeatherDataContext.Provider value={{
+            weatherData, setWeatherData, refactoredWeatherData, setRefactoredWeatherData
+        }}>
             {children}
         </WeatherDataContext.Provider>
     );

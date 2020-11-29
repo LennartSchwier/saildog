@@ -9,7 +9,7 @@ import WeatherDataContext from "../contexts/WeatherDataContext";
 export default function TrimInput({course, setCourse, latitude, longitude}) {
 
     const history = useHistory();
-    const { weatherData, setWeatherData } = useContext(WeatherDataContext)
+    const { refactoredWeatherData, setRefactoredWeatherData } = useContext(WeatherDataContext)
 
     return (
         <PageLayout>
@@ -43,20 +43,20 @@ export default function TrimInput({course, setCourse, latitude, longitude}) {
                     <legend>Weather</legend>
                     <label htmlFor={"windSpeed"}>Wind Speed :</label>
                     <input type={"range"} max={"40"} id={"windSpeed"} name={"windSpeed"}
-                           value={weatherData.windSpeed} onChange={handleSliderChange}
+                           value={refactoredWeatherData.windSpeed} onChange={handleSliderChange}
                     />
-                    <output>{weatherData.windSpeed} knots</output>
+                    <output>{refactoredWeatherData.windSpeed} knots</output>
                     <label htmlFor={"waveHeight"}>Wave Height :</label>
                     <input type={"range"} max={"3"} step={"0.1"} id={"waveHeight"} name={"waveHeight"}
-                           value={weatherData.waveHeight} onChange={handleSliderChange}
+                           value={refactoredWeatherData.waveHeight} onChange={handleSliderChange}
                     />
-                    <output>{weatherData.waveHeight} meter</output>
+                    <output>{refactoredWeatherData.waveHeight} meter</output>
                 </FieldsetStyled>
                 <PrimaryButton labelButton={"Load weather for current location"}
                                handleClick={loadWeather} disableButton={!latitude || !longitude}
                 />
                 <PrimaryButton labelButton={"Reset"} handleClick={resetAllInputData}
-                               disableButton={!weatherData.windSpeed && !weatherData.waveHeight && !course}
+                               disableButton={!refactoredWeatherData.windSpeed && !refactoredWeatherData.waveHeight && !course}
                 />
             </FormStyled>
             <div>
@@ -72,12 +72,12 @@ export default function TrimInput({course, setCourse, latitude, longitude}) {
     }
 
     function handleSliderChange(event) {
-        setWeatherData({...weatherData, [event.target.name]: event.target.value})
+        setRefactoredWeatherData({...refactoredWeatherData, [event.target.name]: event.target.value})
     }
 
     function loadWeather() {
         getStormGlassWeather(latitude, longitude)
-            .then(data => setWeatherData({...weatherData, windSpeed: data.windSpeed, waveHeight: data.waveHeight}));
+            .then(data => setRefactoredWeatherData({...refactoredWeatherData, windSpeed: Math.ceil(data.windSpeed), waveHeight: data.waveHeight === 999 ?  0 : data.waveHeight}));
     }
 
     function redirectToDashboard() {
@@ -85,7 +85,7 @@ export default function TrimInput({course, setCourse, latitude, longitude}) {
     }
 
     function disableHandler() {
-        return !(course && weatherData.windSpeed && weatherData.waveHeight && weatherData.windSpeed !== 0 && weatherData.waveHeight !== 0);
+        return !(course && refactoredWeatherData.windSpeed && refactoredWeatherData.waveHeight && refactoredWeatherData.windSpeed !== 0 && refactoredWeatherData.waveHeight !== 0);
     }
 
     function redirectToMainSail() {
@@ -94,7 +94,7 @@ export default function TrimInput({course, setCourse, latitude, longitude}) {
 
     function resetAllInputData() {
         setCourse(null);
-        setWeatherData({...weatherData, windSpeed: 0, waveHeight: 0})
+        setRefactoredWeatherData({...refactoredWeatherData, windSpeed: 0, waveHeight: 0})
     }
 
     function redirectToHeadSail() {
