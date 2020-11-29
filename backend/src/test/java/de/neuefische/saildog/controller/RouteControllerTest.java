@@ -2,6 +2,7 @@ package de.neuefische.saildog.controller;
 
 import de.neuefische.saildog.dao.RouteDao;
 import de.neuefische.saildog.dto.RouteDto;
+import de.neuefische.saildog.enums.TypeOfWaypoint;
 import de.neuefische.saildog.model.Leg;
 import de.neuefische.saildog.model.Route;
 import de.neuefische.saildog.model.Waypoint;
@@ -41,7 +42,7 @@ class RouteControllerTest {
     @Autowired
     private RouteDao routeDao;
 
-    private HttpEntity<Void> createHttpEntity() {
+    private HttpHeaders createHttpHeader() {
         String jwtToken = Jwts.builder()
                 .setClaims(new HashMap<>())
                 .setSubject("testRouteCreator")
@@ -51,7 +52,7 @@ class RouteControllerTest {
                 .compact();
         HttpHeaders header = new HttpHeaders();
         header.setBearerAuth(jwtToken);
-        return new HttpEntity<>(null, header);
+        return header;
     }
 
     @BeforeEach
@@ -69,7 +70,8 @@ class RouteControllerTest {
     public void testGetRoutesByCreatorReturnsUserRoutes() {
         // GIVEN
         String url = "http://localhost:" + port + "/api/route";
-        HttpEntity<Void> entity = createHttpEntity();
+        HttpHeaders header = createHttpHeader();
+        HttpEntity<Void> entity = new HttpEntity<>(null, header);
         Route[] expectedResponse = new Route[] {new Route("route1", "testRouteCreator", null, 1892),
                 new Route("route3", "testRouteCreator", null, 445)};
 
@@ -79,6 +81,31 @@ class RouteControllerTest {
         // THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody(), is(expectedResponse));
+    }
+
+    @Test
+    public void testAddNewRouteAddsRouteToDbAndReturnsRoute() {
+        // GIVEN
+        String url = "http://localhost:" + port + "/api/route";
+        RouteDto request = new RouteDto("some new route", "45.43252", "3.234" , "50.213", "105.4324");
+        HttpHeaders header = createHttpHeader();
+        HttpEntity<RouteDto> entity = new HttpEntity<RouteDto>(request, header);
+
+        // WHEN
+        ResponseEntity<Route> response = restTemplate.exchange(url, HttpMethod.POST, entity, Route.class);
+
+        // THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(response.getBody(), is(new Route(
+                "some new route", "testRouteCreator", List.of(
+                Leg.builder()
+                        .legId("some new route")
+                        .startPoint(new Waypoint(TypeOfWaypoint.START, "45.43252", "3.234"))
+                        .endPoint(new Waypoint(TypeOfWaypoint.END, "50.213", "105.4324"))
+                        .distance(3788.0724525924593)
+                        .bearing(45.0)
+                .build()
+        ), 0.0)));
     }
 
 }
