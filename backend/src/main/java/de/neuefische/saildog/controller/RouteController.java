@@ -1,12 +1,11 @@
 package de.neuefische.saildog.controller;
 
+import de.neuefische.saildog.dto.RouteDto;
 import de.neuefische.saildog.model.Route;
 import de.neuefische.saildog.service.RouteService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +20,12 @@ public class RouteController {
     }
 
     @GetMapping
-    public List<Route> getRoutesByCreator(@RequestParam Optional<String> creator) {
-        return routeService.getRoutesByCreator(creator);
+    public List<Route> getRoutesByCreator(Principal principal) {
+        return routeService.getRoutesByCreator(principal.getName());
+    }
+
+    @PostMapping
+    public Route addRoute(@RequestBody RouteDto routeToAdd, Principal principal) {
+        return routeService.addNewRoute(routeToAdd, principal.getName());
     }
 }

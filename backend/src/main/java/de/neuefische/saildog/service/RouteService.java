@@ -8,9 +8,7 @@ import de.neuefische.saildog.model.Waypoint;
 import de.neuefische.saildog.utils.RouteUtils;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RouteService {
@@ -23,15 +21,17 @@ public class RouteService {
         this.routeUtils = routeUtils;
     }
 
-    public List<Route> getRoutesByCreator(Optional<String> creator) {
-        if (creator.isPresent() && !creator.get().isBlank()) {
-            return routeDao.findAllByCreator(creator.get());
-        }
-        return routeDao.findAll();
+    public List<Route> getRoutesByCreator(String creator) {
+            return routeDao.findAllByCreator(creator);
+
     }
 
-    public Route addNewRoute(RouteDto routeToAdd, Principal principal) {
-        Route newRoute = Route.builder().build();
+    public Route addNewRoute(RouteDto routeToAdd, String creator) {
+        Route newRoute = Route.builder()
+                .routeId(routeToAdd.getRouteId())
+                .creator(creator)
+                .legs(List.of(createLeg(routeToAdd)))
+                .build();
         routeDao.save(newRoute);
         return newRoute;
     }

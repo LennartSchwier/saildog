@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RouteDto {
 
+    private String routeId;
     private Leg leg;
 }

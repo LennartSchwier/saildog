@@ -10,7 +10,6 @@ import de.neuefische.saildog.utils.RouteUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -33,7 +32,7 @@ class RouteServiceTest {
                 new Route("route1", "user1", null, 1892),
                 new Route("route3", "user1", null, 445)
         ));
-        List<Route> result = routeService.getRoutesByCreator(Optional.of(creator));
+        List<Route> result = routeService.getRoutesByCreator(creator);
 
         // THEN
         assertThat(result, is(List.of(
@@ -45,7 +44,7 @@ class RouteServiceTest {
     @Test
     public void testCreateLegReturnsCorrectLeg() {
         // GIVEN
-        RouteDto testRouteDto = new RouteDto(
+        RouteDto testRouteDto = new RouteDto("test route",
                 Leg.builder()
                         .legId("1")
                         .startPoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
@@ -65,5 +64,36 @@ class RouteServiceTest {
 
         // THEN
         assertThat(result, is(expectedResult));
+    }
+
+    @Test
+    public void testAddNewRouteReturnsNewRouteAndCallsSaveFunction() {
+        // GIVEN
+        String creator = "testCreator";
+        RouteDto testRouteDto = new RouteDto("testRoute",
+                Leg.builder()
+                        .legId("1")
+                        .startPoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
+                        .endPoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
+                        .build()
+        );
+        Route expected = Route.builder()
+                .routeId(testRouteDto.getRouteId())
+                .creator(creator)
+                .legs(List.of(
+                        Leg.builder().legId("1")
+                                .startPoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
+                                .endPoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
+                                .distance(15.321956816335407)
+                                .bearing(339.0)
+                                .build()
+                ))
+                .build();
+
+        // WHEN
+        Route result = routeService.addNewRoute(testRouteDto, creator);
+
+        // THEN
+        assertThat(result, is(expected));
     }
 }

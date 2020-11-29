@@ -55,9 +55,9 @@ class RouteControllerTest {
     public void setupDao() {
         routeDao.deleteAll();
         routeDao.saveAll(List.of(
-                new Route("route1", "user1", null, 1892),
+                new Route("route1", "testRouteCreator", null, 1892),
                 new Route("route2", "user2", null, 213),
-                new Route("route3", "user1", null, 445),
+                new Route("route3", "testRouteCreator", null, 445),
                 new Route("route4", "user3", null, 12)
         ));
     }
@@ -65,11 +65,10 @@ class RouteControllerTest {
     @Test
     public void testGetRoutesByCreatorReturnsUserRoutes() {
         // GIVEN
-        String creator = "user1";
-        String url = "http://localhost:" + port + "/api/route?creator=" + creator;
+        String url = "http://localhost:" + port + "/api/route";
         HttpEntity<Void> entity = createHttpEntity();
-        Route[] expectedResponse = new Route[] {new Route("route1", "user1", null, 1892),
-                new Route("route3", "user1", null, 445)};
+        Route[] expectedResponse = new Route[] {new Route("route1", "testRouteCreator", null, 1892),
+                new Route("route3", "testRouteCreator", null, 445)};
 
         // WHEN
         ResponseEntity<Route[]> response = restTemplate.exchange(url, HttpMethod.GET, entity, Route[].class);
