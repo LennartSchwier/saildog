@@ -25,11 +25,4 @@ describe('component test :: Dashboard', () => {
        // THEN
        expect(screen.getByRole('heading', /sail trim/i)).toBeInTheDocument();
    });
-
-   test('current speed = 999 is not rendered', () => {
-      // GIVEN
-       renderPage()
-       screen.debug();
-
-   });
 });
