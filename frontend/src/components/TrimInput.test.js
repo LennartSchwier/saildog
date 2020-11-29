@@ -14,7 +14,7 @@ describe('component test :: TrimInput', () => {
         );
     }
 
-    it('renders the TrimInput page and it\'s content', () => {
+    xit('renders the TrimInput page and it\'s content', () => {
         // GIVEN
         renderPage();
 
@@ -25,7 +25,7 @@ describe('component test :: TrimInput', () => {
         expect(inputHeader).toBeInTheDocument();
     });
 
-    test('button "Dashboard" redirects to correct page', () => {
+    xtest('button "Dashboard" redirects to correct page', () => {
        // GIVEN
        renderPage();
 
@@ -37,7 +37,7 @@ describe('component test :: TrimInput', () => {
         expect(screen.getByRole('heading', /ahoi/i)).toBeInTheDocument();
     });
 
-    test('button "Main Sail" redirects to correct page', () => {
+    xtest('button "Main Sail" redirects to correct page', () => {
         // GIVEN
         renderPage();
 
@@ -49,7 +49,7 @@ describe('component test :: TrimInput', () => {
         expect(screen.getByRole('heading', /main sail/i)).toBeInTheDocument();
     })
 
-    test('button "Head Sail" redirects to correct page', () => {
+    xtest('button "Head Sail" redirects to correct page', () => {
         // GIVEN
         renderPage();
 
