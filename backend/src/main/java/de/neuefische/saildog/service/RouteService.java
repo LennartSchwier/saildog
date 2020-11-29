@@ -2,6 +2,7 @@ package de.neuefische.saildog.service;
 
 import de.neuefische.saildog.dao.RouteDao;
 import de.neuefische.saildog.dto.RouteDto;
+import de.neuefische.saildog.enums.TypeOfWaypoint;
 import de.neuefische.saildog.model.Leg;
 import de.neuefische.saildog.model.Route;
 import de.neuefische.saildog.model.Waypoint;
@@ -37,10 +38,10 @@ public class RouteService {
     }
 
     public Leg createLeg(RouteDto routeToCreate) {
-        Waypoint startPoint = routeToCreate.getLeg().getStartPoint();
-        Waypoint endPoint = routeToCreate.getLeg().getEndPoint();
+        Waypoint startPoint = new Waypoint(TypeOfWaypoint.START, routeToCreate.getStartLatitude(), routeToCreate.getStartLongitude());
+        Waypoint endPoint = new Waypoint(TypeOfWaypoint.END, routeToCreate.getEndLatitude(), routeToCreate.getEndLongitude());
         return Leg.builder()
-                .legId(routeToCreate.getLeg().getLegId())
+                .legId(routeToCreate.getRouteId())
                 .startPoint(startPoint)
                 .endPoint(endPoint)
                 .distance(routeUtils.calculateDistance(startPoint, endPoint))

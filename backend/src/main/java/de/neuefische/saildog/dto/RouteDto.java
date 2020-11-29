@@ -1,6 +1,5 @@
 package de.neuefische.saildog.dto;
 
-import de.neuefische.saildog.model.Leg;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,5 +10,8 @@ import lombok.NoArgsConstructor;
 public class RouteDto {
 
     private String routeId;
-    private Leg leg;
+    private String startLatitude;
+    private String startLongitude;
+    private String endLatitude;
+    private String endLongitude;
 }

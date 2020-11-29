@@ -1,7 +1,10 @@
 package de.neuefische.saildog.controller;
 
 import de.neuefische.saildog.dao.RouteDao;
+import de.neuefische.saildog.dto.RouteDto;
+import de.neuefische.saildog.model.Leg;
 import de.neuefische.saildog.model.Route;
+import de.neuefische.saildog.model.Waypoint;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.jupiter.api.BeforeEach;

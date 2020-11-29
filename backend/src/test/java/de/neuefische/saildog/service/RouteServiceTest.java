@@ -45,14 +45,10 @@ class RouteServiceTest {
     public void testCreateLegReturnsCorrectLeg() {
         // GIVEN
         RouteDto testRouteDto = new RouteDto("test route",
-                Leg.builder()
-                        .legId("1")
-                        .startPoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
-                        .endPoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
-                        .build()
-        );
+                "50.930932", "6.933717",
+                "51.169266", "6.788612");
 
-        Leg expectedResult = Leg.builder().legId("1")
+        Leg expectedResult = Leg.builder().legId("test route")
                 .startPoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
                 .endPoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
                 .distance(15.321956816335407)
@@ -70,18 +66,15 @@ class RouteServiceTest {
     public void testAddNewRouteReturnsNewRouteAndCallsSaveFunction() {
         // GIVEN
         String creator = "testCreator";
-        RouteDto testRouteDto = new RouteDto("testRoute",
-                Leg.builder()
-                        .legId("1")
-                        .startPoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
-                        .endPoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
-                        .build()
-        );
+        RouteDto testRouteDto = new RouteDto("test route",
+                "50.930932", "6.933717",
+                "51.169266", "6.788612");
+
         Route expected = Route.builder()
                 .routeId(testRouteDto.getRouteId())
                 .creator(creator)
                 .legs(List.of(
-                        Leg.builder().legId("1")
+                        Leg.builder().legId("test route")
                                 .startPoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
                                 .endPoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
                                 .distance(15.321956816335407)

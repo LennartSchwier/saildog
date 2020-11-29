@@ -1,6 +1,5 @@
 package de.neuefische.saildog.model;
 
-import de.neuefische.saildog.enums.TypeOfWaypoint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
