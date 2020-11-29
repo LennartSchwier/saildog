@@ -46,14 +46,14 @@ class RouteServiceTest {
         RouteDto testRouteDto = new RouteDto(
                 Leg.builder()
                         .legId("1")
-                        .startPoint(new Waypoint(TypeOfWaypoint.START, "36", "1"))
-                        .endPoint(new Waypoint(TypeOfWaypoint.END, "39", "4"))
+                        .startPoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
+                        .endPoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
                         .build()
         );
 
         Leg expectedResult = Leg.builder().legId("1")
-                .startPoint(new Waypoint(TypeOfWaypoint.START, "36", "1"))
-                .endPoint(new Waypoint(TypeOfWaypoint.END, "39", "4"))
+                .startPoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
+                .endPoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
                 .distance(215.989461721462)
                 .bearing(38)
                 .build();

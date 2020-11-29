@@ -48,12 +48,12 @@ public class RouteService {
         double startLongitudeRad = Double.parseDouble(startPoint.getLongitude()) * Math.PI/180;
         double endLatitudeRad = Double.parseDouble(endPoint.getLatitude()) * Math.PI/180;
         double endLongitudeRad = Double.parseDouble(endPoint.getLongitude()) * Math.PI/180;
-        double meanRadius = 637100;
+        double meanRadius = 6371000;
 
         double distanceInMeters = Math.acos(
-                Math.sin(startLatitudeRad) * Math.sin(endLatitudeRad)) +
+                Math.sin(startLatitudeRad) * Math.sin(endLatitudeRad) +
                 Math.cos(startLatitudeRad) * Math.cos(endLatitudeRad) *
-                        Math.cos(endLongitudeRad - startLongitudeRad) * meanRadius;
+                        Math.cos(endLongitudeRad - startLongitudeRad)) * meanRadius;
 
         return distanceInMeters / 1852;
     }
