@@ -5,6 +5,7 @@ import de.neuefische.saildog.dto.RouteDto;
 import de.neuefische.saildog.model.Leg;
 import de.neuefische.saildog.model.Route;
 import de.neuefische.saildog.model.Waypoint;
+import de.neuefische.saildog.utils.RouteUtils;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -15,9 +16,11 @@ import java.util.Optional;
 public class RouteService {
 
     private final RouteDao routeDao;
+    private final RouteUtils routeUtils;
 
-    public RouteService(RouteDao routeDao) {
+    public RouteService(RouteDao routeDao, RouteUtils routeUtils) {
         this.routeDao = routeDao;
+        this.routeUtils = routeUtils;
     }
 
     public List<Route> getRoutesByCreator(Optional<String> creator) {
@@ -37,24 +40,11 @@ public class RouteService {
         Waypoint startPoint = routeToCreate.getLeg().getStartPoint();
         Waypoint endPoint = routeToCreate.getLeg().getEndPoint();
         return Leg.builder()
+                .legId(routeToCreate.getLeg().getLegId())
                 .startPoint(startPoint)
                 .endPoint(endPoint)
-                .distance(calculateDistance(startPoint, endPoint))
+                .distance(routeUtils.calculateDistance(startPoint, endPoint))
+                .bearing(routeUtils.calculateBearing(startPoint, endPoint))
                 .build();
-    }
-
-    public double calculateDistance(Waypoint startPoint, Waypoint endPoint) {
-        double startLatitudeRad = Double.parseDouble(startPoint.getLatitude()) * Math.PI/180;
-        double startLongitudeRad = Double.parseDouble(startPoint.getLongitude()) * Math.PI/180;
-        double endLatitudeRad = Double.parseDouble(endPoint.getLatitude()) * Math.PI/180;
-        double endLongitudeRad = Double.parseDouble(endPoint.getLongitude()) * Math.PI/180;
-        double meanRadius = 6371000;
-
-        double distanceInMeters = Math.acos(
-                Math.sin(startLatitudeRad) * Math.sin(endLatitudeRad) +
-                Math.cos(startLatitudeRad) * Math.cos(endLatitudeRad) *
-                        Math.cos(endLongitudeRad - startLongitudeRad)) * meanRadius;
-
-        return distanceInMeters / 1852;
     }
 }

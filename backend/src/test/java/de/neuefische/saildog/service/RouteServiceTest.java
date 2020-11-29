@@ -6,6 +6,7 @@ import de.neuefische.saildog.enums.TypeOfWaypoint;
 import de.neuefische.saildog.model.Leg;
 import de.neuefische.saildog.model.Route;
 import de.neuefische.saildog.model.Waypoint;
+import de.neuefische.saildog.utils.RouteUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -19,7 +20,8 @@ import static org.mockito.Mockito.when;
 class RouteServiceTest {
 
     RouteDao mockedRouteDao = mock(RouteDao.class);
-    RouteService routeService = new RouteService(mockedRouteDao);
+    RouteUtils routeUtils = new RouteUtils();
+    RouteService routeService = new RouteService(mockedRouteDao, routeUtils);
 
     @Test
     public void testGetAllRoutesByCreatorReturnsCorrectListOfRoutes() {
@@ -54,8 +56,8 @@ class RouteServiceTest {
         Leg expectedResult = Leg.builder().legId("1")
                 .startPoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
                 .endPoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
-                .distance(215.989461721462)
-                .bearing(38)
+                .distance(15.321956816335407)
+                .bearing(339.0)
                 .build();
 
         // WHEN
