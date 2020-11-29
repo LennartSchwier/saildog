@@ -4,14 +4,19 @@ import {MemoryRouter as Router} from "react-router-dom";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
-describe('Dashboard', () => {
+describe('component test :: Dashboard', () => {
+
+    const renderPage = () => {
+        render(
+            <Router>
+                <Dashboard/>
+            </Router>
+        );
+    }
+
    test('button "Trim Input" redirects to correct page', () => {
        // GIVEN
-       render(
-           <Router>
-               <Dashboard/>
-           </Router>
-       );
+       renderPage();
 
        // WHEN
        const trimInputButton = screen.getByRole('button', {name: /trim input/i});
@@ -19,5 +24,12 @@ describe('Dashboard', () => {
 
        // THEN
        expect(screen.getByRole('heading', /sail trim/i)).toBeInTheDocument();
+   });
+
+   test('current speed = 999 is not rendered', () => {
+      // GIVEN
+       renderPage()
+       screen.debug();
+
    });
 });
