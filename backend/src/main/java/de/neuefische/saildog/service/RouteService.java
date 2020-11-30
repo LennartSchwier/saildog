@@ -34,6 +34,7 @@ public class RouteService {
                 .routeId(routeToAdd.getRouteId())
                 .creator(creator)
                 .legs(createRouting(routeToAdd))
+                .totalDistance(calculateTotalDistance(routeToAdd))
                 .build();
         routeDao.save(newRoute);
         return newRoute;
@@ -43,6 +44,12 @@ public class RouteService {
         return routeToCreate.getLegs().stream()
                 .map(this::createLeg)
                 .collect(Collectors.toList());
+    }
+
+    public double calculateTotalDistance(RouteDto totalRoute) {
+        return createRouting(totalRoute).stream()
+                .map(Leg::getDistance)
+                .reduce(0.0, Double::sum);
     }
 
     public Leg createLeg(LegDto legToCreate) {
