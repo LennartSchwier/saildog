@@ -11,6 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 public class RouteDto {
 
-    private String routeId;
+    private String routeName;
     private List<LegDto> legs;
 }

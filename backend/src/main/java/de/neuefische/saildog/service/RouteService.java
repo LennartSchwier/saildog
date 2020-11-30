@@ -31,7 +31,8 @@ public class RouteService {
 
     public Route addNewRoute(RouteDto routeToAdd, String creator) {
         Route newRoute = Route.builder()
-                .routeId(routeToAdd.getRouteId())
+                .routeId(routeUtils.createRandomId())
+                .routeName(routeToAdd.getRouteName())
                 .creator(creator)
                 .legs(createRouting(routeToAdd))
                 .totalDistance(calculateTotalDistance(routeToAdd))
@@ -56,7 +57,7 @@ public class RouteService {
         Waypoint startWaypoint = new Waypoint(TypeOfWaypoint.START, legToCreate.getStartLatitude(), legToCreate.getStartLongitude());
         Waypoint endWaypoint = new Waypoint(TypeOfWaypoint.END, legToCreate.getEndLatitude(), legToCreate.getEndLongitude());
         return Leg.builder()
-                .legId(routeUtils.createLegId())
+                .legId(routeUtils.createRandomId())
                 .startWaypoint(startWaypoint)
                 .endWaypoint(endWaypoint)
                 .distance(routeUtils.calculateDistance(startWaypoint, endWaypoint))

@@ -18,6 +18,7 @@ public class Route {
 
     @Id
     private String routeId;
+    private String routeName;
     private String creator;
     private List<Leg> legs;
     private double totalDistance;

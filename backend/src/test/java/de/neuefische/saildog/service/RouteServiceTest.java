@@ -35,11 +35,11 @@ class RouteServiceTest {
     ));
 
     private final List<Leg> expectedListOfLegs = List.of(
-            Leg.builder().legId("some random legId")
+            Leg.builder().legId("some random id")
                     .startWaypoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
                     .endWaypoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
                     .build(),
-            Leg.builder().legId("some random legId")
+            Leg.builder().legId("some random id")
                     .startWaypoint(new Waypoint(TypeOfWaypoint.START, "34.523", "-137.453"))
                     .endWaypoint(new Waypoint(TypeOfWaypoint.END, "21.45", "-152.768"))
                     .build()
@@ -52,22 +52,22 @@ class RouteServiceTest {
 
         // WHEN
         when(mockedRouteDao.findAllByCreator(creator)).thenReturn(List.of(
-                new Route("route1", "user1", null, 1892),
-                new Route("route3", "user1", null, 445)
+                new Route("some route id", "route1", "user1", null, 1892),
+                new Route("some route id","route3", "user1", null, 445)
         ));
         List<Route> result = routeService.getRoutesByCreator(creator);
 
         // THEN
         assertThat(result, is(List.of(
-                new Route("route1", "user1", null, 1892),
-                new Route("route3", "user1", null, 445)
+                new Route("some route id","route1", "user1", null, 1892),
+                new Route("some route id","route3", "user1", null, 445)
         )));
     }
 
     @Test
     public void testCreateLegReturnsCorrectLeg() {
         // GIVEN
-        Leg expectedResult = Leg.builder().legId("some random legId")
+        Leg expectedResult = Leg.builder().legId("some random id")
                 .startWaypoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
                 .endWaypoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
                 .distance(15.321956816335407)
@@ -77,7 +77,7 @@ class RouteServiceTest {
         // WHEN
         when(mockedRouteUtils.calculateBearing(any(), any())).thenCallRealMethod();
         when(mockedRouteUtils.calculateDistance(any(),any())).thenCallRealMethod();
-        when(mockedRouteUtils.createLegId()).thenReturn("some random legId");
+        when(mockedRouteUtils.createRandomId()).thenReturn("some random id");
         Leg result = routeService.createLeg(testLegDto);
 
         // THEN
@@ -87,7 +87,7 @@ class RouteServiceTest {
     @Test
     public void testCreateRoutingReturnsListOfLegs() {
         // WHEN
-        when(mockedRouteUtils.createLegId()).thenReturn("some random legId");
+        when(mockedRouteUtils.createRandomId()).thenReturn("some random id");
         List<Leg> result = routeService.createRouting(testRouteDto);
 
         // THEN
@@ -99,13 +99,14 @@ class RouteServiceTest {
         // GIVEN
         String creator = "testCreator";
         Route expected = Route.builder()
-                .routeId("some test route")
+                .routeId("some random id")
+                .routeName("some test route")
                 .creator(creator)
                 .legs(expectedListOfLegs)
                 .build();
 
         // WHEN
-        when(mockedRouteUtils.createLegId()).thenReturn("some random legId");
+        when(mockedRouteUtils.createRandomId()).thenReturn("some random id");
         Route result = routeService.addNewRoute(testRouteDto, creator);
 
         // THEN

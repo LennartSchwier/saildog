@@ -67,10 +67,26 @@ class RouteControllerTest {
     public void setupDao() {
         routeDao.deleteAll();
         routeDao.saveAll(List.of(
-                new Route("route1", "testRouteCreator", null, 1892),
-                new Route("route2", "user2", null, 213),
-                new Route("route3", "testRouteCreator", null, 445),
-                new Route("route4", "user3", null, 12)
+                Route.builder()
+                        .routeId("some random id")
+                        .routeName("some test route")
+                        .creator("testRouteCreator")
+                        .legs(List.of(
+                                Leg.builder().legId("some random id")
+                                        .startWaypoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
+                                        .endWaypoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
+                                        .distance(15.321956816335407)
+                                        .bearing(339.0)
+                                        .build(),
+                                Leg.builder().legId("some random id")
+                                        .startWaypoint(new Waypoint(TypeOfWaypoint.START, "34.523", "-137.453"))
+                                        .endWaypoint(new Waypoint(TypeOfWaypoint.END, "21.45", "-152.768"))
+                                        .distance(1126.603807406169)
+                                        .bearing(230.0)
+                                        .build()
+                        ))
+                        .totalDistance(1141.9257642225043)
+                        .build()
         ));
     }
 
@@ -80,8 +96,26 @@ class RouteControllerTest {
         String url = "http://localhost:" + port + "/api/route";
         HttpHeaders header = createHttpHeader();
         HttpEntity<Void> entity = new HttpEntity<>(null, header);
-        Route[] expectedResponse = new Route[] {new Route("route1", "testRouteCreator", null, 1892),
-                new Route("route3", "testRouteCreator", null, 445)};
+        Route[] expectedResponse = new Route[] {Route.builder()
+                .routeId("some random id")
+                .routeName("some test route")
+                .creator("testRouteCreator")
+                .legs(List.of(
+                        Leg.builder().legId("some random id")
+                                .startWaypoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
+                                .endWaypoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
+                                .distance(15.321956816335407)
+                                .bearing(339.0)
+                                .build(),
+                        Leg.builder().legId("some random id")
+                                .startWaypoint(new Waypoint(TypeOfWaypoint.START, "34.523", "-137.453"))
+                                .endWaypoint(new Waypoint(TypeOfWaypoint.END, "21.45", "-152.768"))
+                                .distance(1126.603807406169)
+                                .bearing(230.0)
+                                .build()
+                ))
+                .totalDistance(1141.9257642225043)
+                .build()};
 
         // WHEN
         ResponseEntity<Route[]> response = restTemplate.exchange(url, HttpMethod.GET, entity, Route[].class);
@@ -105,29 +139,30 @@ class RouteControllerTest {
         // WHEN
         when(mockedRouteUtils.calculateDistance(any(), any())).thenCallRealMethod();
         when(mockedRouteUtils.calculateBearing(any(), any())).thenCallRealMethod();
-        when(mockedRouteUtils.createLegId()).thenReturn("some random legId");
+        when(mockedRouteUtils.createRandomId()).thenReturn("some random id");
         ResponseEntity<Route> response = restTemplate.exchange(url, HttpMethod.POST, entity, Route.class);
 
         // THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody(), is(Route.builder()
-                .routeId("some test route")
+                .routeId("some random id")
+                .routeName("some test route")
                 .creator("testRouteCreator")
                 .legs(List.of(
-                        Leg.builder().legId("some random legId")
+                        Leg.builder().legId("some random id")
                                 .startWaypoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
                                 .endWaypoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
                                 .distance(15.321956816335407)
                                 .bearing(339.0)
                                 .build(),
-                        Leg.builder().legId("some random legId")
+                        Leg.builder().legId("some random id")
                                 .startWaypoint(new Waypoint(TypeOfWaypoint.START, "34.523", "-137.453"))
                                 .endWaypoint(new Waypoint(TypeOfWaypoint.END, "21.45", "-152.768"))
                                 .distance(1126.603807406169)
                                 .bearing(230.0)
                                 .build()
                 ))
-                .totalDistance(0)
+                .totalDistance(1141.9257642225043)
                 .build()
         ));
     }

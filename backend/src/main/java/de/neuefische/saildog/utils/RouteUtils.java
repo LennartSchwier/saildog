@@ -38,7 +38,7 @@ public class RouteUtils {
         return Math.round((Math.atan2(y, x) * 180/Math.PI + 360) % 360);
     }
 
-    public String createLegId() {
+    public String createRandomId() {
         return UUID.randomUUID().toString();
     }
 }
