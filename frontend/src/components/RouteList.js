@@ -12,8 +12,9 @@ export default function RouteList() {
     const history = useHistory();
     const [routes, setRoutes] = useState([
         {
-            creator: "",
             routeId: "",
+            routeName: "",
+            creator: "",
             legs: [
                 {
                     legId: "",
@@ -44,10 +45,9 @@ export default function RouteList() {
             <Header headerText={"Routes"}/>
             <ul>
                 {routes?.map((route) =>
-                    <li key={route.routeId}>
-                        {route.routeId}
-                        <Route route={route}/>
-                    </li>
+                        <li key={route.routeId}>
+                            <Route route={route}/>
+                        </li>
                     )}
             </ul>
             <ButtonGroup>
@@ -63,13 +63,16 @@ export default function RouteList() {
 
 const PageLayout = styled.div`
 display: grid;
-grid-template-rows: 60px min-content min-content 60px;
+grid-template-rows: 60px min-content 60px;
 row-gap: var(--size-xl);
 height: 100vh;
 
- li {
- margin: var(--size-m);
- }
+  ul {
+   list-style: none;
+   padding: 0;
+   display: grid;
+   row-gap: var(--size-l);
+  }
 `
 
 const ButtonGroup = styled.div`
