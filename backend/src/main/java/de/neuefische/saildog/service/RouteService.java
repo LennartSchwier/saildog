@@ -1,6 +1,7 @@
 package de.neuefische.saildog.service;
 
 import de.neuefische.saildog.dao.RouteDao;
+import de.neuefische.saildog.dto.LegDto;
 import de.neuefische.saildog.dto.RouteDto;
 import de.neuefische.saildog.enums.TypeOfWaypoint;
 import de.neuefische.saildog.model.Leg;
@@ -10,6 +11,7 @@ import de.neuefische.saildog.utils.RouteUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RouteService {
@@ -31,17 +33,23 @@ public class RouteService {
         Route newRoute = Route.builder()
                 .routeId(routeToAdd.getRouteId())
                 .creator(creator)
-                .legs(List.of(createLeg(routeToAdd)))
+                .legs(createRouting(routeToAdd))
                 .build();
         routeDao.save(newRoute);
         return newRoute;
     }
 
-    public Leg createLeg(RouteDto routeToCreate) {
-        Waypoint startWaypoint = new Waypoint(TypeOfWaypoint.START, routeToCreate.getStartLatitude(), routeToCreate.getStartLongitude());
-        Waypoint endWaypoint = new Waypoint(TypeOfWaypoint.END, routeToCreate.getEndLatitude(), routeToCreate.getEndLongitude());
+    public List<Leg> createRouting(RouteDto routeToCreate) {
+        return routeToCreate.getLegs().stream()
+                .map(this::createLeg)
+                .collect(Collectors.toList());
+    }
+
+    public Leg createLeg(LegDto legToCreate) {
+        Waypoint startWaypoint = new Waypoint(TypeOfWaypoint.START, legToCreate.getStartLatitude(), legToCreate.getStartLongitude());
+        Waypoint endWaypoint = new Waypoint(TypeOfWaypoint.END, legToCreate.getEndLatitude(), legToCreate.getEndLongitude());
         return Leg.builder()
-                .legId(routeToCreate.getRouteId())
+                .legId(routeUtils.createLegId())
                 .startWaypoint(startWaypoint)
                 .endWaypoint(endWaypoint)
                 .distance(routeUtils.calculateDistance(startWaypoint, endWaypoint))

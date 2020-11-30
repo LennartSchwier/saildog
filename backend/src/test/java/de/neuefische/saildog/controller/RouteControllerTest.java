@@ -1,17 +1,20 @@
 package de.neuefische.saildog.controller;
 
 import de.neuefische.saildog.dao.RouteDao;
+import de.neuefische.saildog.dto.LegDto;
 import de.neuefische.saildog.dto.RouteDto;
 import de.neuefische.saildog.enums.TypeOfWaypoint;
 import de.neuefische.saildog.model.Leg;
 import de.neuefische.saildog.model.Route;
 import de.neuefische.saildog.model.Waypoint;
+import de.neuefische.saildog.utils.RouteUtils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
@@ -25,6 +28,8 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = {
@@ -41,6 +46,9 @@ class RouteControllerTest {
 
     @Autowired
     private RouteDao routeDao;
+
+    @MockBean
+    RouteUtils mockedRouteUtils;
 
     private HttpHeaders createHttpHeader() {
         String jwtToken = Jwts.builder()
@@ -87,25 +95,41 @@ class RouteControllerTest {
     public void testAddNewRouteAddsRouteToDbAndReturnsRoute() {
         // GIVEN
         String url = "http://localhost:" + port + "/api/route";
-        RouteDto request = new RouteDto("some new route", "45.43252", "3.234" , "50.213", "105.4324");
+        RouteDto request = new RouteDto("some test route", List.of(
+                new LegDto("50.930932", "6.933717", "51.169266", "6.788612"),
+                new LegDto("34.523", "-137.453", "21.45", "-152.768")
+        ));
         HttpHeaders header = createHttpHeader();
         HttpEntity<RouteDto> entity = new HttpEntity<RouteDto>(request, header);
 
         // WHEN
+        when(mockedRouteUtils.calculateDistance(any(), any())).thenCallRealMethod();
+        when(mockedRouteUtils.calculateBearing(any(), any())).thenCallRealMethod();
+        when(mockedRouteUtils.createLegId()).thenReturn("some random legId");
         ResponseEntity<Route> response = restTemplate.exchange(url, HttpMethod.POST, entity, Route.class);
 
         // THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody(), is(new Route(
-                "some new route", "testRouteCreator", List.of(
-                Leg.builder()
-                        .legId("some new route")
-                        .startWaypoint(new Waypoint(TypeOfWaypoint.START, "45.43252", "3.234"))
-                        .endWaypoint(new Waypoint(TypeOfWaypoint.END, "50.213", "105.4324"))
-                        .distance(3788.0724525924593)
-                        .bearing(45.0)
+        assertThat(response.getBody(), is(Route.builder()
+                .routeId("some test route")
+                .creator("testRouteCreator")
+                .legs(List.of(
+                        Leg.builder().legId("some random legId")
+                                .startWaypoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
+                                .endWaypoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
+                                .distance(15.321956816335407)
+                                .bearing(339.0)
+                                .build(),
+                        Leg.builder().legId("some random legId")
+                                .startWaypoint(new Waypoint(TypeOfWaypoint.START, "34.523", "-137.453"))
+                                .endWaypoint(new Waypoint(TypeOfWaypoint.END, "21.45", "-152.768"))
+                                .distance(1126.603807406169)
+                                .bearing(230.0)
+                                .build()
+                ))
+                .totalDistance(0)
                 .build()
-        ), 0.0)));
+        ));
     }
 
 }

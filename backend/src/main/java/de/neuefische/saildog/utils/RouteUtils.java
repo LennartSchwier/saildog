@@ -3,6 +3,8 @@ package de.neuefische.saildog.utils;
 import de.neuefische.saildog.model.Waypoint;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class RouteUtils {
 
@@ -34,5 +36,9 @@ public class RouteUtils {
                         Math.sin(startLatitudeRad) * Math.cos(endLatitudeRad) * Math.cos(endLongitudeRad - startLongitudeRad);
 
         return Math.round((Math.atan2(y, x) * 180/Math.PI + 360) % 360);
+    }
+
+    public String createLegId() {
+        return UUID.randomUUID().toString();
     }
 }

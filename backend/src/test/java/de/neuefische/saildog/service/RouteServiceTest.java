@@ -1,6 +1,7 @@
 package de.neuefische.saildog.service;
 
 import de.neuefische.saildog.dao.RouteDao;
+import de.neuefische.saildog.dto.LegDto;
 import de.neuefische.saildog.dto.RouteDto;
 import de.neuefische.saildog.enums.TypeOfWaypoint;
 import de.neuefische.saildog.model.Leg;
@@ -13,14 +14,36 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class RouteServiceTest {
 
-    RouteDao mockedRouteDao = mock(RouteDao.class);
-    RouteUtils routeUtils = new RouteUtils();
-    RouteService routeService = new RouteService(mockedRouteDao, routeUtils);
+    private final RouteDao mockedRouteDao = mock(RouteDao.class);
+    private final RouteUtils mockedRouteUtils = mock(RouteUtils.class);
+    private final RouteService routeService = new RouteService(mockedRouteDao, mockedRouteUtils);
+
+    private final LegDto testLegDto = new LegDto(
+            "50.930932", "6.933717",
+            "51.169266", "6.788612"
+    );
+
+    private final RouteDto testRouteDto = new RouteDto("some test route", List.of(
+            new LegDto("50.930932", "6.933717", "51.169266", "6.788612"),
+            new LegDto("34.523", "-137.453", "21.45", "-152.768")
+    ));
+
+    private final List<Leg> expectedListOfLegs = List.of(
+            Leg.builder().legId("some random legId")
+                    .startWaypoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
+                    .endWaypoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
+                    .build(),
+            Leg.builder().legId("some random legId")
+                    .startWaypoint(new Waypoint(TypeOfWaypoint.START, "34.523", "-137.453"))
+                    .endWaypoint(new Waypoint(TypeOfWaypoint.END, "21.45", "-152.768"))
+                    .build()
+    );
 
     @Test
     public void testGetAllRoutesByCreatorReturnsCorrectListOfRoutes() {
@@ -44,11 +67,7 @@ class RouteServiceTest {
     @Test
     public void testCreateLegReturnsCorrectLeg() {
         // GIVEN
-        RouteDto testRouteDto = new RouteDto("test route",
-                "50.930932", "6.933717",
-                "51.169266", "6.788612");
-
-        Leg expectedResult = Leg.builder().legId("test route")
+        Leg expectedResult = Leg.builder().legId("some random legId")
                 .startWaypoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
                 .endWaypoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
                 .distance(15.321956816335407)
@@ -56,34 +75,37 @@ class RouteServiceTest {
                 .build();
 
         // WHEN
-        Leg result = routeService.createLeg(testRouteDto);
+        when(mockedRouteUtils.calculateBearing(any(), any())).thenCallRealMethod();
+        when(mockedRouteUtils.calculateDistance(any(),any())).thenCallRealMethod();
+        when(mockedRouteUtils.createLegId()).thenReturn("some random legId");
+        Leg result = routeService.createLeg(testLegDto);
 
         // THEN
         assertThat(result, is(expectedResult));
     }
 
     @Test
+    public void testCreateRoutingReturnsListOfLegs() {
+        // WHEN
+        when(mockedRouteUtils.createLegId()).thenReturn("some random legId");
+        List<Leg> result = routeService.createRouting(testRouteDto);
+
+        // THEN
+        assertThat(result, is(expectedListOfLegs));
+    }
+
+    @Test
     public void testAddNewRouteReturnsNewRouteAndCallsSaveFunction() {
         // GIVEN
         String creator = "testCreator";
-        RouteDto testRouteDto = new RouteDto("test route",
-                "50.930932", "6.933717",
-                "51.169266", "6.788612");
-
         Route expected = Route.builder()
-                .routeId(testRouteDto.getRouteId())
+                .routeId("some test route")
                 .creator(creator)
-                .legs(List.of(
-                        Leg.builder().legId("test route")
-                                .startWaypoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
-                                .endWaypoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
-                                .distance(15.321956816335407)
-                                .bearing(339.0)
-                                .build()
-                ))
+                .legs(expectedListOfLegs)
                 .build();
 
         // WHEN
+        when(mockedRouteUtils.createLegId()).thenReturn("some random legId");
         Route result = routeService.addNewRoute(testRouteDto, creator);
 
         // THEN
