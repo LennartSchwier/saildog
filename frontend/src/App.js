@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import useLoginData from "./hooks/useLoginData";
 import ProtectedRoute from "./routing/ProtectedRoute";
 import WeatherDataContextProvider from "./contexts/WeatherDataContextProvider";
+import RouteList from "./components/RouteList";
 
 
 export default function App() {
@@ -40,6 +41,9 @@ export default function App() {
                     <MainSail
                         course={course}
                     />
+                </ProtectedRoute>
+                <ProtectedRoute path={"/routes"}>
+                    <RouteList/>
                 </ProtectedRoute>
                 <Route path={"/"}>
                     <Redirect to={"/dashboard"}/>

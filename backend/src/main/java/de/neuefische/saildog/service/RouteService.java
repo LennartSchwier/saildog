@@ -38,14 +38,14 @@ public class RouteService {
     }
 
     public Leg createLeg(RouteDto routeToCreate) {
-        Waypoint startPoint = new Waypoint(TypeOfWaypoint.START, routeToCreate.getStartLatitude(), routeToCreate.getStartLongitude());
-        Waypoint endPoint = new Waypoint(TypeOfWaypoint.END, routeToCreate.getEndLatitude(), routeToCreate.getEndLongitude());
+        Waypoint startWaypoint = new Waypoint(TypeOfWaypoint.START, routeToCreate.getStartLatitude(), routeToCreate.getStartLongitude());
+        Waypoint endWaypoint = new Waypoint(TypeOfWaypoint.END, routeToCreate.getEndLatitude(), routeToCreate.getEndLongitude());
         return Leg.builder()
                 .legId(routeToCreate.getRouteId())
-                .startPoint(startPoint)
-                .endPoint(endPoint)
-                .distance(routeUtils.calculateDistance(startPoint, endPoint))
-                .bearing(routeUtils.calculateBearing(startPoint, endPoint))
+                .startWaypoint(startWaypoint)
+                .endWaypoint(endWaypoint)
+                .distance(routeUtils.calculateDistance(startWaypoint, endWaypoint))
+                .bearing(routeUtils.calculateBearing(startWaypoint, endWaypoint))
                 .build();
     }
 }

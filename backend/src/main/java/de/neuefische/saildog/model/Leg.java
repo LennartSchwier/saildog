@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 public class Leg {
 
     private String legId;
-    private Waypoint startPoint;
-    private Waypoint endPoint;
+    private Waypoint startWaypoint;
+    private Waypoint endWaypoint;
     private double bearing;
     private double distance;
 }

@@ -49,8 +49,8 @@ class RouteServiceTest {
                 "51.169266", "6.788612");
 
         Leg expectedResult = Leg.builder().legId("test route")
-                .startPoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
-                .endPoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
+                .startWaypoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
+                .endWaypoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
                 .distance(15.321956816335407)
                 .bearing(339.0)
                 .build();
@@ -75,8 +75,8 @@ class RouteServiceTest {
                 .creator(creator)
                 .legs(List.of(
                         Leg.builder().legId("test route")
-                                .startPoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
-                                .endPoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
+                                .startWaypoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
+                                .endWaypoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
                                 .distance(15.321956816335407)
                                 .bearing(339.0)
                                 .build()

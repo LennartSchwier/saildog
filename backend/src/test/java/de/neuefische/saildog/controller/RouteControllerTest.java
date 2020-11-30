@@ -100,8 +100,8 @@ class RouteControllerTest {
                 "some new route", "testRouteCreator", List.of(
                 Leg.builder()
                         .legId("some new route")
-                        .startPoint(new Waypoint(TypeOfWaypoint.START, "45.43252", "3.234"))
-                        .endPoint(new Waypoint(TypeOfWaypoint.END, "50.213", "105.4324"))
+                        .startWaypoint(new Waypoint(TypeOfWaypoint.START, "45.43252", "3.234"))
+                        .endWaypoint(new Waypoint(TypeOfWaypoint.END, "50.213", "105.4324"))
                         .distance(3788.0724525924593)
                         .bearing(45.0)
                 .build()

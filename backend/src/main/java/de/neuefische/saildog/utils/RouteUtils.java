@@ -11,7 +11,7 @@ public class RouteUtils {
         double startLongitudeRad = Double.parseDouble(startPoint.getLongitude()) * Math.PI/180;
         double endLatitudeRad = Double.parseDouble(endPoint.getLatitude()) * Math.PI/180;
         double endLongitudeRad = Double.parseDouble(endPoint.getLongitude()) * Math.PI/180;
-        double meanRadius = 6371000;
+        double meanRadius = 6371e3;
 
         double distanceInMeters = Math.acos(
                 Math.sin(startLatitudeRad) * Math.sin(endLatitudeRad) +
@@ -27,7 +27,8 @@ public class RouteUtils {
         double endLatitudeRad = Double.parseDouble(endPoint.getLatitude()) * Math.PI/180;
         double endLongitudeRad = Double.parseDouble(endPoint.getLongitude()) * Math.PI/180;
 
-        double y = Math.sin(endLongitudeRad - startLongitudeRad) * Math.cos(endLatitudeRad);
+        double y =
+                Math.sin(endLongitudeRad - startLongitudeRad) * Math.cos(endLatitudeRad);
         double x =
                 Math.cos(startLatitudeRad) * Math.sin(endLatitudeRad) -
                         Math.sin(startLatitudeRad) * Math.cos(endLatitudeRad) * Math.cos(endLongitudeRad - startLongitudeRad);
