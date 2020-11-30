@@ -10,7 +10,6 @@ import useLoginData from "./hooks/useLoginData";
 import ProtectedRoute from "./routing/ProtectedRoute";
 import WeatherDataContextProvider from "./contexts/WeatherDataContextProvider";
 import RouteList from "./components/RouteList";
-import RouteDetails from "./components/RouteDetails";
 
 
 export default function App() {
@@ -45,9 +44,6 @@ export default function App() {
                 </ProtectedRoute>
                 <ProtectedRoute path={"/routes"}>
                     <RouteList/>
-                </ProtectedRoute>
-                <ProtectedRoute path={"/routedetails/:id"}>
-                    <RouteDetails/>
                 </ProtectedRoute>
                 <Route path={"/"}>
                     <Redirect to={"/dashboard"}/>
