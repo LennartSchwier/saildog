@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React from "react";
 import styled from "styled-components/macro";
 import Header from "../commons/Header";
 import PrimaryButton from "../commons/PrimaryButton";
@@ -40,38 +40,6 @@ display: grid;
 grid-template-rows: 60px min-content min-content 60px;
 row-gap: var(--size-xl);
 height: 100vh;
-`
-
-const DashboardBlock = styled.div`
-margin: 0 var(--size-l);
-background-color: Transparent;
-box-shadow: var(--size-xs) var(--size-xs) var(--size-s) dimgrey;
-border-radius: var(--size-m);
-padding: var(--size-m);
-
-  section {
-  margin-bottom: var(--size-l);
-  }
-
-  div {
-  display: grid;
-  row-gap: var(--size-m);
-  margin: 0 var(--size-m);
-  }
-  
-  div > div {
-  display: flex;
-  }
-  
-  .error {
-  margin: var(--size-s);
-  color: red;
-  }
-`
-
-const Bold = styled.span`
-font-weight: bold;
-margin-left: var(--size-m);
 `
 
 const ButtonGroup = styled.div`
