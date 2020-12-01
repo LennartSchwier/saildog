@@ -9,10 +9,10 @@ import java.util.UUID;
 public class RouteUtils {
 
     public double calculateDistance(Waypoint startPoint, Waypoint endPoint) {
-        double startLatitudeRad = Double.parseDouble(startPoint.getLatitude()) * Math.PI/180;
-        double startLongitudeRad = Double.parseDouble(startPoint.getLongitude()) * Math.PI/180;
-        double endLatitudeRad = Double.parseDouble(endPoint.getLatitude()) * Math.PI/180;
-        double endLongitudeRad = Double.parseDouble(endPoint.getLongitude()) * Math.PI/180;
+        double startLatitudeRad = geoLocationToRadian(startPoint.getLatitude());
+        double startLongitudeRad = geoLocationToRadian(startPoint.getLongitude());
+        double endLatitudeRad = geoLocationToRadian(endPoint.getLatitude());
+        double endLongitudeRad = geoLocationToRadian(endPoint.getLongitude());
         double meanRadius = 6371e3;
 
         double distanceInMeters = Math.acos(
@@ -24,10 +24,10 @@ public class RouteUtils {
     }
 
     public double calculateBearing(Waypoint startPoint, Waypoint endPoint) {
-        double startLatitudeRad = Double.parseDouble(startPoint.getLatitude()) * Math.PI/180;
-        double startLongitudeRad = Double.parseDouble(startPoint.getLongitude()) * Math.PI/180;
-        double endLatitudeRad = Double.parseDouble(endPoint.getLatitude()) * Math.PI/180;
-        double endLongitudeRad = Double.parseDouble(endPoint.getLongitude()) * Math.PI/180;
+        double startLatitudeRad = geoLocationToRadian(startPoint.getLatitude());
+        double startLongitudeRad = geoLocationToRadian(startPoint.getLongitude());
+        double endLatitudeRad = geoLocationToRadian(endPoint.getLatitude());
+        double endLongitudeRad = geoLocationToRadian(endPoint.getLongitude());
 
         double y =
                 Math.sin(endLongitudeRad - startLongitudeRad) * Math.cos(endLatitudeRad);
@@ -40,5 +40,9 @@ public class RouteUtils {
 
     public String createRandomId() {
         return UUID.randomUUID().toString();
+    }
+
+    private double geoLocationToRadian(String location) {
+        return Double.parseDouble(location) * Math.PI/180;
     }
 }
