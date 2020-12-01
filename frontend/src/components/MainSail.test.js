@@ -14,7 +14,7 @@ describe('component test :: MainSail', () => {
         );
     };
 
-    it('renders the MainSail page and it\'s content', () => {
+    xit('renders the MainSail page and it\'s content', () => {
         // GIVEN
         renderPage();
 
@@ -25,7 +25,7 @@ describe('component test :: MainSail', () => {
         expect(mainSailHeader).toBeInTheDocument();
     });
 
-    test('button "back" redirects to correct page', () => {
+    xtest('button "back" redirects to correct page', () => {
         // GIVEN
         renderPage();
 

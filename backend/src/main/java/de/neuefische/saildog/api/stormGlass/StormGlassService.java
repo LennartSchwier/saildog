@@ -47,12 +47,29 @@ public class StormGlassService {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         StormGlassResponse stormGlassResponse = objectMapper.readValue(sgResponse, StormGlassResponse.class);
         String time = stormGlassResponse.getHours().get(0).getTime();
-        double windSpeed = stormGlassResponse.getHours().get(0).getWindSpeed().getSg();
-        Optional<WaveHeight> waveHeight = Optional.ofNullable(stormGlassResponse.getHours().get(0).getWaveHeight());
-        if (waveHeight.isEmpty()) {
-            return new WeatherDto(time, windSpeed, 0);
-        }
-        return new WeatherDto(time, windSpeed, waveHeight.get().getSg());
+        double airTemperature = stormGlassResponse.getHours().get(0).getAirTemperature().getSg();
+        double waterTemperature = stormGlassResponse.getHours().get(0).getWaterTemperature().getSg();
+        double pressure = stormGlassResponse.getHours().get(0).getPressure().getSg();
+        double visibility = stormGlassResponse.getHours().get(0).getVisibility().getSg();
+        double currentDirection = stormGlassResponse.getHours().get(0).getCurrentDirection().getSg();
+        double currentSpeed = calculateFromMpsToKts(stormGlassResponse.getHours().get(0).getCurrentSpeed().getSg());
+        double waveDirection = stormGlassResponse.getHours().get(0).getWaveDirection().getSg();
+        double waveHeight = stormGlassResponse.getHours().get(0).getWaveHeight().getSg();
+        double windDirection = stormGlassResponse.getHours().get(0).getWindDirection().getSg();
+        double windSpeed = calculateFromMpsToKts(stormGlassResponse.getHours().get(0).getWindSpeed().getSg());
+        return WeatherDto.builder()
+                .time(time)
+                .airTemperature(airTemperature)
+                .waterTemperature(waterTemperature)
+                .pressure(pressure)
+                .visibility(visibility)
+                .currentDirection(currentDirection)
+                .currentSpeed(currentSpeed)
+                .waveDirection(waveDirection)
+                .waveHeight(waveHeight)
+                .windDirection(windDirection)
+                .windSpeed(windSpeed)
+                .build();
     }
 
     public String generateSgUrl(String latitude, String longitude){
@@ -61,10 +78,14 @@ public class StormGlassService {
                 latitude +
                 "&lng=" +
                 longitude +
-                "&params=windSpeed,waveHeight&start=" +
-                Instant.now().plus(60, ChronoUnit.MINUTES).getEpochSecond() +
+                "&params=windSpeed,waveHeight,airTemperature,pressure,currentDirection,currentSpeed,visibility,windDirection,waveDirection,waterTemperature&start=" +
+                Instant.now().getEpochSecond() +
                 "&end=" +
-                Instant.now().plus(60, ChronoUnit.MINUTES).getEpochSecond() +
+                Instant.now().getEpochSecond() +
                 "&source=sg";
+    }
+
+    private double calculateFromMpsToKts(double input) {
+        return input * 2;
     }
 }

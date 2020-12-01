@@ -1,13 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 import Header from "../commons/Header";
 import styled from "styled-components/macro";
 import PrimaryButton from "../commons/PrimaryButton";
 import { useHistory } from 'react-router-dom';
 import {getStormGlassWeather} from "../service/StormGlassService";
+import WeatherDataContext from "../contexts/WeatherDataContext";
 
-export default function TrimInput({course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight, latitude, longitude}) {
+export default function TrimInput({course, setCourse, latitude, longitude}) {
 
     const history = useHistory();
+    const { refactoredWeatherData, setRefactoredWeatherData } = useContext(WeatherDataContext)
 
     return (
         <PageLayout>
@@ -40,21 +42,21 @@ export default function TrimInput({course, setCourse, windSpeed, setWindSpeed, w
                 <FieldsetStyled>
                     <legend>Weather</legend>
                     <label htmlFor={"windSpeed"}>Wind Speed :</label>
-                    <input type={"range"} max={"40"} value={windSpeed} id={"windSpeed"}
-                           onChange={event => setWindSpeed(event.target.value)}
+                    <input type={"range"} max={"40"} id={"windSpeed"} name={"windSpeed"}
+                           value={refactoredWeatherData.windSpeed} onChange={handleSliderChange}
                     />
-                    <output>{windSpeed} knots</output>
+                    <output>{refactoredWeatherData.windSpeed} knots</output>
                     <label htmlFor={"waveHeight"}>Wave Height :</label>
-                    <input type={"range"} max={"3"} step={"0.1"} value={waveHeight} id={"waveHeight"}
-                           onChange={event => setWaveHeight(event.target.value)}
+                    <input type={"range"} max={"3"} step={"0.1"} id={"waveHeight"} name={"waveHeight"}
+                           value={refactoredWeatherData.waveHeight} onChange={handleSliderChange}
                     />
-                    <output>{waveHeight} meter</output>
+                    <output>{refactoredWeatherData.waveHeight} meter</output>
                 </FieldsetStyled>
                 <PrimaryButton labelButton={"Load weather for current location"}
                                handleClick={loadWeather} disableButton={!latitude || !longitude}
                 />
                 <PrimaryButton labelButton={"Reset"} handleClick={resetAllInputData}
-                               disableButton={!windSpeed && !waveHeight && !course}
+                               disableButton={!refactoredWeatherData.windSpeed && !refactoredWeatherData.waveHeight && !course}
                 />
             </FormStyled>
             <div>
@@ -69,9 +71,13 @@ export default function TrimInput({course, setCourse, windSpeed, setWindSpeed, w
         setCourse(event.target.value);
     }
 
+    function handleSliderChange(event) {
+        setRefactoredWeatherData({...refactoredWeatherData, [event.target.name]: event.target.value})
+    }
+
     function loadWeather() {
-        getStormGlassWeather(latitude, longitude).then(data => setWindSpeed(data.windSpeed));
-        getStormGlassWeather(latitude, longitude).then(data => setWaveHeight(data.waveHeight));
+        getStormGlassWeather(latitude, longitude)
+            .then(data => setRefactoredWeatherData({...refactoredWeatherData, windSpeed: Math.ceil(data.windSpeed), waveHeight: data.waveHeight === 999 ?  0 : data.waveHeight}));
     }
 
     function redirectToDashboard() {
@@ -79,7 +85,7 @@ export default function TrimInput({course, setCourse, windSpeed, setWindSpeed, w
     }
 
     function disableHandler() {
-        return !(course && windSpeed && waveHeight && windSpeed !== 0 && waveHeight !== 0);
+        return !(course && refactoredWeatherData.windSpeed && refactoredWeatherData.waveHeight && refactoredWeatherData.windSpeed !== 0 && refactoredWeatherData.waveHeight !== 0);
     }
 
     function redirectToMainSail() {
@@ -88,8 +94,7 @@ export default function TrimInput({course, setCourse, windSpeed, setWindSpeed, w
 
     function resetAllInputData() {
         setCourse(null);
-        setWindSpeed(0);
-        setWaveHeight(0);
+        setRefactoredWeatherData({...refactoredWeatherData, windSpeed: 0, waveHeight: 0})
     }
 
     function redirectToHeadSail() {

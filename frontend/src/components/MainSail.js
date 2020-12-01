@@ -3,12 +3,14 @@ import useTrimData from "../hooks/useTrimData";
 import Header from "../commons/Header";
 import PrimaryButton from "../commons/PrimaryButton";
 import styled from "styled-components/macro";
-import React from "react";
+import React, {useContext} from "react";
+import WeatherDataContext from "../contexts/WeatherDataContext";
 
-export default function MainSail({course, windSpeed, waveHeight}) {
+export default function MainSail({course}) {
 
     const history = useHistory();
-    const { mainSailTrimData } = useTrimData(course, windSpeed, waveHeight);
+    const { refactoredWeatherData } = useContext(WeatherDataContext);
+    const { mainSailTrimData } = useTrimData(course, refactoredWeatherData.windSpeed, refactoredWeatherData.waveHeight);
 
     const getTextualOutput = (input) => input?.replace("_", " ").toLowerCase()
 
@@ -22,11 +24,11 @@ export default function MainSail({course, windSpeed, waveHeight}) {
                 </div>
                 <div>
                     <div>Wind Speed:</div>
-                    <Bold>{windSpeed} knots</Bold>
+                    <Bold>{refactoredWeatherData.windSpeed} knots</Bold>
                 </div>
                 <div>
                     <div>Wave Height:</div>
-                    <Bold>{waveHeight} meter</Bold>
+                    <Bold>{refactoredWeatherData.waveHeight} meter</Bold>
                 </div>
             </InputField>
             <OutputField>

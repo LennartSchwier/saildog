@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {getJwtToken} from "../service/LoginService";
 import styled from "styled-components/macro";
 import Header from "../commons/Header";
@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 export default function Login({loginData, setLoginData}) {
 
     const history = useHistory();
+    const [errorMessage, setErrorMessage] = useState('');
 
     return(
         <PageLayout>
@@ -25,6 +26,7 @@ export default function Login({loginData, setLoginData}) {
                                disableButton={!loginData.username || !loginData.password}
                 />
             </FormStyled>
+            {errorMessage && <p>{errorMessage}</p>}
         </PageLayout>
     );
 
@@ -37,15 +39,21 @@ export default function Login({loginData, setLoginData}) {
             .then(data => localStorage.setItem("jwtToken", data))
             .then(() => history.push("/dashboard"))
             .then(() => setLoginData(""))
-            .catch(error => console.log(error))
+            .catch(() => setErrorMessage('Wrong username or password'));
     }
 }
 
 const PageLayout = styled.div`
 display: grid;
-grid-template-rows: 60px 120px;
+grid-template-rows: 60px min-content 60px ;
+justify-content: center;
 row-gap: var(--size-xl);
 height: 100vh;
+
+  p {
+  color: darkred;
+  font-weight: bold;
+  }
 `
 
 const FormStyled = styled.form`

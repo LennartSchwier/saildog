@@ -1,52 +1,51 @@
-import React from 'react';
+import React, {useState} from 'react';
 import HeadSail from "./components/HeadSail";
 import {Switch, Route, Redirect} from "react-router-dom";
 import TrimInput from "./components/TrimInput";
-import useEnvironmentData from "./hooks/useEnvironmentData";
 import MainSail from "./components/MainSail";
 import Dashboard from "./components/Dashboard";
 import usePositioning from "./hooks/usePositioning";
 import Login from "./components/Login";
 import useLoginData from "./hooks/useLoginData";
 import ProtectedRoute from "./routing/ProtectedRoute";
+import WeatherDataContextProvider from "./contexts/WeatherDataContextProvider";
 
 
 export default function App() {
 
-    const [course, setCourse, windSpeed, setWindSpeed, waveHeight, setWaveHeight] = useEnvironmentData();
     const [latitude, longitude, errorMessage] = usePositioning();
     const [loginData, setLoginData] = useLoginData();
-
+    const [course, setCourse] = useState(null);
 
     return (
-      <Switch>
-          <Route path={"/login"}>
-              <Login loginData={loginData} setLoginData={setLoginData}/>
-          </Route>
-          <ProtectedRoute path={"/dashboard"}>
-              <Dashboard latitude={latitude} longitude={longitude} errorMessage={errorMessage} />
-          </ProtectedRoute>
-          <ProtectedRoute path={"/triminput"}>
-              <TrimInput course={course} setCourse={setCourse}
-                         windSpeed={windSpeed} setWindSpeed={setWindSpeed}
-                         waveHeight={waveHeight} setWaveHeight={setWaveHeight}
-                         latitude={latitude} longitude={longitude}
-              />
-          </ProtectedRoute>
-          <ProtectedRoute path={"/headsail"}>
-              <HeadSail
-                  course={course} windSpeed={windSpeed} waveHeight={waveHeight}
-              />
-          </ProtectedRoute>
-          <ProtectedRoute path={"/mainsail"}>
-              <MainSail
-                  course={course} windSpeed={windSpeed} waveHeight={waveHeight}
-              />
-          </ProtectedRoute>
-          <Route path={"/"}>
-              <Redirect to={"/dashboard"}/>
-          </Route>
-      </Switch>
+        <WeatherDataContextProvider>
+            <Switch>
+                <Route path={"/login"}>
+                    <Login loginData={loginData} setLoginData={setLoginData}/>
+                </Route>
+                <ProtectedRoute path={"/dashboard"}>
+                    <Dashboard latitude={latitude} longitude={longitude} errorMessage={errorMessage} />
+                </ProtectedRoute>
+                <ProtectedRoute path={"/triminput"}>
+                    <TrimInput course={course} setCourse={setCourse}
+                               latitude={latitude} longitude={longitude}
+                    />
+                </ProtectedRoute>
+                <ProtectedRoute path={"/headsail"}>
+                    <HeadSail
+                        course={course}
+                    />
+                </ProtectedRoute>
+                <ProtectedRoute path={"/mainsail"}>
+                    <MainSail
+                        course={course}
+                    />
+                </ProtectedRoute>
+                <Route path={"/"}>
+                    <Redirect to={"/dashboard"}/>
+                </Route>
+            </Switch>
+        </WeatherDataContextProvider>
   );
 }
 
