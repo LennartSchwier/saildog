@@ -1,16 +1,24 @@
 import React from "react";
 import styled from "styled-components/macro";
+import {NavLink} from "react-router-dom";
 
 export default function Route({route}) {
 
     return (
-        <RouteStyled>
-            <Bold>{route.routeName}</Bold>
-            <div>Number of legs : {route.legs.length}</div>
-            <div>Total distance: {Math.round((route.totalDistance + Number.EPSILON) * 100) / 100} nm</div>
-        </RouteStyled>
+        <LinkStyled to={`/routedetails/${route.routeId}`}>
+            <RouteStyled>
+                <Bold>{route.routeName}</Bold>
+                <div>Number of legs : {route.legs.length}</div>
+                <div>Total distance: {Math.round((route.totalDistance + Number.EPSILON) * 100) / 100} nm</div>
+            </RouteStyled>
+        </LinkStyled>
     );
 }
+
+const LinkStyled = styled(NavLink)`
+text-decoration: none;
+color: black;
+`
 
 const RouteStyled = styled.div`
 margin: 0 var(--size-l);

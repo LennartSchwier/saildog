@@ -35,7 +35,7 @@ export default function RouteContextProvider({ children }) {
     }, []);
 
     return (
-        <RouteContext.Provider value={{routes}}>
+        <RouteContext.Provider value={{ routes }}>
             {children}
         </RouteContext.Provider>
     );
