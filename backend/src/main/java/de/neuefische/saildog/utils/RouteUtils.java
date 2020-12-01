@@ -20,7 +20,7 @@ public class RouteUtils {
                         Math.cos(startLatitudeRad) * Math.cos(endLatitudeRad) *
                                 Math.cos(endLongitudeRad - startLongitudeRad)) * meanRadius;
 
-        return distanceInMeters / 1852;
+        return Math.round(distanceInMeters / 1852 * 100.0) / 100.0;
     }
 
     public double calculateBearing(Waypoint startPoint, Waypoint endPoint) {

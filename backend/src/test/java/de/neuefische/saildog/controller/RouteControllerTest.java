@@ -152,17 +152,17 @@ class RouteControllerTest {
                         Leg.builder().legId("some random id")
                                 .startWaypoint(new Waypoint(TypeOfWaypoint.START, "50.930932", "6.933717"))
                                 .endWaypoint(new Waypoint(TypeOfWaypoint.END, "51.169266", "6.788612"))
-                                .distance(15.321956816335407)
+                                .distance(15.32)
                                 .bearing(339.0)
                                 .build(),
                         Leg.builder().legId("some random id")
                                 .startWaypoint(new Waypoint(TypeOfWaypoint.START, "34.523", "-137.453"))
                                 .endWaypoint(new Waypoint(TypeOfWaypoint.END, "21.45", "-152.768"))
-                                .distance(1126.603807406169)
+                                .distance(1126.6)
                                 .bearing(230.0)
                                 .build()
                 ))
-                .totalDistance(1141.9257642225043)
+                .totalDistance(1141.0)
                 .build()
         ));
     }
