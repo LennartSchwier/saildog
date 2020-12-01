@@ -1,42 +1,42 @@
 import React from "react";
 import styled from "styled-components/macro";
 
+export default function Leg({ leg, index }) {
 
-export default function Leg({legs, leg}) {
-
-    const index = legs.indexOf(leg);
+    const header = index === 0 ? "Start" : `${index}. Waypoint`;
 
     return (
-        <LegStyled>
-            <Bold>{index + 1}. Leg</Bold>
-            <div>
-                start : {leg.startWaypoint.latitude} / {leg.startWaypoint.longitude}
-            </div>
-            <div>
-                end : {leg.endWaypoint.latitude} / {leg.endWaypoint.longitude}
-            </div>
-            <div>
-                distance: {Math.round((leg.distance + Number.EPSILON) * 100) / 100} nm
-            </div>
-            <div>
-                bearing: {leg.bearing} °
-            </div>
-        </LegStyled>
+        <>
+            <WaypointStyled>
+                <Bold>{header}</Bold>
+                <div>{leg?.startWaypoint.latitude} / {leg?.startWaypoint.longitude}</div>
+            </WaypointStyled>
+            <LegInfoStyled>
+                <div>{leg.distance} nm</div>
+                <div>{leg.bearing} °</div>
+            </LegInfoStyled>
+        </>
     );
 }
 
-const LegStyled = styled.div`
+const WaypointStyled = styled.div`
 margin: 0 var(--size-l);
 background-color: Transparent;
 box-shadow: var(--size-xs) var(--size-xs) var(--size-s) dimgrey;
 border-radius: var(--size-m);
 padding: var(--size-m);
-display: grid;
-grid-template-rows: 1.5fr 1fr 1fr;
+display: flex;
+justify-content: space-evenly;
 row-gap: var(--size-s);
+`
+
+const LegInfoStyled = styled.div`
+display: grid;
+grid-template-rows: 1fr 1fr;
+row-gap: var(--size-xs);
+margin-left: var(--size-xxl);
 `
 
 const Bold = styled.span`
 font-weight: bold;
-margin-left: var(--size-m);
 `
