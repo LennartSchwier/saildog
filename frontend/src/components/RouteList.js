@@ -1,44 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext} from "react";
 import styled from "styled-components/macro";
 import Header from "../commons/Header";
 import PrimaryButton from "../commons/PrimaryButton";
 import {useHistory} from "react-router-dom";
-import {getAllRoutesFromUser} from "../service/RouteService";
 import Route from "./Route";
+import RouteContext from "../contexts/RouteContext";
 
 
 export default function RouteList() {
 
     const history = useHistory();
-    const [routes, setRoutes] = useState([
-        {
-            routeId: "",
-            routeName: "",
-            creator: "",
-            legs: [
-                {
-                    legId: "",
-                    startWaypoint: {
-                        typeOfWaypoint: null,
-                        latitude: "",
-                        longitude: "",
-                    },
-                    endWaypoint: {
-                        typeOfWaypoint: null,
-                        latitude: "",
-                        longitude: "",
-                    },
-                    distance: 0.0,
-                    bearing: 0
-                }
-            ],
-            totalDistance: 0
-        }
-    ]);
-
-    useEffect(() => {
-        getAllRoutesFromUser().then(route => setRoutes(route));
-    }, []);
+    const { routes } = useContext(RouteContext);
 
     return (
         <PageLayout>
