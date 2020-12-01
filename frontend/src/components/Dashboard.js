@@ -3,54 +3,21 @@ import styled from "styled-components/macro";
 import Header from "../commons/Header";
 import PrimaryButton from "../commons/PrimaryButton";
 import {useHistory} from "react-router-dom";
-import WeatherDataContext from "../contexts/WeatherDataContext";
 import jwtDecode from "jwt-decode";
+import LocationBLock from "./LocationBlock";
+import WeatherBlock from "./WeatherBlock";
 
 export default function Dashboard({latitude, longitude, errorMessage}) {
 
     const history = useHistory();
-    const {weatherData} = useContext(WeatherDataContext);
     const token = localStorage.getItem('jwtToken');
     const username = token && jwtDecode(token).sub;
 
     return (
         <PageLayout>
             <Header headerText={'Ahoi ' + username}/>
-            <DashboardBlock>
-                <section>Location:</section>
-                {latitude && longitude ?
-                    <div>
-                        <div>Latitude: <Bold>{latitude}</Bold></div>
-                        <div>Longitude: <Bold>{longitude}</Bold></div>
-                    </div>
-                    :
-                    errorMessage ?
-                        <div className={"error"}>{errorMessage}</div>
-                        :
-                        <div>Searching position...</div>
-                }
-            </DashboardBlock>
-            <DashboardBlock>
-                <section>Weather report: </section>
-                {weatherData ?
-                    <div>
-                        <div>Time of report:<Bold>{weatherData.time.substring(11, 19)}</Bold>UTC</div>
-                        <div>Air temperature:<Bold>{weatherData.airTemperature}</Bold>°C</div>
-                        <div>Water temperature:<Bold>{weatherData.waterTemperature}</Bold>°C</div>
-                        <div>Pressure:<Bold>{weatherData.pressure}</Bold>hPa</div>
-                        <div>Visibility:<Bold>{weatherData.visibility}</Bold>km</div>
-                        <div>Wind:<Bold>{weatherData.windDirection}</Bold>°<Bold>{weatherData.windSpeed}</Bold>kts</div>
-                        {weatherData.currentDirection !== 999 && weatherData.currentSpeed !== 999 &&
-                            <div>Current:<Bold>{weatherData.currentDirection}</Bold>°<Bold>{weatherData.currentSpeed}</Bold>kts</div>
-                        }
-                        {weatherData.waveDirection !== 999 && weatherData.waveHeight !== 999 &&
-                            <div>Wave:<Bold>{weatherData.waveDirection}</Bold>°<Bold>{weatherData.waveHeight}</Bold>meters height</div>
-                        }
-                    </div>
-                    :
-                    <div>no weather data available</div>
-                }
-            </DashboardBlock>
+            <LocationBLock latitude={latitude} longitude={longitude} errorMessage={errorMessage}/>
+            <WeatherBlock/>
             <ButtonGroup>
                 <PrimaryButton labelButton={"Log Out"} />
                 <PrimaryButton labelButton={"Sail Trim"} handleClick={redirectToTrimInput}/>
