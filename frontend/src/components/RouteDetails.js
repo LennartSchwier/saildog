@@ -47,7 +47,6 @@ height: 100vh;
   display: grid;
   row-gap: var(--size-l);
   }
-
 `
 
 const ButtonGroup = styled.div`
