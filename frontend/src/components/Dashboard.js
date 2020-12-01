@@ -53,13 +53,18 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
             </DashboardBlock>
             <ButtonGroup>
                 <PrimaryButton labelButton={"Log Out"} />
-                <PrimaryButton labelButton={"Trim Input"} handleClick={redirectToTrimInput}/>
+                <PrimaryButton labelButton={"Sail Trim"} handleClick={redirectToTrimInput}/>
+                <PrimaryButton labelButton={"Routes"} handleClick={redirectToRoutes}/>
             </ButtonGroup>
         </PageLayout>
     );
 
     function redirectToTrimInput() {
         history.push("/triminput");
+    }
+
+    function redirectToRoutes() {
+        history.push("/routes");
     }
 }
 

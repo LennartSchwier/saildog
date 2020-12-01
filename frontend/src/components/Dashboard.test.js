@@ -14,12 +14,12 @@ describe('component test :: Dashboard', () => {
         );
     }
 
-   test('button "Trim Input" redirects to correct page', () => {
+   test('button "Sail Trim" redirects to correct page', () => {
        // GIVEN
        renderPage();
 
        // WHEN
-       const trimInputButton = screen.getByRole('button', {name: /trim input/i});
+       const trimInputButton = screen.getByRole('button', {name: /sail trim/i});
        userEvent.click(trimInputButton);
 
        // THEN
