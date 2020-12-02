@@ -9,17 +9,17 @@ export default function Leg({ leg, index }) {
         <>
             <WaypointStyled>
                 <Bold>{header}</Bold>
-                <div>{leg?.startWaypoint.latitude} / {leg?.startWaypoint.longitude}</div>
+                <p>{leg?.startWaypoint.latitude} / {leg?.startWaypoint.longitude}</p>
             </WaypointStyled>
             <LegInfoStyled>
-                <div>{leg.distance} nm</div>
-                <div>{leg.bearing} °</div>
+                <p>{leg.distance} nm</p>
+                <p>{leg.bearing} °</p>
             </LegInfoStyled>
         </>
     );
 }
 
-const WaypointStyled = styled.div`
+const WaypointStyled = styled.section`
 margin: 0 var(--size-l);
 background-color: Transparent;
 box-shadow: var(--size-xs) var(--size-xs) var(--size-s) dimgrey;
@@ -28,15 +28,23 @@ padding: var(--size-m);
 display: flex;
 justify-content: space-evenly;
 row-gap: var(--size-s);
+
+  p {
+  margin: 0;
+  }
 `
 
-const LegInfoStyled = styled.div`
+const LegInfoStyled = styled.section`
 display: grid;
 grid-template-rows: 1fr 1fr;
 row-gap: var(--size-xs);
 margin-left: var(--size-xxl);
+
+  p {
+  margin: 0;
+  }
 `
 
-const Bold = styled.span`
+const Bold = styled.header`
 font-weight: bold;
 `
