@@ -12,6 +12,7 @@ import WeatherDataContextProvider from "./contexts/WeatherDataContextProvider";
 import RouteList from "./components/route/RouteList";
 import RouteContextProvider from "./contexts/RouteContextProvider";
 import RouteDetails from "./components/route/RouteDetails";
+import NewRoute from "./components/route/NewRoute";
 
 
 export default function App() {
@@ -50,6 +51,9 @@ export default function App() {
                     </ProtectedRoute>
                     <ProtectedRoute path={"/routedetails/:id"}>
                         <RouteDetails/>
+                    </ProtectedRoute>
+                    <ProtectedRoute path={"/newroute"}>
+                        <NewRoute/>
                     </ProtectedRoute>
                     <Route path={"/"}>
                         <Redirect to={"/dashboard"}/>

@@ -24,12 +24,17 @@ export default function RouteList() {
             </ul>
             <ButtonGroup>
                 <PrimaryButton labelButton={"Dashboard"} handleClick={redirectToDashboard}/>
+                <PrimaryButton labelButton={"New Route"} handleClick={redirectToNewRoute}/>
             </ButtonGroup>
         </PageLayout>
     );
 
     function redirectToDashboard() {
-        history.push("/dashboard")
+        history.push("/dashboard");
+    }
+
+    function redirectToNewRoute() {
+        history.push("/newroute");
     }
 }
 
