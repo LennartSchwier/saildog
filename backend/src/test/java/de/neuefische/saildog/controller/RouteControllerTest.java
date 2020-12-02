@@ -162,7 +162,7 @@ class RouteControllerTest {
                                 .bearing(230.0)
                                 .build()
                 ))
-                .totalDistance(1141.0)
+                .totalDistance(1141.92)
                 .build()
         ));
     }
