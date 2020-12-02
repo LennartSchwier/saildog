@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import styled from "styled-components/macro";
-import WeatherDataContext from "../contexts/WeatherDataContext";
+import WeatherDataContext from "../../contexts/WeatherDataContext";
 
 export default function WeatherBlock() {
 

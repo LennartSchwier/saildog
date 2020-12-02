@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {getJwtToken} from "../service/LoginService";
+import {getJwtToken} from "../../service/LoginService";
 import styled from "styled-components/macro";
-import Header from "../commons/Header";
-import PrimaryButton from "../commons/PrimaryButton";
+import Header from "../../commons/Header";
+import PrimaryButton from "../../commons/PrimaryButton";
 import { useHistory } from 'react-router-dom';
 
 export default function Login({loginData, setLoginData}) {

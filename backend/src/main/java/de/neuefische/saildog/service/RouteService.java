@@ -48,9 +48,10 @@ public class RouteService {
     }
 
     public double calculateTotalDistance(RouteDto totalRoute) {
-        return createRouting(totalRoute).stream()
+        double totalDistance = createRouting(totalRoute).stream()
                 .map(Leg::getDistance)
-                .reduce(0.0, Double::sum);
+                .reduce(0.00, Double::sum);
+        return Math.round(totalDistance * 100.0) / 100.0;
     }
 
     public Leg createLeg(LegDto legToCreate) {

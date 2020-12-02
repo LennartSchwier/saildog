@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
-import HeadSail from "./components/HeadSail";
+import HeadSail from "./components/trim/HeadSail";
 import {Switch, Route, Redirect} from "react-router-dom";
-import TrimInput from "./components/TrimInput";
-import MainSail from "./components/MainSail";
-import Dashboard from "./components/Dashboard";
+import TrimInput from "./components/trim/TrimInput";
+import MainSail from "./components/trim/MainSail";
+import Dashboard from "./components/dashboard/Dashboard";
 import usePositioning from "./hooks/usePositioning";
-import Login from "./components/Login";
+import Login from "./components/login/Login";
 import useLoginData from "./hooks/useLoginData";
 import ProtectedRoute from "./routing/ProtectedRoute";
 import WeatherDataContextProvider from "./contexts/WeatherDataContextProvider";
-import RouteList from "./components/RouteList";
+import RouteList from "./components/route/RouteList";
 import RouteContextProvider from "./contexts/RouteContextProvider";
+import RouteDetails from "./components/route/RouteDetails";
 
 
 export default function App() {
@@ -47,7 +48,9 @@ export default function App() {
                     <ProtectedRoute path={"/routes"}>
                         <RouteList/>
                     </ProtectedRoute>
-
+                    <ProtectedRoute path={"/routedetails/:id"}>
+                        <RouteDetails/>
+                    </ProtectedRoute>
                     <Route path={"/"}>
                         <Redirect to={"/dashboard"}/>
                     </Route>
