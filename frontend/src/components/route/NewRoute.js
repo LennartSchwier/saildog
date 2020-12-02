@@ -49,8 +49,8 @@ export default function NewRoute() {
                 <label>Longitude
                     <input type={"text"} name={"endLongitude"} value={newLeg.endLongitude} onChange={changeHandler}/>
                 </label>
-                <button type={"button"} onClick={addHandler}>add new waypoint</button>
             </FormStyled>
+            <PrimaryButton labelButton={"add new waypoint"} handleClick={addHandler}/>
             <ButtonGroup>
                 <PrimaryButton labelButton={"Cancel"} handleClick={redirectBackToRoutes}/>
                 <PrimaryButton labelButton={"Add Route"} handleClick={addRoute}/>
@@ -95,7 +95,7 @@ export default function NewRoute() {
 
 const PageLayout = styled.div`
 display: grid;
-grid-template-rows: 60px min-content 60px;
+grid-template-rows: 60px min-content min-content 60px;
 height: 100vh;
 `
 
