@@ -7,10 +7,15 @@ import {useHistory} from "react-router-dom";
 export default function NewRoute() {
 
     const history = useHistory();
+    const [routeName, setRouteName] = useState("");
 
     return (
         <PageLayout>
             <Header headerText={"New Route"}/>
+            <form>
+                <label htmlFor={"routeName"}>Name of route: </label>
+                <input type={"text"} name={"routeName"} value={routeName} onChange={event => setRouteName(event.target.value)}/>
+            </form>
             <ButtonGroup>
                 <PrimaryButton labelButton={"Cancel"} handleClick={redirectBackToRoutes}/>
             </ButtonGroup>
