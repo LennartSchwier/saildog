@@ -25,11 +25,12 @@ export default function WeatherDataContextProvider({ children }) {
     });
 
     const [latitude, longitude] = usePositioning();
+    const jwtToken = localStorage.getItem('jwtToken');
 
     useEffect(() => {
-        latitude && longitude && getStormGlassWeather(latitude, longitude)
+        jwtToken && latitude && longitude && getStormGlassWeather(latitude, longitude)
             .then(data => setWeatherData(data))
-    }, [latitude, longitude])
+    }, [jwtToken, latitude, longitude])
 
 
 

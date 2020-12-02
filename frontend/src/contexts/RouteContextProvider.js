@@ -30,9 +30,11 @@ export default function RouteContextProvider({ children }) {
         }
     ]);
 
+    const jwtToken = localStorage.getItem('jwtToken');
+
     useEffect(() => {
-        getAllRoutesFromUser().then(route => setRoutes(route));
-    }, []);
+        jwtToken && getAllRoutesFromUser().then(route => setRoutes(route));
+    }, [jwtToken]);
 
     return (
         <RouteContext.Provider value={{routes}}>
