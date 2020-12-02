@@ -22,7 +22,7 @@ export default function RouteDetails() {
             <Header headerText={route?.routeName}/>
             <ul>
                 {!legs? null :
-                    legs.map(leg => <Leg key={leg.legId} leg={leg} index={legs.indexOf(leg)}/>)
+                    legs.map((leg, index) => <Leg key={leg.legId} leg={leg} index={index}/>)
                 }
                 <RouteEnd endWaypoint={endWaypoint}/>
             </ul>
