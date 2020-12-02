@@ -9,7 +9,7 @@ export default function Route({route}) {
             <RouteStyled>
                 <Bold>{route.routeName}</Bold>
                 <div>Number of legs : {route.legs.length}</div>
-                <div>Total distance: {Math.round((route.totalDistance + Number.EPSILON) * 100) / 100} nm</div>
+                <div>Total distance: {route.totalDistance} nm</div>
             </RouteStyled>
         </LinkStyled>
     );

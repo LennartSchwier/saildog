@@ -26,7 +26,7 @@ export default function RouteContextProvider({ children }) {
                     bearing: 0
                 }
             ],
-            totalDistance: 0
+            totalDistance: 0.0
         }
     ]);
 
