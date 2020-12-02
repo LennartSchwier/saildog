@@ -14,6 +14,7 @@ export default function NewRoute() {
         endLatitude: "",
         endLongitude: ""
     });
+    const [legs, setLegs] = useState([]);
     const [newRoute, setNewRoute] = useState({
         routeName: "",
         legs: [
@@ -48,6 +49,7 @@ export default function NewRoute() {
                 <label>Longitude
                     <input type={"text"} name={"endLongitude"} value={newLeg.endLongitude} onChange={changeHandler}/>
                 </label>
+                <button type={"button"} onClick={addHandler}>add new waypoint</button>
             </FormStyled>
             <ButtonGroup>
                 <PrimaryButton labelButton={"Cancel"} handleClick={redirectBackToRoutes}/>
@@ -60,13 +62,34 @@ export default function NewRoute() {
         setNewLeg({...newLeg, [event.target.name]: event.target.value});
     }
 
+    function addHandler() {
+        setLegs([...legs, newLeg]);
+        setNewLeg({
+            startLatitude: newLeg.endLatitude,
+            startLongitude: newLeg.endLongitude,
+            endLatitude: "",
+            endLongitude: ""
+        });
+        return(
+            <>
+                <label>Latitude
+                    <input type={"text"} name={"endLatitude"} value={newLeg.endLatitude} onChange={changeHandler}/>
+                </label>
+                <label>Longitude
+                    <input type={"text"} name={"endLongitude"} value={newLeg.endLongitude} onChange={changeHandler}/>
+                </label>
+                <button type={"button"} onClick={addHandler}>add new waypoint</button>
+            </>
+        );
+    }
+
     function redirectBackToRoutes() {
         history.push("/routes");
     }
 
     function addRoute() {
-        setNewRoute({...newRoute, legs: [newLeg]})
-        addNewRoute(newRoute).then(response => console.log(response))
+        setNewRoute({...newRoute, legs: legs});
+        addNewRoute(newRoute).then(response => console.log(response));
     }
 }
 
