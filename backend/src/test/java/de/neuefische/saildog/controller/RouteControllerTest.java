@@ -134,7 +134,7 @@ class RouteControllerTest {
                 new LegDto("34.523", "-137.453", "21.45", "-152.768")
         ));
         HttpHeaders header = createHttpHeader();
-        HttpEntity<RouteDto> entity = new HttpEntity<RouteDto>(request, header);
+        HttpEntity<RouteDto> entity = new HttpEntity<>(request, header);
 
         // WHEN
         when(mockedRouteUtils.calculateDistance(any(), any())).thenCallRealMethod();
@@ -162,9 +162,8 @@ class RouteControllerTest {
                                 .bearing(230.0)
                                 .build()
                 ))
-                .totalDistance(1141.0)
+                .totalDistance(1141.92)
                 .build()
         ));
     }
-
 }
