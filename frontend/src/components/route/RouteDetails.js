@@ -1,9 +1,9 @@
 import React, {useContext} from "react";
-import Header from "../commons/Header";
-import PrimaryButton from "../commons/PrimaryButton";
+import Header from "../../commons/Header";
+import PrimaryButton from "../../commons/PrimaryButton";
 import {useHistory, useParams} from "react-router-dom";
 import styled from "styled-components/macro";
-import RouteContext from "../contexts/RouteContext";
+import RouteContext from "../../contexts/RouteContext";
 import RouteEnd from "./RouteEnd";
 import Leg from "./Leg";
 

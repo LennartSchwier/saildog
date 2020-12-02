@@ -1,10 +1,10 @@
 import React, {useContext} from "react";
-import Header from "../commons/Header";
+import Header from "../../commons/Header";
 import styled from "styled-components/macro";
-import PrimaryButton from "../commons/PrimaryButton";
+import PrimaryButton from "../../commons/PrimaryButton";
 import { useHistory } from 'react-router-dom';
-import {getStormGlassWeather} from "../service/StormGlassService";
-import WeatherDataContext from "../contexts/WeatherDataContext";
+import {getStormGlassWeather} from "../../service/StormGlassService";
+import WeatherDataContext from "../../contexts/WeatherDataContext";
 
 export default function TrimInput({course, setCourse, latitude, longitude}) {
 

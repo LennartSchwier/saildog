@@ -1,10 +1,10 @@
 import React, {useContext} from "react";
 import styled from "styled-components/macro";
-import Header from "../commons/Header";
-import PrimaryButton from "../commons/PrimaryButton";
+import Header from "../../commons/Header";
+import PrimaryButton from "../../commons/PrimaryButton";
 import {useHistory} from "react-router-dom";
 import Route from "./Route";
-import RouteContext from "../contexts/RouteContext";
+import RouteContext from "../../contexts/RouteContext";
 
 
 export default function RouteList() {

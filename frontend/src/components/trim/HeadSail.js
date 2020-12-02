@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
-import Header from "../commons/Header";
-import PrimaryButton from "../commons/PrimaryButton";
+import Header from "../../commons/Header";
+import PrimaryButton from "../../commons/PrimaryButton";
 import styled from "styled-components/macro";
 import {useHistory} from "react-router-dom";
-import useTrimData from "../hooks/useTrimData";
-import WeatherDataContext from "../contexts/WeatherDataContext";
+import useTrimData from "../../hooks/useTrimData";
+import WeatherDataContext from "../../contexts/WeatherDataContext";
 
 export default function HeadSail({course}) {
 
