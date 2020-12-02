@@ -13,7 +13,6 @@ export const getAllRoutesFromUser = () => {
     return axios.get(url, setHeaders()).then(response => response.data);
 }
 
-/*
-export const addNewRoute = () => {
-    return axios.post(url, )
-}*/
+export const addNewRoute = (newRoute) => {
+    return axios.post(url, newRoute, setHeaders())
+}
