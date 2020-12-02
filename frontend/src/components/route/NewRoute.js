@@ -4,10 +4,12 @@ import styled from "styled-components/macro";
 import PrimaryButton from "../../commons/PrimaryButton";
 import {useHistory} from "react-router-dom";
 import {addNewRoute} from "../../service/RouteService";
+import RouteName from "./RouteName";
 
 export default function NewRoute() {
 
     const history = useHistory();
+
     const [newLeg, setNewLeg] = useState({
         startLatitude: "",
         startLongitude: "",
@@ -30,27 +32,10 @@ export default function NewRoute() {
     return (
         <PageLayout>
             <Header headerText={"New Route"}/>
-            <FormStyled>
-                <label>Name of route
-                    <input type={"text"} value={newRoute.routeName}
-                           onChange={event => setNewRoute({...newRoute, routeName: event.target.value})}/>
-                </label>
-                <span>Start Waypoint</span>
-                <label>Latitude
-                    <input type={"text"} name={"startLatitude"} value={newLeg.startLatitude} onChange={changeHandler}/>
-                </label>
-                <label>Longitude
-                    <input type={"text"} name={"startLongitude"} value={newLeg.startLongitude} onChange={changeHandler}/>
-                </label>
-                <span>End Waypoint</span>
-                <label>Latitude
-                    <input type={"text"} name={"endLatitude"} value={newLeg.endLatitude} onChange={changeHandler}/>
-                </label>
-                <label>Longitude
-                    <input type={"text"} name={"endLongitude"} value={newLeg.endLongitude} onChange={changeHandler}/>
-                </label>
-            </FormStyled>
-            <PrimaryButton labelButton={"add new waypoint"} handleClick={addHandler}/>
+            <FieldsetStyled>
+                <legend>Name</legend>
+                <RouteName newRoute={newRoute} setNewRoute={setNewRoute}/>
+            </FieldsetStyled>
             <ButtonGroup>
                 <PrimaryButton labelButton={"Cancel"} handleClick={redirectBackToRoutes}/>
                 <PrimaryButton labelButton={"Add Route"} handleClick={addRoute}/>
@@ -99,8 +84,10 @@ grid-template-rows: 60px min-content min-content 60px;
 height: 100vh;
 `
 
-const FormStyled = styled.form`
-display: grid;
+const FieldsetStyled = styled.fieldset`
+border-radius: var(--size-s);
+border-color: lightgrey;
+margin: var(--size-m);
 `
 
 const ButtonGroup = styled.div`
