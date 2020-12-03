@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import WeatherDataContext from "./WeatherDataContext";
 import {getStormGlassWeather} from "../service/StormGlassService";
-import usePositioning from "../hooks/usePositioning";
 
 export default function WeatherDataContextProvider({ children }) {
 
@@ -24,7 +23,7 @@ export default function WeatherDataContextProvider({ children }) {
         waveHeight: 0
     });
 
-    const [latitude, longitude] = usePositioning();
+    const [latitude, longitude] = ["50.777559", "1.168035"]
     const jwtToken = localStorage.getItem('jwtToken');
 
     useEffect(() => {
