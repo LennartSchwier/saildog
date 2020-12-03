@@ -15,30 +15,18 @@ export default function WaypointInput({ legs, setLegs }) {
         return (
             <>
                 <InputFieldStyled>
-                    <BoldHeader className={"header"}>Start of Route</BoldHeader>
-                    <InputLineStyled>Latitude
-                        <input type={"text"} name={"startLatitude"} value={newLeg.startLatitude}
-                               onChange={changeHandler}
-                        />
-                    </InputLineStyled>
-                    <InputLineStyled>Longitude
-                        <input type={"text"} name={"startLongitude"} value={newLeg.startLongitude}
-                               onChange={changeHandler}
-                        />
-                    </InputLineStyled>
-                    <BoldHeader>End/1. Waypoint</BoldHeader>
-                    <InputLineStyled>Latitude
-                        <input type={"text"} name={"endLatitude"} value={newLeg.endLatitude}
-                               onChange={changeHandler}
-                        />
-                    </InputLineStyled>
-                    <InputLineStyled>Longitude
-                        <input type={"text"} name={"endLongitude"} value={newLeg.endLongitude}
-                               onChange={changeHandler}
-                        />
-                    </InputLineStyled>
-                    <PrimaryButton labelButton={"Create Leg"} handleClick={createRoute}/>
+                    <BoldHeader className={"firstHeader"}>Start of Route</BoldHeader>
+                    <input type={"text"} name={"startLatitude"} value={newLeg.startLatitude}
+                                   onChange={changeHandler} placeholder={"latitude"}/>
+                    <input type={"text"} name={"startLongitude"} value={newLeg.startLongitude}
+                               onChange={changeHandler} placeholder={"longitude"}/>
+                    <BoldHeader className={"secondHeader"}>End/1. Waypoint</BoldHeader>
+                    <input type={"text"} name={"endLatitude"} value={newLeg.endLatitude}
+                               onChange={changeHandler} placeholder={"latitude"}/>
+                    <input type={"text"} name={"endLongitude"} value={newLeg.endLongitude}
+                               onChange={changeHandler} placeholder={"longitude"}/>
                 </InputFieldStyled>
+                <PrimaryButton labelButton={"Save"} handleClick={createRoute}/>
             </>
         );
     }
@@ -46,18 +34,13 @@ export default function WaypointInput({ legs, setLegs }) {
         return (
             <>
                 <InputFieldStyled>
-                    <InputLineStyled>Latitude
-                        <input type={"text"} name={"endLatitude"} value={newLeg.endLatitude}
-                               onChange={changeHandler}
-                        />
-                    </InputLineStyled>
-                    <InputLineStyled>Longitude
-                        <input type={"text"} name={"endLongitude"} value={newLeg.endLongitude}
-                               onChange={changeHandler}
-                        />
-                    </InputLineStyled>
-                    <PrimaryButton labelButton={"Add Leg"} handleClick={createRoute}/>
+                    <BoldHeader className={"firstHeader"}>New Leg</BoldHeader>
+                    <input type={"text"} name={"endLatitude"} value={newLeg.endLatitude}
+                               onChange={changeHandler} placeholder={"latitude"}/>
+                    <input type={"text"} name={"endLongitude"} value={newLeg.endLongitude}
+                               onChange={changeHandler} placeholder={"longitude"}/>
                 </InputFieldStyled>
+                <PrimaryButton labelButton={"Add"} handleClick={createRoute}/>
             </>
         );
     }
@@ -81,7 +64,20 @@ const InputFieldStyled = styled.div`
 display: grid;
 row-gap: var(--size-s);
 align-items: center;
+justify-items: center;
+grid-template-rows: 1fr 1fr ;
+grid-auto-rows: 1fr;
+grid-template-columns: 1fr 1fr;
+
+  .firstHeader {
+  grid-row: 1/3;
+  }
+  
+  .secondHeader {
+  grid-row: 3/5;
+  }
 `
+
 
 const InputLineStyled = styled.label`
 display: flex;
