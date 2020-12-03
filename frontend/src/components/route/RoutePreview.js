@@ -9,9 +9,9 @@ export default function RoutePreview({ legs }) {
                 {legs.length === 0 ? null : <li><BoldSpan>Start</BoldSpan>{legs[0]?.startLatitude} / {legs[0]?.startLongitude}</li>}
                 {legs?.map(leg =>
                     legs.indexOf(leg) + 1 === legs.length ?
-                    <li><BoldSpan>End</BoldSpan>{leg.endLatitude} / {leg.endLongitude}</li>
+                    <li key={legs.indexOf(leg)}><BoldSpan>End</BoldSpan>{leg.endLatitude} / {leg.endLongitude}</li>
                     :
-                    <li><BoldSpan>{legs.indexOf(leg) + 1}. Waypoint</BoldSpan>{leg.endLatitude} / {leg.endLongitude}</li>
+                    <li key={legs.indexOf(leg)}><BoldSpan>{legs.indexOf(leg) + 1}. Waypoint</BoldSpan>{leg.endLatitude} / {leg.endLongitude}</li>
                 )}
             </ListStyled>
         </>
