@@ -46,7 +46,7 @@ export default function NewRoute() {
 
     function createNewRoute() {
         setNewRoute({...newRoute, legs: legs});
-        addNewRoute(newRoute).then(data => console.log(data));
+        addNewRoute(newRoute);
     }
 }
 
