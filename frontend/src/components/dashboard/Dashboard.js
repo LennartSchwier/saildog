@@ -45,4 +45,7 @@ height: 100vh;
 const ButtonGroup = styled.div`
 position: fixed;
 bottom: 24px;
+display: flex;
+justify-content: space-evenly;
+width: 100vw;
 `

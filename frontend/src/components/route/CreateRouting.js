@@ -53,7 +53,7 @@ export default function CreateRouting() {
                                    onChange={changeHandler}
                             />
                         </InputLineStyled>
-                        <PrimaryButton labelButton={"Add Waypoint"} handleClick={createRoute}/>
+                        <PrimaryButton labelButton={"Add Leg"} handleClick={createRoute}/>
                     </InputFieldStyled>
                 }
             </section>
