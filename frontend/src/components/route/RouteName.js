@@ -10,7 +10,7 @@ export default function RouteName({ newRoute, setNewRoute }) {
         return (
             <>
                 <NameFieldStyled>
-                    <BoldHeader className={"firstHeader"}>Name</BoldHeader>
+                    <Bold className={"firstHeader"}>Name</Bold>
                     <div>{newRoute.routeName}</div>
                 </NameFieldStyled>
                 <PrimaryButton labelButton={"Edit"} handleClick={editRouteName}/>
@@ -21,7 +21,7 @@ export default function RouteName({ newRoute, setNewRoute }) {
         return (
             <>
                 <NameFieldStyled>
-                    <BoldHeader className={"firstHeader"}>Name</BoldHeader>
+                    <Bold className={"firstHeader"}>Name</Bold>
                     <input type={"text"} value={name}
                            onChange={event => setName(event.target.value)}/>
                 </NameFieldStyled>
@@ -44,7 +44,7 @@ display: flex;
 justify-content: space-evenly;
 `
 
-const BoldHeader = styled.header`
+const Bold = styled.header`
 font-weight: bold;
 margin-left: var(--size-m);
 `

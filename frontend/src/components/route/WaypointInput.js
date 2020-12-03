@@ -15,18 +15,18 @@ export default function WaypointInput({ legs, setLegs }) {
         return (
             <>
                 <InputFieldStyled>
-                    <BoldHeader className={"firstHeader"}>Start of Route</BoldHeader>
+                    <Bold className={"firstHeader"}>Start of Route</Bold>
                     <input type={"text"} name={"startLatitude"} value={newLeg.startLatitude}
                                    onChange={changeHandler} placeholder={"latitude"}/>
                     <input type={"text"} name={"startLongitude"} value={newLeg.startLongitude}
                                onChange={changeHandler} placeholder={"longitude"}/>
-                    <BoldHeader className={"secondHeader"}>End/1. Waypoint</BoldHeader>
+                    <Bold className={"secondHeader"}>End / 1. Waypoint</Bold>
                     <input type={"text"} name={"endLatitude"} value={newLeg.endLatitude}
                                onChange={changeHandler} placeholder={"latitude"}/>
                     <input type={"text"} name={"endLongitude"} value={newLeg.endLongitude}
                                onChange={changeHandler} placeholder={"longitude"}/>
                 </InputFieldStyled>
-                <PrimaryButton labelButton={"Save"} handleClick={createRoute}/>
+                <PrimaryButton labelButton={"Save"} handleClick={createLeg}/>
             </>
         );
     }
@@ -34,13 +34,13 @@ export default function WaypointInput({ legs, setLegs }) {
         return (
             <>
                 <InputFieldStyled>
-                    <BoldHeader className={"firstHeader"}>New Leg</BoldHeader>
+                    <Bold className={"firstHeader"}>New Leg</Bold>
                     <input type={"text"} name={"endLatitude"} value={newLeg.endLatitude}
                                onChange={changeHandler} placeholder={"latitude"}/>
                     <input type={"text"} name={"endLongitude"} value={newLeg.endLongitude}
                                onChange={changeHandler} placeholder={"longitude"}/>
                 </InputFieldStyled>
-                <PrimaryButton labelButton={"Add"} handleClick={createRoute}/>
+                <PrimaryButton labelButton={"Add"} handleClick={createLeg}/>
             </>
         );
     }
@@ -49,7 +49,7 @@ export default function WaypointInput({ legs, setLegs }) {
         setNewLeg({...newLeg, [event.target.name]: event.target.value});
     }
 
-    function createRoute() {
+    function createLeg() {
         setLegs([...legs, newLeg]);
         setNewLeg({
             startLatitude: newLeg.endLatitude,
@@ -78,13 +78,7 @@ grid-template-columns: 1fr 1fr;
   }
 `
 
-
-const InputLineStyled = styled.label`
-display: flex;
-justify-content: space-evenly;
-`
-
-const BoldHeader = styled.header`
+const Bold = styled.header`
 font-weight: bold;
 margin-left: var(--size-m);
 `

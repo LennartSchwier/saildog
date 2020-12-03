@@ -6,6 +6,7 @@ import {useHistory} from "react-router-dom";
 import RouteName from "./RouteName";
 import RoutePreview from "./RoutePreview";
 import WaypointInput from "./WaypointInput";
+import {addNewRoute} from "../../service/RouteService";
 
 export default function NewRoute() {
 
@@ -34,13 +35,18 @@ export default function NewRoute() {
             </UserInputField>
             <ButtonGroup>
                 <PrimaryButton labelButton={"Cancel"} handleClick={redirectBackToRoutes}/>
-                <PrimaryButton labelButton={"Add Route (WIP)"} />
+                <PrimaryButton labelButton={"Add Route (WIP)"} handleClick={createNewRoute}/>
             </ButtonGroup>
         </PageLayout>
     );
 
     function redirectBackToRoutes() {
         history.push("/routes");
+    }
+
+    function createNewRoute() {
+        setNewRoute({...newRoute, legs: legs});
+        addNewRoute(newRoute).then(data => console.log(data));
     }
 }
 
