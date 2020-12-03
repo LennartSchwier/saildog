@@ -8,19 +8,25 @@ export default function RouteName({ newRoute, setNewRoute }) {
 
     if (newRoute.routeName) {
         return (
-            <NameFieldStyled>
-                <div>{newRoute.routeName}</div>
+            <>
+                <NameFieldStyled>
+                    <BoldHeader className={"firstHeader"}>Name</BoldHeader>
+                    <div>{newRoute.routeName}</div>
+                </NameFieldStyled>
                 <PrimaryButton labelButton={"Edit"} handleClick={editRouteName}/>
-            </NameFieldStyled>
+            </>
         );
     }
     if (!newRoute.routeName) {
         return (
-            <NameFieldStyled>
-                <input type={"text"} value={name}
-                       onChange={event => setName(event.target.value)}/>
+            <>
+                <NameFieldStyled>
+                    <BoldHeader className={"firstHeader"}>Name</BoldHeader>
+                    <input type={"text"} value={name}
+                           onChange={event => setName(event.target.value)}/>
+                </NameFieldStyled>
                 <PrimaryButton labelButton={"Save"} handleClick={setRouteName} disableButton={!name}/>
-            </NameFieldStyled>
+            </>
         );
     }
 
@@ -34,5 +40,11 @@ export default function RouteName({ newRoute, setNewRoute }) {
 }
 
 const NameFieldStyled = styled.section`
-display: grid;
+display: flex;
+justify-content: space-evenly;
+`
+
+const BoldHeader = styled.header`
+font-weight: bold;
+margin-left: var(--size-m);
 `

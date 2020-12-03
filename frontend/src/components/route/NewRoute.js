@@ -27,12 +27,11 @@ export default function NewRoute() {
     return (
         <PageLayout>
             <Header headerText={"New Route"}/>
-            <FieldsetStyled>
-                <legend>Name of Route</legend>
+            <UserInputField>
                 <RouteName newRoute={newRoute} setNewRoute={setNewRoute}/>
-            </FieldsetStyled>
-            <WaypointInput legs={legs} setLegs={setLegs}/>
-            <RoutePreview legs={legs}/>
+                <WaypointInput legs={legs} setLegs={setLegs}/>
+                <RoutePreview legs={legs}/>
+            </UserInputField>
             <ButtonGroup>
                 <PrimaryButton labelButton={"Cancel"} handleClick={redirectBackToRoutes}/>
                 <PrimaryButton labelButton={"Add Route (WIP)"} />
@@ -48,14 +47,12 @@ export default function NewRoute() {
 const PageLayout = styled.div`
 display: grid;
 grid-template-rows: 60px min-content min-content min-content 60px;
+row-gap: var(--size-xl);
 height: 100vh;
 `
 
-const FieldsetStyled = styled.fieldset`
-border-radius: var(--size-s);
-border-color: lightgrey;
-margin: var(--size-m);
-padding-bottom: 0;
+const UserInputField = styled.section`
+display: grid;
 `
 
 const ButtonGroup = styled.div`

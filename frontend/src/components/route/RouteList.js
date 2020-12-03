@@ -46,6 +46,7 @@ height: 100vh;
 
   ul {
    list-style: none;
+   margin: 0;
    padding: 0;
    display: grid;
    row-gap: var(--size-l);
