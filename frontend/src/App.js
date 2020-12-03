@@ -13,6 +13,7 @@ import RouteList from "./components/route/RouteList";
 import RouteContextProvider from "./contexts/RouteContextProvider";
 import RouteDetails from "./components/route/RouteDetails";
 import NewRoute from "./components/route/NewRoute";
+import IconContextProvider from "./contexts/IconContextProvider";
 
 
 export default function App() {
@@ -24,41 +25,43 @@ export default function App() {
     return (
         <WeatherDataContextProvider>
             <RouteContextProvider>
-                <Switch>
-                    <Route path={"/login"}>
-                        <Login loginData={loginData} setLoginData={setLoginData}/>
-                    </Route>
-                    <ProtectedRoute path={"/dashboard"}>
-                        <Dashboard latitude={latitude} longitude={longitude} errorMessage={errorMessage} />
-                    </ProtectedRoute>
-                    <ProtectedRoute path={"/triminput"}>
-                        <TrimInput course={course} setCourse={setCourse}
-                                   latitude={latitude} longitude={longitude}
-                        />
-                    </ProtectedRoute>
-                    <ProtectedRoute path={"/headsail"}>
-                        <HeadSail
-                            course={course}
-                        />
-                    </ProtectedRoute>
-                    <ProtectedRoute path={"/mainsail"}>
-                        <MainSail
-                            course={course}
-                        />
-                    </ProtectedRoute>
-                    <ProtectedRoute path={"/routes"}>
-                        <RouteList/>
-                    </ProtectedRoute>
-                    <ProtectedRoute path={"/routedetails/:id"}>
-                        <RouteDetails/>
-                    </ProtectedRoute>
-                    <ProtectedRoute path={"/newroute"}>
-                        <NewRoute/>
-                    </ProtectedRoute>
-                    <Route path={"/"}>
-                        <Redirect to={"/dashboard"}/>
-                    </Route>
-                </Switch>
+                <IconContextProvider>
+                    <Switch>
+                        <Route path={"/login"}>
+                            <Login loginData={loginData} setLoginData={setLoginData}/>
+                        </Route>
+                        <ProtectedRoute path={"/dashboard"}>
+                            <Dashboard latitude={latitude} longitude={longitude} errorMessage={errorMessage} />
+                        </ProtectedRoute>
+                        <ProtectedRoute path={"/triminput"}>
+                            <TrimInput course={course} setCourse={setCourse}
+                                       latitude={latitude} longitude={longitude}
+                            />
+                        </ProtectedRoute>
+                        <ProtectedRoute path={"/headsail"}>
+                            <HeadSail
+                                course={course}
+                            />
+                        </ProtectedRoute>
+                        <ProtectedRoute path={"/mainsail"}>
+                            <MainSail
+                                course={course}
+                            />
+                        </ProtectedRoute>
+                        <ProtectedRoute path={"/routes"}>
+                            <RouteList/>
+                        </ProtectedRoute>
+                        <ProtectedRoute path={"/routedetails/:id"}>
+                            <RouteDetails/>
+                        </ProtectedRoute>
+                        <ProtectedRoute path={"/newroute"}>
+                            <NewRoute/>
+                        </ProtectedRoute>
+                        <Route path={"/"}>
+                            <Redirect to={"/dashboard"}/>
+                        </Route>
+                    </Switch>
+                </IconContextProvider>
             </RouteContextProvider>
         </WeatherDataContextProvider>
   );

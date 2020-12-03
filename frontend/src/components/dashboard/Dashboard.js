@@ -6,6 +6,7 @@ import {useHistory} from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import LocationBLock from "./LocationBlock";
 import WeatherBlock from "./WeatherBlock";
+import {BiLogOut, GiSailboat, FaRoute} from "react-icons/all";
 
 export default function Dashboard({latitude, longitude, errorMessage}) {
 
@@ -19,9 +20,18 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
             <LocationBLock latitude={latitude} longitude={longitude} errorMessage={errorMessage}/>
             <WeatherBlock/>
             <ButtonGroup>
-                <PrimaryButton labelButton={"Log Out"} />
-                <PrimaryButton labelButton={"Sail Trim"} handleClick={redirectToTrimInput}/>
-                <PrimaryButton labelButton={"Routes"} handleClick={redirectToRoutes}/>
+                <IconLabelPair>
+                    <BiLogOut className={"icon"}/>
+                    <PrimaryButton labelButton={"Log Out"} />
+                </IconLabelPair>
+                <IconLabelPair>
+                    <GiSailboat className={"icon"}/>
+                    <PrimaryButton labelButton={"Sail Trim"} handleClick={redirectToTrimInput}/>
+                </IconLabelPair>
+                <IconLabelPair>
+                    <FaRoute className={"icon"}/>
+                    <PrimaryButton labelButton={"Routes"} handleClick={redirectToRoutes}/>
+                </IconLabelPair>
             </ButtonGroup>
         </PageLayout>
     );
@@ -48,4 +58,10 @@ bottom: 24px;
 display: flex;
 justify-content: space-evenly;
 width: 100vw;
+`
+
+const IconLabelPair = styled.div`
+display: grid;
+row-gap: var(--size-xs);
+justify-items: center;
 `
