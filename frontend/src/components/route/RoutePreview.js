@@ -24,6 +24,7 @@ font-weight: bold;
 
 const ListStyled = styled.ul`
 list-style: none;
+margin: var(--size-l);
 padding: 0;
 display: grid;
 row-gap: var(--size-s);

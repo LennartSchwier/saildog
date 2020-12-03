@@ -13,7 +13,7 @@ export default function WaypointInput({ legs, setLegs }) {
 
     if (legs.length === 0) {
         return (
-            <>
+            <BlockStyled>
                 <InputFieldStyled>
                     <Bold className={"firstHeader"}>Start of Route</Bold>
                     <input type={"text"} name={"startLatitude"} value={newLeg.startLatitude}
@@ -27,12 +27,12 @@ export default function WaypointInput({ legs, setLegs }) {
                                onChange={changeHandler} placeholder={"longitude"}/>
                 </InputFieldStyled>
                 <PrimaryButton labelButton={"Save"} handleClick={createLeg}/>
-            </>
+            </BlockStyled>
         );
     }
     if (legs.length !== 0) {
         return (
-            <>
+            <BlockStyled>
                 <InputFieldStyled>
                     <Bold className={"firstHeader"}>New Leg</Bold>
                     <input type={"text"} name={"endLatitude"} value={newLeg.endLatitude}
@@ -41,7 +41,7 @@ export default function WaypointInput({ legs, setLegs }) {
                                onChange={changeHandler} placeholder={"longitude"}/>
                 </InputFieldStyled>
                 <PrimaryButton labelButton={"Add"} handleClick={createLeg}/>
-            </>
+            </BlockStyled>
         );
     }
 
@@ -59,6 +59,10 @@ export default function WaypointInput({ legs, setLegs }) {
         })
     }
 }
+
+const BlockStyled = styled.section`
+display: grid;
+`
 
 const InputFieldStyled = styled.div`
 display: grid;
