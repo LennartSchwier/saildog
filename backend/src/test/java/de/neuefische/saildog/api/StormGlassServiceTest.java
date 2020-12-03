@@ -31,18 +31,16 @@ class StormGlassServiceTest {
         // THEN
         assertThat(weatherDto, is(WeatherDto.builder()
                 .time("2020-11-26T15:00:00+00:00")
-                .airTemperature(8.06)
-                .currentDirection(43.08)
-                .currentSpeed(1.48)
-                .pressure(1019.79)
-                .visibility(24.14)
-                .waterTemperature(12.88)
-                .waveDirection(262.1)
-                .waveHeight(0.44)
-                .windDirection(79.22)
-                .windSpeed(5.74)
+                .airTemperature(8)
+                .currentDirection(43)
+                .currentSpeed(1)
+                .pressure(1020)
+                .visibility(24.1)
+                .waterTemperature(13)
+                .waveDirection(262)
+                .waveHeight(0.4)
+                .windDirection(79)
+                .windSpeed(6)
                 .build()));
     }
-
-
 }
