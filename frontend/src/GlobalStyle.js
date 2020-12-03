@@ -22,5 +22,7 @@ export default createGlobalStyle`
   
   body {
   background-image: url(${backgroundImage});
+  background-repeat: no-repeat;
+  background-size: cover;
   }
 `
