@@ -10,7 +10,7 @@ export default function RouteName({ newRoute, setNewRoute }) {
         return (
             <NameFieldStyled>
                 <div>{newRoute.routeName}</div>
-                <PrimaryButton labelButton={"Edit Name"} handleClick={editRouteName}/>
+                <PrimaryButton labelButton={"Edit"} handleClick={editRouteName}/>
             </NameFieldStyled>
         );
     }
@@ -19,7 +19,7 @@ export default function RouteName({ newRoute, setNewRoute }) {
             <NameFieldStyled>
                 <input type={"text"} value={name}
                        onChange={event => setName(event.target.value)}/>
-                <PrimaryButton labelButton={"Set Name"} handleClick={setRouteName} disableButton={!name}/>
+                <PrimaryButton labelButton={"Save"} handleClick={setRouteName} disableButton={!name}/>
             </NameFieldStyled>
         );
     }
