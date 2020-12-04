@@ -11,10 +11,10 @@ export default function Header({headerText}) {
 }
 
 const HeaderStyled = styled.section`
-  display: flex;
-  
+display: flex;
+box-shadow: 0 5px 13px -5px grey;
   
   h1 {
-  margin: var(--size-xl) 0 var(--size-s) var(--size-xl);
+  margin-left: var(--size-xl);
   }
 `

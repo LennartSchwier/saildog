@@ -35,7 +35,7 @@ export default function LocationBLock({latitude, longitude, errorMessage}) {
 const StyledDashboardSection = styled.section`
 margin: 0 var(--size-l);
 background-color: Transparent;
-box-shadow: var(--size-xs) var(--size-xs) var(--size-s) dimgrey;
+box-shadow: 2px 2px var(--size-s) grey;
 border-radius: var(--size-m);
 padding: var(--size-m);
 

@@ -51,10 +51,10 @@ export default function MapBlock({ latitude, longitude }) {
 }
 
 const StyledDashboardSection = styled.section`
-    margin: 0 var(--size-l);
-    background-color: Transparent;
-    box-shadow: var(--size-xs) var(--size-xs) var(--size-s) dimgrey;
-    border-radius: var(--size-m);
-    height: 300px;
-    overflow: auto;
-`
+margin: 0 var(--size-l);
+background-color: Transparent;
+box-shadow: 2px 2px var(--size-s) grey;
+border-radius: var(--size-m);
+height: 300px;
+overflow: auto;
+`;
