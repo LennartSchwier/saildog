@@ -52,7 +52,7 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
 
 const PageLayout = styled.div`
 display: grid;
-grid-template-rows: 60px 1fr 60px;
+grid-template-rows: min-content 1fr 60px;
 height: 100vh;
 `
 
