@@ -24,14 +24,27 @@ export default function MapBlock({ latitude, longitude }) {
         libraries
     })
 
-    if (loadError) return "Error loading maps";
-    if (!isLoaded) return "Loading maps";
-
-    return (
-        <StyledDashboardSection>
-            <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center} options={options}/>
-        </StyledDashboardSection>
-    );
+    if (loadError) {
+        return (
+            <StyledDashboardSection>
+                <p>Error loading map</p>
+            </StyledDashboardSection>
+        );
+    }
+    if (!isLoaded) {
+        return (
+            <StyledDashboardSection>
+                <p>Loading map</p>
+            </StyledDashboardSection>
+        );
+    }
+    if (isLoaded) {
+        return (
+            <StyledDashboardSection>
+                <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center} options={options}/>
+            </StyledDashboardSection>
+        );
+    }
 }
 
 const StyledDashboardSection = styled.section`
