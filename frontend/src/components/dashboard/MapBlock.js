@@ -1,12 +1,13 @@
 import React from "react";
-import {GoogleMap, useLoadScript} from "@react-google-maps/api";
+import {GoogleMap, Marker, useLoadScript} from "@react-google-maps/api";
 import MapStyles from "./MapStyles";
 import styled from "styled-components/macro";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-    width: "319px",
-    height: "200px",
+    width: "100%",
+    height: "100%",
+    borderRadius: "12px"
 };
 const options = {
     styles: MapStyles,
@@ -41,7 +42,9 @@ export default function MapBlock({ latitude, longitude }) {
     if (isLoaded) {
         return (
             <StyledDashboardSection>
-                <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center} options={options}/>
+                <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center} options={options}>
+                    <Marker position={{ lat: latitude, lng: longitude }} />
+                </GoogleMap>
             </StyledDashboardSection>
         );
     }
@@ -52,5 +55,6 @@ const StyledDashboardSection = styled.section`
     background-color: Transparent;
     box-shadow: var(--size-xs) var(--size-xs) var(--size-s) dimgrey;
     border-radius: var(--size-m);
-    padding: var(--size-m);
+    height: 300px;
+    overflow: auto;
 `
