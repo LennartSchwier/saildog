@@ -6,7 +6,6 @@ import {useHistory} from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import LocationBLock from "./LocationBlock";
 import WeatherBlock from "./WeatherBlock";
-import {BiLogOut, GiSailboat, FaRoute} from "react-icons/all";
 import MapBlock from "./MapBlock";
 
 export default function Dashboard({latitude, longitude, errorMessage}) {
@@ -25,18 +24,9 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
                 <div className={"placeholder"}/>
             </MainStyled>
             <ButtonGroup>
-                <IconLabelPair>
-                    <BiLogOut className={"icon"}/>
-                    <PrimaryButton labelButton={"Log Out"} />
-                </IconLabelPair>
-                <IconLabelPair>
-                    <GiSailboat className={"icon"}/>
-                    <PrimaryButton labelButton={"Sail Trim"} handleClick={redirectToTrimInput}/>
-                </IconLabelPair>
-                <IconLabelPair>
-                    <FaRoute className={"icon"}/>
-                    <PrimaryButton labelButton={"Routes"} handleClick={redirectToRoutes}/>
-                </IconLabelPair>
+                <PrimaryButton labelButton={"Log Out"}/>
+                <PrimaryButton labelButton={"Sail Trim"} handleClick={redirectToTrimInput}/>
+                <PrimaryButton labelButton={"Routes"} handleClick={redirectToRoutes}/>
             </ButtonGroup>
         </PageLayout>
     );
@@ -75,10 +65,4 @@ margin-bottom: var(--size-s);
 display: flex;
 justify-content: space-evenly;
 width: 100vw;
-`
-
-const IconLabelPair = styled.div`
-display: grid;
-row-gap: var(--size-xs);
-justify-items: center;
 `
