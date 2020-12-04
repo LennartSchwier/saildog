@@ -38,6 +38,7 @@ background-color: Transparent;
 box-shadow: 2px 2px var(--size-s) grey;
 border-radius: var(--size-m);
 padding: var(--size-m);
+backdrop-filter: blur(2px);
 
   section {
   margin-bottom: var(--size-l);
