@@ -21,7 +21,7 @@ export default function MapBlock({ latitude, longitude }) {
         lng: longitude
     }
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: "AIzaSyAWKmAYQVh0A4pvW1zz453QRztS69Alh-s",
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries
     })
 
