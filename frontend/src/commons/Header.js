@@ -5,12 +5,16 @@ export default function Header({headerText}) {
 
     return(
         <HeaderStyled>
-            <h2>{headerText}</h2>
+            <h1>{headerText}</h1>
         </HeaderStyled>
     );
 }
 
-const HeaderStyled = styled.div`
-  display: flex;
-  justify-content: center;
+const HeaderStyled = styled.section`
+display: flex;
+box-shadow: 0 5px 13px -5px grey;
+  
+  h1 {
+  margin-left: var(--size-xl);
+  }
 `

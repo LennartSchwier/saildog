@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.neuefische.saildog.api.stormGlass.stormGlassModels.StormGlassResponse;
-import de.neuefische.saildog.api.stormGlass.stormGlassModels.WaveHeight;
 import de.neuefische.saildog.dto.WeatherDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 
 
 @Service
@@ -59,16 +56,16 @@ public class StormGlassService {
         double windSpeed = calculateFromMpsToKts(stormGlassResponse.getHours().get(0).getWindSpeed().getSg());
         return WeatherDto.builder()
                 .time(time)
-                .airTemperature(airTemperature)
-                .waterTemperature(waterTemperature)
-                .pressure(pressure)
-                .visibility(visibility)
-                .currentDirection(currentDirection)
-                .currentSpeed(currentSpeed)
-                .waveDirection(waveDirection)
-                .waveHeight(waveHeight)
-                .windDirection(windDirection)
-                .windSpeed(windSpeed)
+                .airTemperature(Math.round(airTemperature))
+                .waterTemperature(Math.round(waterTemperature))
+                .pressure(Math.round(pressure))
+                .visibility(Math.round(visibility * 10.0) / 10.0)
+                .currentDirection(Math.round(currentDirection))
+                .currentSpeed(Math.round(currentSpeed))
+                .waveDirection(Math.round(waveDirection))
+                .waveHeight(Math.round(waveHeight * 10.0) / 10.0)
+                .windDirection(Math.round(windDirection))
+                .windSpeed(Math.round(windSpeed))
                 .build();
     }
 

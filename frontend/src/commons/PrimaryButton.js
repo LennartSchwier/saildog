@@ -8,11 +8,9 @@ export default function PrimaryButton({disableButton = false, labelButton, handl
 }
 
 const ButtonStyled = styled.button`
-margin: var(--size-s);
 border: none;
 font-size: 1em;
 background-color: Transparent;
-color: darkblue;
     
     :disabled {
     opacity: .2;

@@ -6,6 +6,7 @@ import {useHistory} from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import LocationBLock from "./LocationBlock";
 import WeatherBlock from "./WeatherBlock";
+import MapBlock from "./MapBlock";
 
 export default function Dashboard({latitude, longitude, errorMessage}) {
 
@@ -16,10 +17,14 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
     return (
         <PageLayout>
             <Header headerText={'Ahoi ' + username}/>
-            <LocationBLock latitude={latitude} longitude={longitude} errorMessage={errorMessage}/>
-            <WeatherBlock/>
+            <MainStyled>
+                <LocationBLock latitude={latitude} longitude={longitude} errorMessage={errorMessage}/>
+                <MapBlock latitude={latitude} longitude={longitude}/>
+                <WeatherBlock/>
+                <div className={"placeholder"}/>
+            </MainStyled>
             <ButtonGroup>
-                <PrimaryButton labelButton={"Log Out"} />
+                <PrimaryButton labelButton={"Log Out"}/>
                 <PrimaryButton labelButton={"Sail Trim"} handleClick={redirectToTrimInput}/>
                 <PrimaryButton labelButton={"Routes"} handleClick={redirectToRoutes}/>
             </ButtonGroup>
@@ -37,14 +42,26 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
 
 const PageLayout = styled.div`
 display: grid;
-grid-template-rows: 60px min-content min-content 60px;
-row-gap: var(--size-xl);
+grid-template-rows: min-content 1fr 60px;
 height: 100vh;
+`
+
+const MainStyled = styled.main`
+display: grid;
+grid-template-rows: min-content min-content min-content min-content;
+row-gap: var(--size-l);
+overflow: auto;
+padding-top: var(--size-s);
+
+  .placeholder {
+  height: var(--size-s);
+  }
 `
 
 const ButtonGroup = styled.div`
 position: fixed;
-bottom: 24px;
+bottom: 0;
+margin-bottom: var(--size-s);
 display: flex;
 justify-content: space-evenly;
 width: 100vw;

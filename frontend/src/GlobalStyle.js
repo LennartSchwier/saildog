@@ -18,9 +18,12 @@ export default createGlobalStyle`
   html, body {
   margin: 0;
   font-family: 'Comfortaa', sans-serif;
+  color: #0B132B;
   }
   
   body {
   background-image: url(${backgroundImage});
+  background-repeat: no-repeat;
+  background-size: cover;
   }
 `
