@@ -7,6 +7,7 @@ import jwtDecode from "jwt-decode";
 import LocationBLock from "./LocationBlock";
 import WeatherBlock from "./WeatherBlock";
 import MapBlock from "./MapBlock";
+import {BiLogOut, FaRoute, GiSailboat} from "react-icons/all";
 
 export default function Dashboard({latitude, longitude, errorMessage}) {
 
@@ -24,9 +25,9 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
                 <div className={"placeholder"}/>
             </MainStyled>
             <ButtonGroup>
-                <PrimaryButton labelButton={"Log Out"}/>
-                <PrimaryButton labelButton={"Sail Trim"} handleClick={redirectToTrimInput}/>
-                <PrimaryButton labelButton={"Routes"} handleClick={redirectToRoutes}/>
+                <PrimaryButton labelButton={"Log Out"} icon={<BiLogOut/>}/>
+                <PrimaryButton labelButton={"Sail Trim"} handleClick={redirectToTrimInput} icon={<GiSailboat/>}/>
+                <PrimaryButton labelButton={"Routes"} handleClick={redirectToRoutes} icon={<FaRoute/>}/>
             </ButtonGroup>
         </PageLayout>
     );
