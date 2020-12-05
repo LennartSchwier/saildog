@@ -7,6 +7,8 @@ import RouteName from "./RouteName";
 import RoutePreview from "./RoutePreview";
 import WaypointInput from "./WaypointInput";
 import {addNewRoute} from "../../service/RouteService";
+import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
+import {IoIosAdd, MdCancel} from "react-icons/all";
 
 export default function NewRoute() {
 
@@ -34,8 +36,8 @@ export default function NewRoute() {
                 <RoutePreview legs={legs}/>
             </UserInputField>
             <ButtonGroup>
-                <PrimaryButton labelButton={"Cancel"} handleClick={redirectBackToRoutes}/>
-                <PrimaryButton labelButton={"Add Route (WIP)"} handleClick={createNewRoute}/>
+                <PrimaryButton labelButton={"Cancel"} handleClick={redirectBackToRoutes} icon={<MdCancel/>}/>
+                <PrimaryButton labelButton={"Add Route"} handleClick={createNewRoute} icon={<IoIosAdd/>}/>
             </ButtonGroup>
         </PageLayout>
     );
@@ -63,7 +65,4 @@ grid-template-rows: min-content min-content min-content;
 row-gap: var(--size-s);
 `
 
-const ButtonGroup = styled.div`
-position: fixed;
-bottom: 24px;
-`
+const ButtonGroup = ButtonGroupStyles;
