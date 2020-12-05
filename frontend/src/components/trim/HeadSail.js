@@ -5,6 +5,8 @@ import styled from "styled-components/macro";
 import {useHistory} from "react-router-dom";
 import useTrimData from "../../hooks/useTrimData";
 import WeatherDataContext from "../../contexts/WeatherDataContext";
+import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
+import {IoIosArrowBack} from "react-icons/all";
 
 export default function HeadSail({course}) {
 
@@ -45,9 +47,9 @@ export default function HeadSail({course}) {
                     {headSailTrimData && <Bold>{getTextualOutput(headSailTrimData.headSailLuff)}</Bold>}
                 </div>
             </OutputField>
-            <div>
-                <PrimaryButton labelButton={"Back"} handleClick={redirectToInput}/>
-            </div>
+            <ButtonGroup>
+                <PrimaryButton labelButton={"Back"} handleClick={redirectToInput} icon={<IoIosArrowBack/>}/>
+            </ButtonGroup>
         </PageLayout>
     );
 
@@ -89,3 +91,5 @@ font-size: 1.1em;
 const Bold = styled.span`
 font-weight: bold;
 `
+
+const ButtonGroup = ButtonGroupStyles;
