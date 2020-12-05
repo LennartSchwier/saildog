@@ -6,6 +6,8 @@ import styled from "styled-components/macro";
 import RouteContext from "../../contexts/RouteContext";
 import RouteEnd from "./RouteEnd";
 import Leg from "./Leg";
+import {IoIosArrowBack} from "react-icons/all";
+import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
 
 export default function RouteDetails() {
 
@@ -27,7 +29,7 @@ export default function RouteDetails() {
                 <RouteEnd endWaypoint={endWaypoint}/>
             </ul>
             <ButtonGroup>
-                <PrimaryButton labelButton={"Back"} handleClick={redirectToRoutes}/>
+                <PrimaryButton labelButton={"Back"} handleClick={redirectToRoutes} icon={<IoIosArrowBack/>}/>
             </ButtonGroup>
         </PageLayout>
     );
@@ -49,7 +51,4 @@ height: 100vh;
   }
 `
 
-const ButtonGroup = styled.div`
-position: fixed;
-bottom: 24px;
-`
+const ButtonGroup = ButtonGroupStyles;
