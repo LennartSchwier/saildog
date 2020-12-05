@@ -8,6 +8,7 @@ import LocationBLock from "./LocationBlock";
 import WeatherBlock from "./WeatherBlock";
 import MapBlock from "./MapBlock";
 import {BiLogOut, FaRoute, GiSailboat} from "react-icons/all";
+import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
 
 export default function Dashboard({latitude, longitude, errorMessage}) {
 
@@ -59,11 +60,4 @@ padding-top: var(--size-s);
   }
 `
 
-const ButtonGroup = styled.div`
-position: fixed;
-bottom: 0;
-margin-bottom: var(--size-s);
-display: flex;
-justify-content: space-evenly;
-width: 100vw;
-`
+const ButtonGroup = ButtonGroupStyles;
