@@ -5,6 +5,8 @@ import PrimaryButton from "../../commons/PrimaryButton";
 import {useHistory} from "react-router-dom";
 import Route from "./Route";
 import RouteContext from "../../contexts/RouteContext";
+import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
+import {IoIosAdd, MdDashboard} from "react-icons/all";
 
 
 export default function RouteList() {
@@ -23,8 +25,8 @@ export default function RouteList() {
                     )}
             </ul>
             <ButtonGroup>
-                <PrimaryButton labelButton={"Dashboard"} handleClick={redirectToDashboard}/>
-                <PrimaryButton labelButton={"New Route"} handleClick={redirectToNewRoute}/>
+                <PrimaryButton labelButton={"Dashboard"} handleClick={redirectToDashboard} icon={<MdDashboard/>}/>
+                <PrimaryButton labelButton={"New Route"} handleClick={redirectToNewRoute} icon={<IoIosAdd/>}/>
             </ButtonGroup>
         </PageLayout>
     );
@@ -53,7 +55,4 @@ height: 100vh;
   }
 `
 
-const ButtonGroup = styled.div`
-position: fixed;
-bottom: 24px;
-`
+const ButtonGroup = ButtonGroupStyles;
