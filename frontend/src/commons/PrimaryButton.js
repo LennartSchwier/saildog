@@ -16,6 +16,7 @@ font-size: 1em;
 background-color: Transparent;
 display: grid;
 justify-items: center;
+color: #3A506B;
     
     :disabled {
     opacity: .2;
