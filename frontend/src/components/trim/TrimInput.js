@@ -5,6 +5,8 @@ import PrimaryButton from "../../commons/PrimaryButton";
 import { useHistory } from 'react-router-dom';
 import {getStormGlassWeather} from "../../service/StormGlassService";
 import WeatherDataContext from "../../contexts/WeatherDataContext";
+import {MdDashboard, RiSailboatFill, RiSailboatLine} from "react-icons/all";
+import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
 
 export default function TrimInput({course, setCourse, latitude, longitude}) {
 
@@ -59,11 +61,11 @@ export default function TrimInput({course, setCourse, latitude, longitude}) {
                                disableButton={!refactoredWeatherData.windSpeed && !refactoredWeatherData.waveHeight && !course}
                 />
             </FormStyled>
-            <div>
-                <PrimaryButton labelButton={"Dashboard"} handleClick={redirectToDashboard}/>
-                <PrimaryButton labelButton={"Main Sail"} handleClick={redirectToMainSail} disableButton={disableHandler()}/>
-                <PrimaryButton labelButton={"Head Sail"} handleClick={redirectToHeadSail} disableButton={disableHandler()}/>
-            </div>
+            <ButtonGroup>
+                <PrimaryButton labelButton={"Dashboard"} handleClick={redirectToDashboard} icon={<MdDashboard/>}/>
+                <PrimaryButton labelButton={"Main Sail"} handleClick={redirectToMainSail} disableButton={disableHandler()} icon={<RiSailboatFill/>}/>
+                <PrimaryButton labelButton={"Head Sail"} handleClick={redirectToHeadSail} disableButton={disableHandler()} icon={<RiSailboatLine/>}/>
+            </ButtonGroup>
         </PageLayout>
     );
 
@@ -125,3 +127,5 @@ border-color: lightgrey;
   font-weight: bold;
   }
 `
+
+const ButtonGroup = ButtonGroupStyles;
