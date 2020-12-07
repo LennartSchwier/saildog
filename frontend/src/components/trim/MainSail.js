@@ -5,6 +5,8 @@ import PrimaryButton from "../../commons/PrimaryButton";
 import styled from "styled-components/macro";
 import React, {useContext} from "react";
 import WeatherDataContext from "../../contexts/WeatherDataContext";
+import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
+import {IoIosArrowBack} from "react-icons/io";
 
 export default function MainSail({course}) {
 
@@ -53,9 +55,9 @@ export default function MainSail({course}) {
                     {mainSailTrimData && <Bold>{getTextualOutput(mainSailTrimData.mainSailFoot)}</Bold>}
                 </div>
             </OutputField>
-            <div>
-                <PrimaryButton labelButton={"Back"} handleClick={redirectToInput}/>
-            </div>
+            <ButtonGroup>
+                <PrimaryButton labelButton={"Back"} handleClick={redirectToInput} icon={<IoIosArrowBack/>}/>
+            </ButtonGroup>
         </PageLayout>
     );
 
@@ -97,3 +99,5 @@ font-size: 1.1em;
 const Bold = styled.span`
 font-weight: bold;
 `
+
+const ButtonGroup = ButtonGroupStyles;

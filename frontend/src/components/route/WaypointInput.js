@@ -62,11 +62,12 @@ export default function WaypointInput({ legs, setLegs }) {
 
 const BlockStyled = styled.section`
 display: grid;
+row-gap: var(--size-m);
 `
 
 const InputFieldStyled = styled.div`
 display: grid;
-row-gap: var(--size-s);
+row-gap: var(--size-m);
 align-items: center;
 justify-items: center;
 grid-template-rows: 1fr 1fr ;

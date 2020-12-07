@@ -13,20 +13,22 @@ export default function Login({loginData, setLoginData}) {
     return(
         <PageLayout>
             <Header headerText={"Log In"}/>
-            <FormStyled>
-                <label htmlFor={"username"}>Username:</label>
-                <input value={loginData.username} name={"username"}
-                       onChange={updateLoginData} type={"text"}
-                />
-                <label htmlFor={"password"}>Password:</label>
-                <input value={loginData.password} name={"password"}
-                       onChange={updateLoginData} type={"password"}
-                />
-                <PrimaryButton labelButton={"Log in"} handleClick={login}
-                               disableButton={!loginData.username || !loginData.password}
-                />
-            </FormStyled>
-            {errorMessage && <p>{errorMessage}</p>}
+            <Main>
+                <FormStyled>
+                    <label htmlFor={"username"}>Username:</label>
+                    <input value={loginData.username} name={"username"}
+                           onChange={updateLoginData} type={"text"}
+                    />
+                    <label htmlFor={"password"}>Password:</label>
+                    <input value={loginData.password} name={"password"}
+                           onChange={updateLoginData} type={"password"}
+                    />
+                    <PrimaryButton labelButton={"Log in"} handleClick={login}
+                                   disableButton={!loginData.username || !loginData.password}
+                    />
+                </FormStyled>
+                {errorMessage && <p>{errorMessage}</p>}
+            </Main>
         </PageLayout>
     );
 
@@ -44,11 +46,8 @@ export default function Login({loginData, setLoginData}) {
 }
 
 const PageLayout = styled.div`
-display: grid;
-grid-template-rows: 60px min-content 60px ;
-justify-content: center;
-row-gap: var(--size-xl);
 height: 100vh;
+justify-content: center;
 
   p {
   color: darkred;
@@ -56,9 +55,15 @@ height: 100vh;
   }
 `
 
+const Main = styled.section`
+display: grid;
+justify-content: center;
+`
+
 const FormStyled = styled.form`
 display: grid;
-grid-template-rows: 1fr 1fr 1fr 1fr 40px;
+grid-template-rows: 1fr 1fr 1fr 1fr min-content;
 justify-content: center;
 row-gap: var(--size-m);
+margin: var(--size-xl);
 `

@@ -5,6 +5,9 @@ import PrimaryButton from "../../commons/PrimaryButton";
 import {useHistory} from "react-router-dom";
 import Route from "./Route";
 import RouteContext from "../../contexts/RouteContext";
+import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
+import {IoIosAdd} from "react-icons/io";
+import {MdDashboard} from "react-icons/md";
 
 
 export default function RouteList() {
@@ -23,8 +26,8 @@ export default function RouteList() {
                     )}
             </ul>
             <ButtonGroup>
-                <PrimaryButton labelButton={"Dashboard"} handleClick={redirectToDashboard}/>
-                <PrimaryButton labelButton={"New Route"} handleClick={redirectToNewRoute}/>
+                <PrimaryButton labelButton={"Dashboard"} handleClick={redirectToDashboard} icon={<MdDashboard/>}/>
+                <PrimaryButton labelButton={"New Route"} handleClick={redirectToNewRoute} icon={<IoIosAdd/>}/>
             </ButtonGroup>
         </PageLayout>
     );
@@ -40,20 +43,23 @@ export default function RouteList() {
 
 const PageLayout = styled.div`
 display: grid;
-grid-template-rows: 60px min-content 60px;
-row-gap: var(--size-xl);
+grid-template-rows: min-content 1fr 60px;
 height: 100vh;
 
   ul {
    list-style: none;
    margin: 0;
-   padding: 0;
+   padding: var(--size-s) 0;
    display: grid;
    row-gap: var(--size-l);
+   overflow: auto;
+     
+     li:last-child:after {
+      content: '';
+      display: block;
+      height: var(--size-s);
+     }
   }
 `
 
-const ButtonGroup = styled.div`
-position: fixed;
-bottom: 24px;
-`
+const ButtonGroup = ButtonGroupStyles;

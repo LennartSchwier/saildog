@@ -7,6 +7,10 @@ import jwtDecode from "jwt-decode";
 import LocationBLock from "./LocationBlock";
 import WeatherBlock from "./WeatherBlock";
 import MapBlock from "./MapBlock";
+import {BiLogOut} from "react-icons/bi";
+import {FaRoute} from "react-icons/fa";
+import {GiSailboat} from "react-icons/gi";
+import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
 
 export default function Dashboard({latitude, longitude, errorMessage}) {
 
@@ -24,9 +28,9 @@ export default function Dashboard({latitude, longitude, errorMessage}) {
                 <div className={"placeholder"}/>
             </MainStyled>
             <ButtonGroup>
-                <PrimaryButton labelButton={"Log Out"}/>
-                <PrimaryButton labelButton={"Sail Trim"} handleClick={redirectToTrimInput}/>
-                <PrimaryButton labelButton={"Routes"} handleClick={redirectToRoutes}/>
+                <PrimaryButton labelButton={"Log Out"} icon={<BiLogOut/>}/>
+                <PrimaryButton labelButton={"Sail Trim"} handleClick={redirectToTrimInput} icon={<GiSailboat/>}/>
+                <PrimaryButton labelButton={"Routes"} handleClick={redirectToRoutes} icon={<FaRoute/>}/>
             </ButtonGroup>
         </PageLayout>
     );
@@ -58,11 +62,4 @@ padding-top: var(--size-s);
   }
 `
 
-const ButtonGroup = styled.div`
-position: fixed;
-bottom: 0;
-margin-bottom: var(--size-s);
-display: flex;
-justify-content: space-evenly;
-width: 100vw;
-`
+const ButtonGroup = ButtonGroupStyles;
