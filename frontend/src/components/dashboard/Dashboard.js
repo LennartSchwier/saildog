@@ -7,7 +7,9 @@ import jwtDecode from "jwt-decode";
 import LocationBLock from "./LocationBlock";
 import WeatherBlock from "./WeatherBlock";
 import MapBlock from "./MapBlock";
-import {BiLogOut, FaRoute, GiSailboat} from "react-icons/all";
+import {BiLogOut} from "react-icons/bi";
+import {FaRoute} from "react-icons/fa";
+import {GiSailboat} from "react-icons/gi";
 import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
 
 export default function Dashboard({latitude, longitude, errorMessage}) {

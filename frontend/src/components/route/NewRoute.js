@@ -8,7 +8,8 @@ import RoutePreview from "./RoutePreview";
 import WaypointInput from "./WaypointInput";
 import {addNewRoute} from "../../service/RouteService";
 import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
-import {IoIosAdd, MdCancel} from "react-icons/all";
+import {IoIosAdd} from "react-icons/io";
+import {MdCancel} from "react-icons/md";
 
 export default function NewRoute() {
 

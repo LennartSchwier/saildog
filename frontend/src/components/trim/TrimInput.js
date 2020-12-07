@@ -5,7 +5,8 @@ import PrimaryButton from "../../commons/PrimaryButton";
 import { useHistory } from 'react-router-dom';
 import {getStormGlassWeather} from "../../service/StormGlassService";
 import WeatherDataContext from "../../contexts/WeatherDataContext";
-import {MdDashboard, RiSailboatFill, RiSailboatLine} from "react-icons/all";
+import {MdDashboard} from "react-icons/md";
+import {RiSailboatFill, RiSailboatLine} from "react-icons/ri";
 import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
 
 export default function TrimInput({course, setCourse, latitude, longitude}) {

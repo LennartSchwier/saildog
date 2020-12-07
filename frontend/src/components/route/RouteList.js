@@ -6,7 +6,8 @@ import {useHistory} from "react-router-dom";
 import Route from "./Route";
 import RouteContext from "../../contexts/RouteContext";
 import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
-import {IoIosAdd, MdDashboard} from "react-icons/all";
+import {IoIosAdd} from "react-icons/io";
+import {MdDashboard} from "react-icons/md";
 
 
 export default function RouteList() {

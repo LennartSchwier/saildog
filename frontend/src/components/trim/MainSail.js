@@ -6,7 +6,7 @@ import styled from "styled-components/macro";
 import React, {useContext} from "react";
 import WeatherDataContext from "../../contexts/WeatherDataContext";
 import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
-import {IoIosArrowBack} from "react-icons/all";
+import {IoIosArrowBack} from "react-icons/io";
 
 export default function MainSail({course}) {
 

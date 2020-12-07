@@ -6,7 +6,7 @@ import styled from "styled-components/macro";
 import RouteContext from "../../contexts/RouteContext";
 import RouteEnd from "./RouteEnd";
 import Leg from "./Leg";
-import {IoIosArrowBack} from "react-icons/all";
+import {IoIosArrowBack} from "react-icons/io";
 import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
 
 export default function RouteDetails() {
