@@ -1,42 +1,19 @@
-import React, {useState} from "react";
-import PrimaryButton from "../../commons/PrimaryButton";
+import React from "react";
 import styled from "styled-components/macro";
 
 export default function RouteName({ newRoute, setNewRoute }) {
 
-    const [name, setName] = useState("");
+    console.log(newRoute);
 
-    if (newRoute.routeName) {
-        return (
-            <BlockStyled>
-                <NameFieldStyled>
-                    <Bold className={"firstHeader"}>Name</Bold>
-                    <p>{newRoute.routeName}</p>
-                </NameFieldStyled>
-                <PrimaryButton labelButton={"Edit"} handleClick={editRouteName}/>
-            </BlockStyled>
-        );
-    }
-    if (!newRoute.routeName) {
-        return (
-            <BlockStyled>
-                <NameFieldStyled>
-                    <Bold className={"firstHeader"}>Name</Bold>
-                    <input type={"text"} value={name}
-                           onChange={event => setName(event.target.value)}/>
-                </NameFieldStyled>
-                <PrimaryButton labelButton={"Save"} handleClick={setRouteName} disableButton={!name}/>
-            </BlockStyled>
-        );
-    }
-
-    function editRouteName() {
-        setNewRoute({...newRoute, routeName: ""})
-    }
-
-    function setRouteName() {
-        setNewRoute({...newRoute, routeName: name})
-    }
+    return (
+        <BlockStyled>
+            <NameFieldStyled>
+                <Bold className={"firstHeader"}>Name</Bold>
+                <input type={"text"} value={newRoute.routeName}
+                       onChange={event => setNewRoute({...newRoute, routeName: event.target.value})}/>
+            </NameFieldStyled>
+        </BlockStyled>
+    );
 }
 
 const BlockStyled = styled.section`
