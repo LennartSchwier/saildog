@@ -23,7 +23,7 @@ color: black;
 const RouteStyled = styled.div`
 margin: 0 var(--size-l);
 background-color: Transparent;
-box-shadow: var(--size-xxs) var(--size-xxs) var(--size-s) grey;
+box-shadow: var(--boxshadow);
 border-radius: var(--size-m);
 padding: var(--size-m);
 display: grid;
