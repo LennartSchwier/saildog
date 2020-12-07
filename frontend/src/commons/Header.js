@@ -16,6 +16,6 @@ box-shadow: 0 5px 13px -5px grey;
   
   h1 {
   margin-left: var(--size-xl);
-  color: #3A506B;
+  var(--theme-mid);
   }
 `

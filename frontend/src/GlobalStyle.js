@@ -28,7 +28,7 @@ export default createGlobalStyle`
   html, body {
   margin: 0;
   font-family: 'Comfortaa', sans-serif;
-  color: var(--theme-darker);
+  color: var(--theme-dark);
   }
   
   body {

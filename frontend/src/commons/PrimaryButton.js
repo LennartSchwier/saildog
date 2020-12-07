@@ -16,7 +16,7 @@ font-size: 1em;
 background-color: Transparent;
 display: grid;
 justify-items: center;
-color: #3A506B;
+color: var(--theme-mid);
     
     :disabled {
     opacity: .2;
