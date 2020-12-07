@@ -16,3 +16,8 @@ export const getAllRoutesFromUser = () => {
 export const addNewRoute = (newRoute) => {
     return axios.post(url, newRoute, setHeaders()).then(response => response.data);
 }
+
+export const deleteRoute = (routeId) => {
+    const urlWithId = url + "/" + routeId;
+    axios.delete(urlWithId, setHeaders()).catch(error => console.log(error));
+}
