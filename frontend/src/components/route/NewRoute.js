@@ -63,7 +63,7 @@ height: 100vh;
 const UserInputField = styled.section`
 display: grid;
 grid-template-rows: min-content min-content min-content;
-row-gap: var(--size-s);
+row-gap: var(--size-m);
 `
 
 const ButtonGroup = ButtonGroupStyles;

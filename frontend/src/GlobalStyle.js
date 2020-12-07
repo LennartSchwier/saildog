@@ -3,7 +3,8 @@ import backgroundImage from './assets/background-image.jpg';
 
 export default createGlobalStyle`
   :root {
-  --size-xs: 4px;
+   --size-xxs: 2px;
+   --size-xs: 4px;
    --size-s: 8px;
    --size-m: 12px;
    --size-l: 16px;

@@ -41,6 +41,7 @@ export default function RouteName({ newRoute, setNewRoute }) {
 
 const BlockStyled = styled.section`
 display: grid;
+row-gap: var(--size-m);
 `
 
 const NameFieldStyled = styled.div`

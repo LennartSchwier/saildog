@@ -43,16 +43,22 @@ export default function RouteList() {
 
 const PageLayout = styled.div`
 display: grid;
-grid-template-rows: 60px min-content 60px;
-row-gap: var(--size-xl);
+grid-template-rows: min-content 1fr 60px;
 height: 100vh;
 
   ul {
    list-style: none;
    margin: 0;
-   padding: 0;
+   padding: var(--size-s) 0;
    display: grid;
    row-gap: var(--size-l);
+   overflow: auto;
+     
+     li:last-child:after {
+      content: '';
+      display: block;
+      height: var(--size-s);
+     }
   }
 `
 

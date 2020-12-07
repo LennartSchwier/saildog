@@ -114,6 +114,7 @@ height: 100vh;
 const FormStyled = styled.form`
 display: grid;
 grid-template-rows: min-content min-content min-content min-content;
+row-gap: var(--size-s);
 `
 
 const FieldsetStyled = styled.fieldset`
