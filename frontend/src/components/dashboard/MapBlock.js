@@ -43,7 +43,7 @@ export default function MapBlock({ latitude, longitude }) {
         return (
             <StyledDashboardSection>
                 <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center} options={options}>
-                    <Marker position={{ lat: latitude, lng: longitude }} />
+                    {latitude && longitude && <Marker position={{ lat: latitude, lng: longitude }} />}
                 </GoogleMap>
             </StyledDashboardSection>
         );

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import Header from "../../commons/Header";
 import styled from "styled-components/macro";
 import PrimaryButton from "../../commons/PrimaryButton";
@@ -6,14 +6,16 @@ import {useHistory} from "react-router-dom";
 import RouteName from "./RouteName";
 import RoutePreview from "./RoutePreview";
 import WaypointInput from "./WaypointInput";
-import {addNewRoute} from "../../service/RouteService";
 import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
 import {IoIosAdd} from "react-icons/io";
 import {MdCancel} from "react-icons/md";
+import RouteContext from "../../contexts/RouteContext";
 
 export default function NewRoute() {
 
     const history = useHistory();
+
+    const { addNewRouteAndUpdateAllRoutes } = useContext(RouteContext);
 
     const [legs, setLegs] = useState([]);
     const [newRoute, setNewRoute] = useState({
@@ -49,7 +51,7 @@ export default function NewRoute() {
 
     function createNewRoute() {
         const payload = {...newRoute, legs: legs};
-        addNewRoute(payload);
+        addNewRouteAndUpdateAllRoutes(payload);
         history.push("/routes");
     }
 }

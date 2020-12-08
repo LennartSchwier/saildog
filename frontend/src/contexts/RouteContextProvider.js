@@ -1,34 +1,10 @@
 import React, {useEffect, useState} from "react";
 import RouteContext from "./RouteContext";
-import {getAllRoutesFromUser} from "../service/RouteService";
+import {addNewRoute, getAllRoutesFromUser} from "../service/RouteService";
 
 export default function RouteContextProvider({ children }) {
 
-    const [routes, setRoutes] = useState([
-        {
-            routeId: "",
-            routeName: "",
-            creator: "",
-            legs: [
-                {
-                    legId: "",
-                    startWaypoint: {
-                        typeOfWaypoint: null,
-                        latitude: "",
-                        longitude: "",
-                    },
-                    endWaypoint: {
-                        typeOfWaypoint: null,
-                        latitude: "",
-                        longitude: "",
-                    },
-                    distance: 0.0,
-                    bearing: 0
-                }
-            ],
-            totalDistance: 0.0
-        }
-    ]);
+    const [routes, setRoutes] = useState([]);
 
     const jwtToken = localStorage.getItem('jwtToken');
 
@@ -36,8 +12,12 @@ export default function RouteContextProvider({ children }) {
         jwtToken && getAllRoutesFromUser().then(route => setRoutes(route));
     }, [jwtToken]);
 
+    const addNewRouteAndUpdateAllRoutes = (newRoute) => {
+        addNewRoute(newRoute).then(route => setRoutes([...routes, route]));
+    }
+
     return (
-        <RouteContext.Provider value={{routes}}>
+        <RouteContext.Provider value={{routes, addNewRouteAndUpdateAllRoutes}}>
             {children}
         </RouteContext.Provider>
     );
