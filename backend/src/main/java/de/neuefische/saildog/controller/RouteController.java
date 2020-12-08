@@ -27,4 +27,9 @@ public class RouteController {
     public Route addRoute(@RequestBody RouteDto routeToAdd, Principal principal) {
         return routeService.addNewRoute(routeToAdd, principal.getName());
     }
+
+    @DeleteMapping(path = "{routeId}")
+    public void deleteRoute(@PathVariable String routeId, Principal principal) {
+        routeService.deleteRoute(routeId, principal.getName());
+    }
 }

@@ -22,6 +22,7 @@ import org.springframework.test.context.TestPropertySource;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -50,7 +51,7 @@ class RouteControllerTest {
     @MockBean
     RouteUtils mockedRouteUtils;
 
-    private HttpHeaders createHttpHeader() {
+    private <T> HttpEntity<T> createHttpEntity(T body) {
         String jwtToken = Jwts.builder()
                 .setClaims(new HashMap<>())
                 .setSubject("testRouteCreator")
@@ -60,7 +61,7 @@ class RouteControllerTest {
                 .compact();
         HttpHeaders header = new HttpHeaders();
         header.setBearerAuth(jwtToken);
-        return header;
+        return new HttpEntity<T>(body, header);
     }
 
     @BeforeEach
@@ -94,8 +95,7 @@ class RouteControllerTest {
     public void testGetRoutesByCreatorReturnsUserRoutes() {
         // GIVEN
         String url = "http://localhost:" + port + "/api/route";
-        HttpHeaders header = createHttpHeader();
-        HttpEntity<Void> entity = new HttpEntity<>(null, header);
+        HttpEntity<Void> entity = createHttpEntity(null);
         Route[] expectedResponse = new Route[] {Route.builder()
                 .routeId("some random id")
                 .routeName("some test route")
@@ -133,8 +133,7 @@ class RouteControllerTest {
                 new LegDto("50.930932", "6.933717", "51.169266", "6.788612"),
                 new LegDto("34.523", "-137.453", "21.45", "-152.768")
         ));
-        HttpHeaders header = createHttpHeader();
-        HttpEntity<RouteDto> entity = new HttpEntity<>(request, header);
+        HttpEntity<RouteDto> entity = createHttpEntity(request);
 
         // WHEN
         when(mockedRouteUtils.calculateDistance(any(), any())).thenCallRealMethod();
@@ -165,5 +164,50 @@ class RouteControllerTest {
                 .totalDistance(1141.92)
                 .build()
         ));
+    }
+
+    @Test
+    public void testDeleteMethodThrowsNotFoundWhenRouteDoesNotExist() {
+        // GIVEN
+        String routeId = "some wrong id";
+        String url = "http://localhost:" + port + "/api/route/" + routeId;
+        HttpEntity<Void> entity = createHttpEntity(null);
+
+        // WHEN
+        ResponseEntity<Void> response = restTemplate.exchange(url, HttpMethod.DELETE, entity, Void.class);
+
+        // THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    public void testDeleteMethodThrowsForbiddenWhenCreatorIsNotMatching() {
+        // GIVEN
+        String routeId = "some correct id";
+        String url = "http://localhost:" + port + "/api/route/" + routeId;
+        routeDao.save(Route.builder().routeId(routeId).creator("some wrong creator").build());
+        HttpEntity<Void> entity = createHttpEntity(null);
+
+        // WHEN
+        ResponseEntity<Void> response = restTemplate.exchange(url, HttpMethod.DELETE, entity, Void.class);
+
+        // THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.FORBIDDEN));
+    }
+
+    @Test
+    public void testDeleteMethodDeletesCorrectRoute() {
+        // GIVEN
+        String routeId = "some random id";
+        String url = "http://localhost:" + port + "/api/route/" + routeId;
+        HttpEntity<Void> entity = createHttpEntity(null);
+
+        // WHEN
+        ResponseEntity<Void> response = restTemplate.exchange(url, HttpMethod.DELETE, entity, Void.class);
+        List<Route> storedRoutes = routeDao.findAll();
+
+        // THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(storedRoutes, is(Collections.emptyList()));
     }
 }

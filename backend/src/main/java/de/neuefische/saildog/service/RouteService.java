@@ -8,7 +8,9 @@ import de.neuefische.saildog.model.Leg;
 import de.neuefische.saildog.model.Route;
 import de.neuefische.saildog.model.Waypoint;
 import de.neuefische.saildog.utils.RouteUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,5 +66,14 @@ public class RouteService {
                 .distance(routeUtils.calculateDistance(startWaypoint, endWaypoint))
                 .bearing(routeUtils.calculateBearing(startWaypoint, endWaypoint))
                 .build();
+    }
+
+    public void deleteRoute(String routeId, String creator) {
+        Route routeToDelete = routeDao.findById(routeId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (!routeToDelete.getCreator().equals(creator)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+        routeDao.deleteById(routeId);
     }
 }

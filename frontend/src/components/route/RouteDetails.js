@@ -7,7 +7,9 @@ import RouteContext from "../../contexts/RouteContext";
 import RouteEnd from "./RouteEnd";
 import Leg from "./Leg";
 import {IoIosArrowBack} from "react-icons/io";
+import {MdDelete} from "react-icons/md";
 import ButtonGroupStyles from "../../commons/ButtonGroupStyles";
+import {deleteRoute} from "../../service/RouteService";
 
 export default function RouteDetails() {
 
@@ -30,11 +32,17 @@ export default function RouteDetails() {
             </ul>
             <ButtonGroup>
                 <PrimaryButton labelButton={"Back"} handleClick={redirectToRoutes} icon={<IoIosArrowBack/>}/>
+                <PrimaryButton labelButton={"Delete"} handleClick={deleteThisRoute} icon={<MdDelete/>}/>
             </ButtonGroup>
         </PageLayout>
     );
 
     function redirectToRoutes() {
+        history.push("/routes")
+    }
+
+    function deleteThisRoute() {
+        deleteRoute(id)
         history.push("/routes")
     }
 }

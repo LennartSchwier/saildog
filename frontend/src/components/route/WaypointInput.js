@@ -86,4 +86,4 @@ grid-template-columns: 1fr 1fr;
 const Bold = styled.header`
 font-weight: bold;
 margin-left: var(--size-m);
-`
+`;
