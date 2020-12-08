@@ -48,8 +48,9 @@ export default function NewRoute() {
     }
 
     function createNewRoute() {
-        setNewRoute({...newRoute, legs: legs});
-        addNewRoute(newRoute);
+        const payload = {...newRoute, legs: legs};
+        addNewRoute(payload);
+        history.push("/routes");
     }
 }
 

@@ -29,6 +29,7 @@ padding: var(--size-m);
 display: grid;
 grid-template-rows: 1.5fr 1fr 1fr;
 row-gap: var(--size-s);
+backdrop-filter: blur(var(--size-xxs));
 `
 
 const Bold = styled.span`
