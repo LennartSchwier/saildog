@@ -3,8 +3,6 @@ import styled from "styled-components/macro";
 
 export default function RouteName({ newRoute, setNewRoute }) {
 
-    console.log(newRoute);
-
     return (
         <BlockStyled>
             <NameFieldStyled>
