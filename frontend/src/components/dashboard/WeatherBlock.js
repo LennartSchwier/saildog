@@ -43,8 +43,7 @@ background-color: Transparent;
 box-shadow: var(--boxshadow);
 border-radius: var(--size-m);
 padding: var(--size-m);
-backdrop-filter: blur(2px);
-
+backdrop-filter: blur(var(--size-xxs));
 
   section {
   margin-bottom: var(--size-l);
