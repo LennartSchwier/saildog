@@ -20,11 +20,6 @@ export default function NewRouteMap({ latitude, longitude }) {
 
     const history = useHistory();
 
-    const center = {
-        lat: latitude,
-        lng: longitude,
-    }
-
     const [waypoints, setWaypoints] = useState([]);
 
     const { isLoaded, loadError } = useLoadScript({
@@ -47,7 +42,7 @@ export default function NewRouteMap({ latitude, longitude }) {
             <MapContainer>
                 <h1>some route name</h1>
                 <GoogleMap mapContainerStyle={mapContainerStyle}
-                           zoom={10} center={center} options={options}
+                           zoom={10} center={centerMap()} options={options}
                            onClick={(event) => {
                                setWaypoints(current => [...current, {
                                    lat: event.latLng.lat(),
@@ -67,6 +62,19 @@ export default function NewRouteMap({ latitude, longitude }) {
                 <button className={"done"}><MdDone/>Done</button>
             </MapContainer>
         );
+    }
+
+    function centerMap() {
+        if (waypoints.length === 0) {
+            return {
+                lat: latitude,
+                lng: longitude,
+            }
+        }
+        return {
+            lat: waypoints[waypoints.length - 1].lat,
+            lng: waypoints[waypoints.length - 1].lng,
+        }
     }
 
     function labelMarker(collection, item) {
