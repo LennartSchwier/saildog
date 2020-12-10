@@ -19,6 +19,7 @@ padding: var(--size-m);
 display: flex;
 justify-content: space-evenly;
 row-gap: var(--size-s);
+backdrop-filter: blur(var(--size-xxs));
 `
 
 const Bold = styled.span`
