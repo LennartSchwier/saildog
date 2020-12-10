@@ -33,6 +33,7 @@ export default function RouteDetails() {
                         legs.map((leg, index) => <Leg key={leg.legId} leg={leg} index={index}/>)
                     }
                     <RouteEnd endWaypoint={endWaypoint}/>
+                    <div className={"placeholder"}/>
                 </ul>
                 <ButtonGroup>
                     <PrimaryButton labelButton={"Back"} handleClick={redirectToRoutes} icon={<IoIosArrowBack/>}/>
@@ -68,13 +69,18 @@ export default function RouteDetails() {
 
 const PageLayout = styled.div`
 display: grid;
-grid-template-rows: 60px min-content 60px;
+grid-template-rows: 60px 1fr 60px;
 height: 100vh;
 
   ul {
   padding: 0;
   display: grid;
   row-gap: var(--size-l);
+  overflow: auto;
+  
+    .placeholder {
+    height: var(--size-s);
+    }
   }
 `
 

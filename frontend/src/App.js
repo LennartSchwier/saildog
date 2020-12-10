@@ -56,7 +56,7 @@ export default function App() {
                             <RouteDetails/>
                         </ProtectedRoute>
                         <ProtectedRoute path={"/newroute"}>
-                            {latitude && longitude && !errorMessage ?
+                            {latitude && longitude ?
                                 <NewRouteMap latitude={latitude} longitude={longitude}/>
                                 :
                                 <NewRoute/>
