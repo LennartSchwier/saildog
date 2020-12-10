@@ -1,5 +1,5 @@
 import React from "react";
-import {GoogleMap, Marker, useLoadScript} from "@react-google-maps/api";
+import {GoogleMap, Marker, Polyline, useLoadScript} from "@react-google-maps/api";
 import MapStyles from "../../commons/MapStyles";
 import styled from "styled-components/macro";
 import {IoMdList} from "react-icons/io";
@@ -12,14 +12,21 @@ const mapContainerStyle = {
 const options = {
     styles: MapStyles,
     disableDefaultUI: true,
+    zoomControl: true,
 }
 
 export default function MapView({ route, toggleView }) {
 
-    console.log(route.legs)
-
     const startLat = Number(route.legs[0].startWaypoint.latitude);
     const startLng = Number(route.legs[0].startWaypoint.longitude);
+
+    const routing = route.legs.map(leg => (
+            {lat: Number(leg.endWaypoint.latitude), lng: Number(leg.endWaypoint.longitude)}
+        ));
+
+    routing.unshift({lat: startLat, lng: startLng});
+
+    console.log(routing)
 
     const center = {
         lat: startLat,
@@ -53,6 +60,7 @@ export default function MapView({ route, toggleView }) {
                             position={{lat: Number(leg.endWaypoint?.latitude), lng: Number(leg.endWaypoint?.longitude)}}
                         />
                     )}
+                    <Polyline path={routing}/>
                 </GoogleMap>
                 <button onClick={toggleView}><IoMdList/></button>
             </MapContainer>
