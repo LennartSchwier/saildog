@@ -1,2 +1,10 @@
 *.iml
 .idea
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.config.yml
+!.elasticbeanstalk/*.global.yml
+
+# production backend build
+backend-code.zip

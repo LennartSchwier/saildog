@@ -1,4 +1,4 @@
-import axios from 'axios';
+import {axiosClient} from "./AxiosClient";
 
 const url = '/api/route'
 const setHeaders = () => {
@@ -10,14 +10,14 @@ const setHeaders = () => {
 }
 
 export const getAllRoutesFromUser = () => {
-    return axios.get(url, setHeaders()).then(response => response.data);
+    return axiosClient.get(url, setHeaders()).then(response => response.data);
 }
 
 export const addNewRoute = (newRoute) => {
-    return axios.post(url, newRoute, setHeaders()).then(response => response.data);
+    return axiosClient.post(url, newRoute, setHeaders()).then(response => response.data);
 }
 
 export const deleteRoute = (routeId) => {
     const urlWithId = url + "/" + routeId;
-    axios.delete(urlWithId, setHeaders()).catch(error => console.log(error));
+    axiosClient.delete(urlWithId, setHeaders()).catch(error => console.log(error));
 }
