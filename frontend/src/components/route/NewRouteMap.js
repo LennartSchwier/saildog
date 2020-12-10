@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {GoogleMap, Marker, Polyline, useLoadScript} from "@react-google-maps/api";
 import MapStyles from "../../commons/MapStyles";
 import styled from "styled-components/macro";
 import {MdCancel, MdDone} from "react-icons/md";
 import {useHistory} from "react-router-dom";
+import RouteContext from "../../contexts/RouteContext";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -19,6 +20,7 @@ const options = {
 export default function NewRouteMap({ latitude, longitude }) {
 
     const history = useHistory();
+    const { addNewRouteAndUpdateAllRoutes } = useContext(RouteContext);
 
     const [waypoints, setWaypoints] = useState([]);
     const [routeName, setRouteName] = useState("");
@@ -117,22 +119,24 @@ export default function NewRouteMap({ latitude, longitude }) {
         for (let i = 0; i < waypointsWithoutStart.length; i++) {
             if (i === 0) {
                 legs[i] = {
-                    startLatitude: startWaypoint.startLatitude,
-                    startLongitude: startWaypoint.startLongitude,
-                    endLatitude: waypointsWithoutStart[i].lat,
-                    endLongitude: waypointsWithoutStart[i].lng,
+                    startLatitude: startWaypoint.startLatitude.toFixed(6),
+                    startLongitude: startWaypoint.startLongitude.toFixed(6),
+                    endLatitude: waypointsWithoutStart[i].lat.toFixed(6),
+                    endLongitude: waypointsWithoutStart[i].lng.toFixed(6),
                 }
             }
             if (i > 0) {
                  legs[i] = {
-                    startLatitude: waypointsWithoutStart[i-1].lat,
-                    startLongitude: waypointsWithoutStart[i-1].lng,
-                    endLatitude: waypointsWithoutStart[i].lat,
-                    endLongitude: waypointsWithoutStart[i].lng,
+                    startLatitude: waypointsWithoutStart[i-1].lat.toFixed(6),
+                    startLongitude: waypointsWithoutStart[i-1].lng.toFixed(6),
+                    endLatitude: waypointsWithoutStart[i].lat.toFixed(6),
+                    endLongitude: waypointsWithoutStart[i].lng.toFixed(6),
                 }
             }
         }
-
+        const payload = {routeName: routeName, legs: legs}
+        addNewRouteAndUpdateAllRoutes(payload);
+        history.push("/routes");
     }
 
 }
