@@ -21,7 +21,8 @@ export default function NewRouteMap({ latitude, longitude }) {
     const history = useHistory();
 
     const [waypoints, setWaypoints] = useState([]);
-    const [newRoute, setNewRoute] = useState({});
+    const [routeName, setRouteName] = useState("");
+    const [showName, setShowName] = useState(false);
 
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -41,7 +42,19 @@ export default function NewRouteMap({ latitude, longitude }) {
     if (isLoaded) {
         return (
             <MapContainer>
-                <h1>some route name</h1>
+                {showName ?
+                    <div>
+                        <h1>{routeName}</h1>
+                    </div>
+                    :
+                    <div>
+                        <input
+                        type={"text"} placeholder={"name of your route"}
+                        value={routeName} onChange={event => setRouteName(event.target.value)}
+                        />
+                        <button className={"saveName"} onClick={saveRouteName}>Save route name</button>
+                    </div>
+                }
                 <GoogleMap mapContainerStyle={mapContainerStyle}
                            zoom={10} center={centerMap()} options={options}
                            onClick={clickHandler}>
@@ -52,7 +65,6 @@ export default function NewRouteMap({ latitude, longitude }) {
                     }
                     <Polyline path={waypoints}/>
                 </GoogleMap>
-                <button className={"edit"}>edit</button>
                 <button className={"cancel"} onClick={redirectBackToRoutes}><MdCancel/>Cancel</button>
                 <button className={"done"} onClick={createRoute}><MdDone/>Done</button>
             </MapContainer>
@@ -86,6 +98,10 @@ export default function NewRouteMap({ latitude, longitude }) {
         return String(collection.indexOf(item));
     }
 
+    function saveRouteName() {
+        setShowName(!showName);
+    }
+
     function redirectBackToRoutes() {
         history.push("/routes");
     }
@@ -116,7 +132,7 @@ export default function NewRouteMap({ latitude, longitude }) {
                 }
             }
         }
-        setNewRoute({...newRoute, legs});
+
     }
 
 }
@@ -125,7 +141,7 @@ const MapContainer = styled.section`
 width: 100vw;
 height: 100vh;
 
-  h1 {
+  h1, input {
   position: absolute;
   top: 1rem;
   left: 1rem;
@@ -145,7 +161,7 @@ height: 100vh;
   background: none;
   }
   
-  .edit {
+  .saveName {
   top: 1rem;
   right: 1rem;
   }
