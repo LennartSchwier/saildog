@@ -21,6 +21,7 @@ export default function NewRouteMap({ latitude, longitude }) {
     const history = useHistory();
 
     const [waypoints, setWaypoints] = useState([]);
+    const [newRoute, setNewRoute] = useState({});
 
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -43,13 +44,7 @@ export default function NewRouteMap({ latitude, longitude }) {
                 <h1>some route name</h1>
                 <GoogleMap mapContainerStyle={mapContainerStyle}
                            zoom={10} center={centerMap()} options={options}
-                           onClick={(event) => {
-                               setWaypoints(current => [...current, {
-                                   lat: event.latLng.lat(),
-                                   lng: event.latLng.lng(),
-                               }]);
-                           }}
-                >
+                           onClick={clickHandler}>
                     {waypoints.map(waypoint =>
                         <Marker position={waypoint} key={waypoints.indexOf(waypoint)}
                                 label={labelMarker(waypoints, waypoint)}
@@ -59,7 +54,7 @@ export default function NewRouteMap({ latitude, longitude }) {
                 </GoogleMap>
                 <button className={"edit"}>edit</button>
                 <button className={"cancel"} onClick={redirectBackToRoutes}><MdCancel/>Cancel</button>
-                <button className={"done"}><MdDone/>Done</button>
+                <button className={"done"} onClick={createRoute}><MdDone/>Done</button>
             </MapContainer>
         );
     }
@@ -77,6 +72,10 @@ export default function NewRouteMap({ latitude, longitude }) {
         }
     }
 
+    function clickHandler(event) {
+        setWaypoints([...waypoints, {lat: event.latLng.lat(), lng: event.latLng.lng()}]);
+    }
+
     function labelMarker(collection, item) {
         if ((collection.indexOf(item)) === 0) {
             return "Start";
@@ -90,6 +89,36 @@ export default function NewRouteMap({ latitude, longitude }) {
     function redirectBackToRoutes() {
         history.push("/routes");
     }
+
+    function createRoute() {
+        const startWaypoint = {
+            startLatitude: waypoints[0].lat,
+            startLongitude: waypoints[0].lng,
+        }
+        const waypointsWithoutStart = waypoints.slice(1, waypoints.length);
+        const legs = [];
+
+        for (let i = 0; i < waypointsWithoutStart.length; i++) {
+            if (i === 0) {
+                legs[i] = {
+                    startLatitude: startWaypoint.startLatitude,
+                    startLongitude: startWaypoint.startLongitude,
+                    endLatitude: waypointsWithoutStart[i].lat,
+                    endLongitude: waypointsWithoutStart[i].lng,
+                }
+            }
+            if (i > 0) {
+                 legs[i] = {
+                    startLatitude: waypointsWithoutStart[i-1].lat,
+                    startLongitude: waypointsWithoutStart[i-1].lng,
+                    endLatitude: waypointsWithoutStart[i].lat,
+                    endLongitude: waypointsWithoutStart[i].lng,
+                }
+            }
+        }
+        setNewRoute({...newRoute, legs});
+    }
+
 }
 
 const MapContainer = styled.section`
