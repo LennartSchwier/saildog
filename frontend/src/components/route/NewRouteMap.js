@@ -2,7 +2,8 @@ import React from "react";
 import {GoogleMap, Polyline, useLoadScript} from "@react-google-maps/api";
 import MapStyles from "../../commons/MapStyles";
 import styled from "styled-components/macro";
-import PrimaryButton from "../../commons/PrimaryButton";
+import {MdCancel, MdDone} from "react-icons/md";
+import {useHistory} from "react-router-dom";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -16,6 +17,8 @@ const options = {
 }
 
 export default function NewRouteMap({ latitude, longitude }) {
+
+    const history = useHistory();
 
     const center = {
         lat: latitude,
@@ -44,9 +47,15 @@ export default function NewRouteMap({ latitude, longitude }) {
                 <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center} options={options}>
                     <Polyline/>
                 </GoogleMap>
-                <button>edit name</button>
+                <button className={"edit"}>edit</button>
+                <button className={"cancel"} onClick={redirectBackToRoutes}><MdCancel/>Cancel</button>
+                <button className={"done"}><MdDone/>Done</button>
             </MapContainer>
         );
+    }
+
+    function redirectBackToRoutes() {
+        history.push("/routes");
     }
 }
 
@@ -62,17 +71,35 @@ height: 100vh;
   margin: 0;
   }
   
+  svg {
+  width: var(--size-xxl);
+  height: var(--size-xxl);
+  }
+  
   button {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
   z-index: 10;
   border: none;
   background: none;
   }
   
-  svg {
-  width: 27px;
-  height: 27px;
+  .edit {
+  top: 1rem;
+  right: 1rem;
+  }
+  
+  .cancel, .done {
+  display: grid;
+  justify-items: center;
+  bottom: 2rem;
+  }
+  
+  .cancel {
+  left: 1rem;
+  color: darkred;
+  }
+  
+  .done {
+  left: 6rem;
   }
 `
