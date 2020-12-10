@@ -1,4 +1,4 @@
-import axios from 'axios';
+import {axiosClient} from "./AxiosClient";
 
 const setHeaders = () => {
     return {
@@ -10,6 +10,6 @@ const setHeaders = () => {
 
 export const getStormGlassWeather = (latitude, longitude) => {
     const url = `/api/stormglass?latitude=${latitude}&longitude=${longitude}`;
-    return axios.get(url, setHeaders())
+    return axiosClient.get(url, setHeaders())
         .then(response => response.data);
 }
