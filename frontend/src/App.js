@@ -12,8 +12,8 @@ import WeatherDataContextProvider from "./contexts/WeatherDataContextProvider";
 import RouteList from "./components/route/RouteList";
 import RouteContextProvider from "./contexts/RouteContextProvider";
 import RouteDetails from "./components/route/RouteDetails";
-import NewRoute from "./components/route/NewRoute";
 import IconContextProvider from "./contexts/IconContextProvider";
+import NewRouteMap from "./components/route/NewRouteMap";
 
 
 export default function App() {
@@ -55,7 +55,7 @@ export default function App() {
                             <RouteDetails/>
                         </ProtectedRoute>
                         <ProtectedRoute path={"/newroute"}>
-                            <NewRoute/>
+                            <NewRouteMap latitude={latitude} longitude={longitude}/>
                         </ProtectedRoute>
                         <Route path={"/"}>
                             <Redirect to={"/dashboard"}/>
