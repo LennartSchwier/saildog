@@ -14,6 +14,7 @@ import RouteContextProvider from "./contexts/RouteContextProvider";
 import RouteDetails from "./components/route/RouteDetails";
 import IconContextProvider from "./contexts/IconContextProvider";
 import NewRouteMap from "./components/route/NewRouteMap";
+import NewRoute from "./components/route/NewRoute";
 
 
 export default function App() {
@@ -55,7 +56,11 @@ export default function App() {
                             <RouteDetails/>
                         </ProtectedRoute>
                         <ProtectedRoute path={"/newroute"}>
-                            <NewRouteMap latitude={latitude} longitude={longitude}/>
+                            {latitude && longitude && !errorMessage ?
+                                <NewRouteMap latitude={latitude} longitude={longitude}/>
+                                :
+                                <NewRoute/>
+                            }
                         </ProtectedRoute>
                         <Route path={"/"}>
                             <Redirect to={"/dashboard"}/>
