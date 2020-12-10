@@ -53,11 +53,11 @@ export default function MapView({ route, toggleView }) {
             <MapContainer>
                 <h1>{route.routeName}</h1>
                 <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center} options={options}>
-                    <Marker key={"start"} position={{ lat: startLat, lng: startLng }} />
-                    {route.legs.map((leg) =>
+                    {routing.map((leg) =>
                         <Marker
-                            key={leg.legID}
-                            position={{lat: Number(leg.endWaypoint?.latitude), lng: Number(leg.endWaypoint?.longitude)}}
+                            key={routing.indexOf(leg)}
+                            position={leg}
+                            label={String(routing.indexOf(leg) + 1)}
                         />
                     )}
                     <Polyline path={routing}/>
