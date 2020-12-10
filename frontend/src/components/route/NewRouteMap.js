@@ -1,5 +1,5 @@
-import React from "react";
-import {GoogleMap, Polyline, useLoadScript} from "@react-google-maps/api";
+import React, {useState} from "react";
+import {GoogleMap, Marker, Polyline, useLoadScript} from "@react-google-maps/api";
 import MapStyles from "../../commons/MapStyles";
 import styled from "styled-components/macro";
 import {MdCancel, MdDone} from "react-icons/md";
@@ -25,6 +25,8 @@ export default function NewRouteMap({ latitude, longitude }) {
         lng: longitude,
     }
 
+    const [waypoints, setWaypoints] = useState([]);
+
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries
@@ -44,14 +46,37 @@ export default function NewRouteMap({ latitude, longitude }) {
         return (
             <MapContainer>
                 <h1>some route name</h1>
-                <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center} options={options}>
-                    <Polyline/>
+                <GoogleMap mapContainerStyle={mapContainerStyle}
+                           zoom={10} center={center} options={options}
+                           onClick={(event) => {
+                               setWaypoints(current => [...current, {
+                                   lat: event.latLng.lat(),
+                                   lng: event.latLng.lng(),
+                               }]);
+                           }}
+                >
+                    {waypoints.map(waypoint =>
+                        <Marker position={waypoint} key={waypoints.indexOf(waypoint)}
+                                label={labelMarker(waypoints, waypoint)}
+                        />)
+                    }
+                    <Polyline path={waypoints}/>
                 </GoogleMap>
                 <button className={"edit"}>edit</button>
                 <button className={"cancel"} onClick={redirectBackToRoutes}><MdCancel/>Cancel</button>
                 <button className={"done"}><MdDone/>Done</button>
             </MapContainer>
         );
+    }
+
+    function labelMarker(collection, item) {
+        if ((collection.indexOf(item)) === 0) {
+            return "Start";
+        }
+        if ((collection.indexOf(item) + 1) === collection.length) {
+            return "End";
+        }
+        return String(collection.indexOf(item));
     }
 
     function redirectBackToRoutes() {
