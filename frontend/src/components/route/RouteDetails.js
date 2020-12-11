@@ -29,6 +29,7 @@ export default function RouteDetails() {
             <PageLayout>
                 <Header headerText={route?.routeName}/>
                 <ul>
+                    <div className={"placeholder"}/>
                     {!legs? null :
                         legs.map((leg, index) => <Leg key={leg.legId} leg={leg} index={index}/>)
                     }
@@ -74,12 +75,14 @@ height: 100vh;
 
   ul {
   padding: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
   display: grid;
   row-gap: var(--size-l);
   overflow: auto;
   
     .placeholder {
-    height: var(--size-s);
+    height: var(--size-xs);
     }
   }
 `
