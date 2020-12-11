@@ -1,89 +1,118 @@
-import React, {useState} from "react";
-import PrimaryButton from "../../commons/PrimaryButton";
-import styled from "styled-components/macro";
+import React, { useState } from 'react';
+import PrimaryButton from '../../commons/PrimaryButton';
+import styled from 'styled-components/macro';
 
 export default function WaypointInput({ legs, setLegs }) {
+  const [newLeg, setNewLeg] = useState({
+    startLatitude: '',
+    startLongitude: '',
+    endLatitude: '',
+    endLongitude: '',
+  });
 
-    const [newLeg, setNewLeg] = useState({
-        startLatitude: "",
-        startLongitude: "",
-        endLatitude: "",
-        endLongitude: ""
+  if (legs.length === 0) {
+    return (
+      <BlockStyled>
+        <InputFieldStyled>
+          <Bold className={'firstHeader'}>Start of Route</Bold>
+          <input
+            type={'text'}
+            name={'startLatitude'}
+            value={newLeg.startLatitude}
+            onChange={changeHandler}
+            placeholder={'latitude'}
+          />
+          <input
+            type={'text'}
+            name={'startLongitude'}
+            value={newLeg.startLongitude}
+            onChange={changeHandler}
+            placeholder={'longitude'}
+          />
+          <Bold className={'secondHeader'}>End / 1. Waypoint</Bold>
+          <input
+            type={'text'}
+            name={'endLatitude'}
+            value={newLeg.endLatitude}
+            onChange={changeHandler}
+            placeholder={'latitude'}
+          />
+          <input
+            type={'text'}
+            name={'endLongitude'}
+            value={newLeg.endLongitude}
+            onChange={changeHandler}
+            placeholder={'longitude'}
+          />
+        </InputFieldStyled>
+        <PrimaryButton labelButton={'Save'} handleClick={createLeg} />
+      </BlockStyled>
+    );
+  }
+  if (legs.length !== 0) {
+    return (
+      <BlockStyled>
+        <InputFieldStyled>
+          <Bold className={'firstHeader'}>New Leg</Bold>
+          <input
+            type={'text'}
+            name={'endLatitude'}
+            value={newLeg.endLatitude}
+            onChange={changeHandler}
+            placeholder={'latitude'}
+          />
+          <input
+            type={'text'}
+            name={'endLongitude'}
+            value={newLeg.endLongitude}
+            onChange={changeHandler}
+            placeholder={'longitude'}
+          />
+        </InputFieldStyled>
+        <PrimaryButton labelButton={'Add'} handleClick={createLeg} />
+      </BlockStyled>
+    );
+  }
+
+  function changeHandler(event) {
+    setNewLeg({ ...newLeg, [event.target.name]: event.target.value });
+  }
+
+  function createLeg() {
+    setLegs([...legs, newLeg]);
+    setNewLeg({
+      startLatitude: newLeg.endLatitude,
+      startLongitude: newLeg.endLongitude,
+      endLatitude: '',
+      endLongitude: '',
     });
-
-    if (legs.length === 0) {
-        return (
-            <BlockStyled>
-                <InputFieldStyled>
-                    <Bold className={"firstHeader"}>Start of Route</Bold>
-                    <input type={"text"} name={"startLatitude"} value={newLeg.startLatitude}
-                                   onChange={changeHandler} placeholder={"latitude"}/>
-                    <input type={"text"} name={"startLongitude"} value={newLeg.startLongitude}
-                               onChange={changeHandler} placeholder={"longitude"}/>
-                    <Bold className={"secondHeader"}>End / 1. Waypoint</Bold>
-                    <input type={"text"} name={"endLatitude"} value={newLeg.endLatitude}
-                               onChange={changeHandler} placeholder={"latitude"}/>
-                    <input type={"text"} name={"endLongitude"} value={newLeg.endLongitude}
-                               onChange={changeHandler} placeholder={"longitude"}/>
-                </InputFieldStyled>
-                <PrimaryButton labelButton={"Save"} handleClick={createLeg}/>
-            </BlockStyled>
-        );
-    }
-    if (legs.length !== 0) {
-        return (
-            <BlockStyled>
-                <InputFieldStyled>
-                    <Bold className={"firstHeader"}>New Leg</Bold>
-                    <input type={"text"} name={"endLatitude"} value={newLeg.endLatitude}
-                               onChange={changeHandler} placeholder={"latitude"}/>
-                    <input type={"text"} name={"endLongitude"} value={newLeg.endLongitude}
-                               onChange={changeHandler} placeholder={"longitude"}/>
-                </InputFieldStyled>
-                <PrimaryButton labelButton={"Add"} handleClick={createLeg}/>
-            </BlockStyled>
-        );
-    }
-
-    function changeHandler(event) {
-        setNewLeg({...newLeg, [event.target.name]: event.target.value});
-    }
-
-    function createLeg() {
-        setLegs([...legs, newLeg]);
-        setNewLeg({
-            startLatitude: newLeg.endLatitude,
-            startLongitude: newLeg.endLongitude,
-            endLatitude: "",
-            endLongitude: ""
-        })
-    }
+  }
 }
 
 const BlockStyled = styled.section`
-display: grid;
-row-gap: var(--size-m);
-`
+  display: grid;
+  row-gap: var(--size-m);
+`;
 
 const InputFieldStyled = styled.div`
-display: grid;
-row-gap: var(--size-m);
-align-items: center;
-justify-items: center;
-grid-template-rows: 1fr 1fr ;
-grid-auto-rows: 1fr;
-grid-template-columns: 1fr 1fr;
+  display: grid;
+  row-gap: var(--size-m);
+  align-items: center;
+  justify-items: center;
+  grid-template-rows: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
 
   .firstHeader {
-  grid-row: 1/3;
+    grid-row: 1/3;
   }
-  
+
   .secondHeader {
-  grid-row: 3/5;
+    grid-row: 3/5;
   }
-`
+`;
 
 const Bold = styled.header`
-font-weight: bold;
-margin-left: var(--size-m);
-`
+  font-weight: bold;
+  margin-left: var(--size-m);
+`;
