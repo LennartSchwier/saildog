@@ -43,7 +43,7 @@ export default function RouteList() {
 
 const PageLayout = styled.div`
 display: grid;
-grid-template-rows: min-content 1fr 60px;
+grid-template-rows: min-content min-content 60px;
 height: 100vh;
 
   ul {
