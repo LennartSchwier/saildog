@@ -56,7 +56,7 @@ export default function NewRouteMap({ latitude, longitude }) {
               value={routeName}
               onChange={(event) => setRouteName(event.target.value)}
             />
-            <button className={'saveName'} onClick={saveRouteName}>
+            <button className={'saveName'} onClick={toggleShowName}>
               Save route name
             </button>
           </div>
@@ -90,15 +90,15 @@ export default function NewRouteMap({ latitude, longitude }) {
   }
 
   function centerMap() {
-    if (waypoints.length === 0) {
+    if (waypoints.length) {
       return {
-        lat: latitude,
-        lng: longitude,
+        lat: waypoints[waypoints.length - 1].lat,
+        lng: waypoints[waypoints.length - 1].lng,
       };
     }
     return {
-      lat: waypoints[waypoints.length - 1].lat,
-      lng: waypoints[waypoints.length - 1].lng,
+      lat: latitude,
+      lng: longitude,
     };
   }
 
@@ -110,16 +110,17 @@ export default function NewRouteMap({ latitude, longitude }) {
   }
 
   function labelMarker(collection, item) {
-    if (collection.indexOf(item) === 0) {
+    const index = collection.indexOf(item);
+    if (index === 0) {
       return 'Start';
     }
-    if (collection.indexOf(item) + 1 === collection.length) {
+    if (index === collection.length - 1) {
       return 'End';
     }
-    return String(collection.indexOf(item));
+    return '' + index;
   }
 
-  function saveRouteName() {
+  function toggleShowName() {
     setShowName(!showName);
   }
 
@@ -133,26 +134,23 @@ export default function NewRouteMap({ latitude, longitude }) {
       startLongitude: waypoints[0].lng,
     };
     const waypointsWithoutStart = waypoints.slice(1, waypoints.length);
-    const legs = [];
-
-    for (let i = 0; i < waypointsWithoutStart.length; i++) {
-      if (i === 0) {
-        legs[i] = {
+    const legs = waypointsWithoutStart.map((waypoint, index) => {
+      if (index === 0) {
+        return {
           startLatitude: startWaypoint.startLatitude.toFixed(6),
           startLongitude: startWaypoint.startLongitude.toFixed(6),
-          endLatitude: waypointsWithoutStart[i].lat.toFixed(6),
-          endLongitude: waypointsWithoutStart[i].lng.toFixed(6),
+          endLatitude: waypointsWithoutStart[index].lat.toFixed(6),
+          endLongitude: waypointsWithoutStart[index].lng.toFixed(6),
         };
       }
-      if (i > 0) {
-        legs[i] = {
-          startLatitude: waypointsWithoutStart[i - 1].lat.toFixed(6),
-          startLongitude: waypointsWithoutStart[i - 1].lng.toFixed(6),
-          endLatitude: waypointsWithoutStart[i].lat.toFixed(6),
-          endLongitude: waypointsWithoutStart[i].lng.toFixed(6),
-        };
+      return {
+        startLatitude: waypointsWithoutStart[index - 1].lat.toFixed(6),
+        startLongitude: waypointsWithoutStart[index - 1].lng.toFixed(6),
+        endLatitude: waypointsWithoutStart[index].lat.toFixed(6),
+        endLongitude: waypointsWithoutStart[index].lng.toFixed(6),
       }
-    }
+    });
+
     const payload = { routeName: routeName, legs: legs };
     addNewRouteAndUpdateAllRoutes(payload);
     history.push('/routes');
@@ -182,18 +180,14 @@ const MapContainer = styled.section`
     z-index: 10;
     border: none;
     background: none;
+    display: grid;
+    justify-items: center;
+    bottom: 2rem;
   }
 
   .saveName {
     top: 1rem;
     right: 1rem;
-  }
-
-  .cancel,
-  .done {
-    display: grid;
-    justify-items: center;
-    bottom: 2rem;
   }
 
   .cancel {
