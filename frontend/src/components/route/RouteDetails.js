@@ -28,14 +28,14 @@ export default function RouteDetails() {
       <PageLayout>
         <Header headerText={route?.routeName} />
         <ul>
-          <div className={'placeholder'} />
           {!legs
             ? null
             : legs.map((leg, index) => (
                 <Leg key={leg.legId} leg={leg} index={index} />
               ))}
-          <RouteEnd endWaypoint={endWaypoint} />
-          <div className={'placeholder'} />
+          <li>
+            <RouteEnd endWaypoint={endWaypoint} />
+          </li>
         </ul>
         <ButtonGroup>
           <PrimaryButton
@@ -85,16 +85,22 @@ export default function RouteDetails() {
 
 const PageLayout = styled.div`
   display: grid;
-  grid-template-rows: 60px 1fr 60px;
+  grid-template-rows: min-content 1fr 60px;
   height: 100vh;
 
   ul {
-    padding: 0;
+    padding: var(--size-s) 0;
     margin-block-start: 0;
     margin-block-end: 0;
     display: grid;
     row-gap: var(--size-l);
     overflow: auto;
+    
+    li:last-child:after {
+      content: '';
+      display: block;
+      height: var(--size-s);
+    }
 
     .placeholder {
       height: var(--size-xs);
