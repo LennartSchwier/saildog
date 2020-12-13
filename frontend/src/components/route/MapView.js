@@ -93,20 +93,21 @@ export default function MapView({ route, toggleView }) {
   }
 
   function labelMarker(collection, item) {
-    if (collection.indexOf(item) === 0) {
+    const index = collection.indexOf(item);
+    if (index === 0) {
       return 'Start';
     }
-    if (collection.indexOf(item) + 1 === collection.length) {
+    if (index === collection.length - 1) {
       return 'End';
     }
-    return String(collection.indexOf(item));
+    return "" + index;
   }
 
   function nameWaypoint(index) {
     if (index === 0) {
       return 'Start';
     }
-    if (index + 1 === routing.length) {
+    if (index === routing.length - 1) {
       return 'End';
     }
     return index + '. Waypoint';
