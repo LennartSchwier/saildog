@@ -33,11 +33,6 @@ export default function MapView({ route, toggleView }) {
 
   routing.unshift({ lat: startLat, lng: startLng });
 
-  const center = {
-    lat: startLat,
-    lng: startLng,
-  };
-
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -56,7 +51,7 @@ export default function MapView({ route, toggleView }) {
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
           zoom={10}
-          center={center}
+          center={centerMap()}
           options={options}
         >
           {routing.map((leg) => (
@@ -90,6 +85,20 @@ export default function MapView({ route, toggleView }) {
         </button>
       </MapContainer>
     );
+  }
+
+
+  function centerMap() {
+    if (selected) {
+      return {
+        lat: selected.leg.lat,
+        lng: selected.leg.lng,
+      };
+    }
+    return {
+      lat: startLat,
+      lng: startLng,
+    };
   }
 
   function labelMarker(collection, item) {
