@@ -1,11 +1,10 @@
-import {useState} from "react";
+import { useState } from 'react';
 
 export default function useLoginData() {
+  const [loginData, setLoginData] = useState({
+    username: '',
+    password: '',
+  });
 
-    const [loginData, setLoginData] = useState({
-        username: "",
-        password: ""
-    });
-
-    return [loginData, setLoginData];
+  return [loginData, setLoginData];
 }
