@@ -102,6 +102,10 @@ const PageLayout = styled.div`
       height: var(--size-s);
     }
   }
+  
+  button + button + button {
+  color: darkred;
+  }
 `;
 
 const ButtonGroup = ButtonGroupStyles;
