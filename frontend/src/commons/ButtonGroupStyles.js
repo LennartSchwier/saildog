@@ -8,6 +8,7 @@ const ButtonGroupStyles = styled.section`
   justify-content: space-evenly;
   width: 100vw;
   box-shadow: 0 -5px 13px -5px grey;
+  background-color: #a5fbee;
 `;
 
 export default ButtonGroupStyles;
