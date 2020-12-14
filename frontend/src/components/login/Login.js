@@ -73,4 +73,8 @@ const FormStyled = styled.form`
   justify-content: center;
   row-gap: var(--size-m);
   margin: var(--size-xl);
+  
+  button {
+  outline: none;
+  }
 `;
