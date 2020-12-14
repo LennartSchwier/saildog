@@ -101,10 +101,10 @@ const PageLayout = styled.div`
       display: block;
       height: var(--size-s);
     }
-
-    .placeholder {
-      height: var(--size-xs);
-    }
+  }
+  
+  button + button + button {
+  color: darkred;
   }
 `;
 

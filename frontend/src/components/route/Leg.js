@@ -22,6 +22,7 @@ export default function Leg({ leg, index }) {
 
 const WaypointStyled = styled.section`
   margin: 0 var(--size-l);
+  height: 44px;
   background-color: Transparent;
   box-shadow: var(--size-xs) var(--size-xs) var(--size-s) dimgrey;
   border-radius: var(--size-m);
